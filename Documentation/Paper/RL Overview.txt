@@ -1,0 +1,19 @@
+* Agent-environment interface
+* Tasks: episodic or continuing
+* State-space: n-dimensional discrete or continuous
+* Action-space: m-dimensional discrete or continuous
+* Sampling: online or offline (no further interaction with the environment)
+* Learning: on-policy (learn the value of the policy used to make decisions) or off-policy (behavior differs from the policy being evaluated)
+* Prediction (predict the value): dynamic programming, monte carlo, temporal difference
+* Control (choose the action): exploration vs exploitation, SARSA (on-policy, learns the value of the policy being followed), Q-learning (off-policy, always learns the optimal policy independent of the policy followed)
+* ???: table, linear function approximation, non-linear function approximation
+* Value iteration: state, afterstate, action
+* Action selection: greedy, e-greedy, softmax
+* Elementary methods: dynamic programming, monte carlo, temporal-difference TD(0)
+* Combined methods: eligibility traces TD(lambda)
+* Function approximation: gradient descent
+* Linear function approximation: gradient descent over a linear function
+* Non-linear function approximation: artificial neural networks using gradient descent error backpropagation
+
+
+Actor-critic -- explicitly represent the policy independent of the value function
