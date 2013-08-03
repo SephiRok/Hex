@@ -166,7 +166,7 @@ public class HexLayout implements LayoutManager {
 		frame.getContentPane().setLayout(new HexLayout(3, 0, -1, false));
 		for (int i = 0; i < 9; ++i) {
 			HexButton button = new HexButton(String.valueOf(i));
-			button.setForeground(Color.black);
+			button.setForeground(Color.red);
 			button.setBackground(Color.green);
 			frame.add(button);
         }

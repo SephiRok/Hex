@@ -23,14 +23,17 @@ public class HexButton extends JButton {
 
 	private Polygon hexagon = new Polygon();
 	
-	public HexButton() {}
+	public HexButton() {
+		setContentAreaFilled(false);
+	}
 	
 	public HexButton(String string) {
 		super(string);
+		setContentAreaFilled(false);
 	}
 	
 	private void calculateCoordinates() {
-		hexagon = new Polygon();
+		hexagon.reset();
 		int w = getWidth() - 1;
 		int h = getHeight() - 1;
 		int ratio = (int) (h * 0.25);
