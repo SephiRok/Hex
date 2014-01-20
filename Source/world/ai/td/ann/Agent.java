@@ -42,7 +42,7 @@ public class Agent implements world.ai.Agent {
 		this.player = player;
 		inputLayer = new Layer((player.getWorld().getWidth() 
 				* player.getWorld().getHeight()) * 3, 1);
-		outputLayer = new Layer((int) ((inputLayer.getNeurons().length - 1) 
+		hiddenLayer = new Layer((int) ((inputLayer.getNeurons().length - 1) 
 				* 1.0), 1);
 		inputLayer.setOutput(hiddenLayer);
 		hiddenLayer.setOutput(outputLayer);

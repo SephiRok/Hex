@@ -1,27 +1,27 @@
 \select@language {slovene}
 \contentsline {section}{\numberline {1}Uvod}{7}
 \contentsline {subsection}{\numberline {1.1}Okrepitveno u\IeC {\v c}enje}{7}
-\contentsline {subsection}{\numberline {1.2}Primeri}{8}
-\contentsline {subsection}{\numberline {1.3}Elementi okrepitvenega u\IeC {\v c}enja}{8}
-\contentsline {section}{\numberline {2}Problem}{9}
-\contentsline {subsection}{\numberline {2.1}Ocenjevanje povratne informacije}{9}
-\contentsline {subsection}{\numberline {2.2}Celoten problem okrepitvenega u\IeC {\v c}enja}{9}
-\contentsline {section}{\numberline {3}Re\IeC {\v s}itve}{10}
-\contentsline {subsection}{\numberline {3.1}Dinami\IeC {\v c}no programiranje}{10}
-\contentsline {subsection}{\numberline {3.2}Predvidevanje - vrednost stanja}{10}
-\contentsline {subsubsection}{\numberline {3.2.1}Monte Carlo metode}{10}
-\contentsline {subsubsection}{\numberline {3.2.2}U\IeC {\v c}enje na podlagi \IeC {\v c}asovne razlike - TD(0)}{10}
-\contentsline {subsubsection}{\numberline {3.2.3}Zdru\IeC {\v z}itev metod - TD($\lambda $)}{10}
-\contentsline {subsection}{\numberline {3.3}Krmiljenje - vrednost dejanja}{10}
-\contentsline {subsubsection}{\numberline {3.3.1}Monte Carlo metode}{10}
-\contentsline {subsubsection}{\numberline {3.3.2}U\IeC {\v c}enje na podlagi \IeC {\v c}asovne razlike - TD(0)}{10}
-\contentsline {subsubsection}{\numberline {3.3.3}Zdru\IeC {\v z}itev metod - TD($\lambda $)}{10}
-\contentsline {section}{\numberline {4}Posplo\IeC {\v s}evanje in funkcijska aproksimacija}{11}
-\contentsline {subsection}{\numberline {4.1}Predvidevanje - vrednost stanja}{11}
-\contentsline {subsection}{\numberline {4.2}Krmiljenje - vrednost dejanja}{11}
-\contentsline {section}{\numberline {5}U\IeC {\v c}enje na namizni igri Hex}{12}
-\contentsline {subsection}{\numberline {5.1}Ozadje}{12}
-\contentsline {subsection}{\numberline {5.2}Implementacija}{12}
-\contentsline {section}{\numberline {6}Zaklju\IeC {\v c}ek}{13}
-\contentsline {section}{\numberline {7}Literatura}{14}
-\contentsline {section}{\numberline {8}Priloge}{15}
+\contentsline {subsection}{\numberline {1.2}Primeri}{7}
+\contentsline {subsection}{\numberline {1.3}Elementi okrepitvenega u\IeC {\v c}enja}{7}
+\contentsline {section}{\numberline {2}Problem}{8}
+\contentsline {subsection}{\numberline {2.1}Ocenjevanje povratne informacije}{8}
+\contentsline {subsection}{\numberline {2.2}Celoten problem okrepitvenega u\IeC {\v c}enja}{8}
+\contentsline {section}{\numberline {3}Re\IeC {\v s}itve}{9}
+\contentsline {subsection}{\numberline {3.1}Dinami\IeC {\v c}no programiranje}{9}
+\contentsline {subsection}{\numberline {3.2}Predvidevanje - vrednost stanja}{9}
+\contentsline {subsubsection}{\numberline {3.2.1}Monte Carlo metode}{9}
+\contentsline {subsubsection}{\numberline {3.2.2}U\IeC {\v c}enje na podlagi \IeC {\v c}asovne razlike - TD(0)}{9}
+\contentsline {subsubsection}{\numberline {3.2.3}Zdru\IeC {\v z}itev metod - TD($\lambda $)}{9}
+\contentsline {subsection}{\numberline {3.3}Krmiljenje - vrednost dejanja}{9}
+\contentsline {subsubsection}{\numberline {3.3.1}Monte Carlo metode}{9}
+\contentsline {subsubsection}{\numberline {3.3.2}U\IeC {\v c}enje na podlagi \IeC {\v c}asovne razlike - TD(0)}{9}
+\contentsline {subsubsection}{\numberline {3.3.3}Zdru\IeC {\v z}itev metod - TD($\lambda $)}{9}
+\contentsline {section}{\numberline {4}Posplo\IeC {\v s}evanje in funkcijska aproksimacija}{10}
+\contentsline {subsection}{\numberline {4.1}Predvidevanje - vrednost stanja}{10}
+\contentsline {subsection}{\numberline {4.2}Krmiljenje - vrednost dejanja}{10}
+\contentsline {section}{\numberline {5}U\IeC {\v c}enje na namizni igri Hex}{11}
+\contentsline {subsection}{\numberline {5.1}Ozadje}{11}
+\contentsline {subsection}{\numberline {5.2}Implementacija}{11}
+\contentsline {section}{\numberline {6}Zaklju\IeC {\v c}ek}{12}
+\contentsline {section}{\numberline {7}Literatura}{13}
+\contentsline {section}{\numberline {8}Priloge}{14}

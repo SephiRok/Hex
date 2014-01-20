@@ -3,6 +3,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[left=3cm, top=3cm, right=2.5cm, bottom=2.5cm]{geometry}
 \usepackage{fancyhdr}
+\usepackage{etoolbox}
+
+\patchcmd{\thebibliography}{\section*{\refname}}{\section{\refname}}{}{}
 
 \pagestyle{fancy}
 \fontfamily{timesnewroman}
@@ -13,7 +16,7 @@
 % Strojno učenje: okrepitveno učenje
 % Učenje z interakcijo z okoljem
 
-\lhead{\footnotesize Breulj R. Učenje iz interakcije\\UP FAMNIT, 2013}
+\lhead{\footnotesize Breulj R. Učenje iz interakcije\\UP FAMNIT, 2014}
 \rhead{\thepage}
 \cfoot{}
 
@@ -45,7 +48,7 @@ Mentor: doc. dr. Peter Rogelj\\
 
 \vfill
 \begin{center}
-{\large Koper, September 2013}
+{\large Koper, Februar 2014}
 \end{center}
 \end{titlepage}
 
@@ -76,21 +79,23 @@ Mentor: doc. dr. Peter Rogelj\\
 %\subsection*{Seznam kratic}
 
 \section{Uvod}
-% Meh, just translated. Rewrite.
-%children playing with blocks
-%matching shapes
-Ideja učenja iz interakcije z našim okoljem je ena od prvih, ki nam pride na misel, ko razmišljamo o naravi učenja. Ko se dojenček igra, maha z rokami ali gleda naokoli nima izrecnega učitelja, ima pa neposredno senzomotorično povezavo z okoljem. Uporaba te povezave proizvede ogromno informacije o vzrokih in učinkih, o posledicah dejanj in načinih kako doseči cilje. Skozi naše življenje so takšne interakcije nedvoumno velik izvir znanja o našem okolju in samim sebi. Ko se učimo voziti avto ali pogovarjati, se zavedamo kako se okolje odziva na naša dejanja in iščemo način kako vplivati na rezultat z našim vedenjem.
+
 
 What's in this work.
 
+% Meh, just translated. Rewrite.
+%children playing with blocks
+%matching shapes
+%Ideja učenja iz interakcije z našim okoljem je ena od prvih, ki nam pride na misel, ko razmišljamo o naravi učenja. Ko se dojenček igra, maha z rokami ali gleda naokoli nima izrecnega učitelja, ima pa neposredno senzomotorično povezavo z okoljem. Uporaba te povezave proizvede ogromno informacije o vzrokih in učinkih, o posledicah dejanj in načinih kako doseči cilje. Skozi naše življenje so takšne interakcije nedvoumno velik izvir znanja o našem okolju in samim sebi. Ko se učimo voziti avto ali pogovarjati, se zavedamo kako se okolje odziva na naša dejanja in iščemo način kako vplivati na rezultat z našim vedenjem.
+
 \subsection{Okrepitveno učenje}
-Okrepitveno učenje (angl. reinforcement learning) je učenje kaj narediti, kako izbirati dejanje, da povečamo številčni nagrajevalni signal. Učencu niso nikoli predstavljena pravilna ali optimalna dejanja kot pri večini oblik strojnega učenja. Katera dejanja prinesejo največjo nagrado mora sam odkriti s poizkušanjem. Skozi interakcijo z okoljem se uči posledic svojih dejanj. V najbolj zanimivih in težavnih primerih imajo dejanja vpliv ne le na takojšnjo nagrado ampak tudi na naslednji položaj in posledične nagrade. Te dve karakteristiki, iskanje s poizkušanjem in zamudne nagrade, so dve najpomembnejši lastnosti okrepitvenega učenja.
+%Okrepitveno učenje (angl. reinforcement learning) je učenje kaj narediti, kako izbirati dejanje, da povečamo številčni nagrajevalni signal. Učencu niso nikoli predstavljena pravilna ali optimalna dejanja kot pri večini oblik strojnega učenja. Katera dejanja prinesejo največjo nagrado mora sam odkriti s poizkušanjem. Skozi interakcijo z okoljem se uči posledic svojih dejanj. V najbolj zanimivih in težavnih primerih imajo dejanja vpliv ne le na takojšnjo nagrado ampak tudi na naslednji položaj in posledične nagrade. Te dve karakteristiki, iskanje s poizkušanjem in zamudne nagrade, so dve najpomembnejši lastnosti okrepitvenega učenja.
 
-Okrepitveno učenje ni definirano s karakterističnimi metodami učenja temveč kot karakterizacija problema učenja. Katerokoli metodo primerno za rešitev problema smatramo kot metodo okrepitvenega učenja. Celoten problem okrepitvenega učenja je predstavljen na strani \pageref{section:problem}. Osnovna ideja je zajeti najpomembnejše vidike realnega problema s katerim se sooča učenec (angl. learning agent) pri interakciji s svojim okoljem za dosego cilja. Takšen učenec mora imeti nekakšna čutila za pridobivanje informacij o stanju okolja in mora biti sposoben vplivati na to stanje z dejanji. Imeti mora tudi cilj ali pa cilje, ki se nanašajo na stanje okolja. Namen opisa problema je predstaviti te vidike, čutenje, dejanje in cilj, v najenostavnejši obliki brez poenostavljenja.
+%Okrepitveno učenje ni definirano s karakterističnimi metodami učenja temveč kot karakterizacija problema učenja. Katerokoli metodo primerno za rešitev problema smatramo kot metodo okrepitvenega učenja. Celoten problem okrepitvenega učenja je predstavljen na strani \pageref{section:problem}. Osnovna ideja je zajeti najpomembnejše vidike realnega problema s katerim se sooča učenec (angl. learning agent) pri interakciji s svojim okoljem za dosego cilja. Takšen učenec mora imeti nekakšna čutila za pridobivanje informacij o stanju okolja in mora biti sposoben vplivati na to stanje z dejanji. Imeti mora tudi cilj ali pa cilje, ki se nanašajo na stanje okolja. Namen opisa problema je predstaviti te vidike, čutenje, dejanje in cilj, v najenostavnejši obliki brez poenostavljenja.
 
-Okrepitveno učenje se razlikuje od nadzorovanega učenja (angl. supervised learning) v tem, da nima izobraženega zunanjega nadzornika, ki predloži učencu primere in rezultate. Nadzorovano učenje je pomemben tip učenja vendar ni primerno za učenje iz interakcije. V interaktivnih problemih je velikokrat nepraktično pridobiti primere želenega vedenja, ki so pravilni in hkrati predstavljajo vsa stanja v katerih mora učenec delovati. V neznanem okolju, kjer bi si predstavljali, da je učenje najbolj koristno, se mora učenec učiti iz svojih izkušenj [[[[[[[[[[[1]]]]]]]]]]].
+%Okrepitveno učenje se razlikuje od nadzorovanega učenja (angl. supervised learning) v tem, da nima izobraženega zunanjega nadzornika, ki predloži učencu primere in rezultate. Nadzorovano učenje je pomemben tip učenja vendar ni primerno za učenje iz interakcije. V interaktivnih problemih je velikokrat nepraktično pridobiti primere želenega vedenja, ki so pravilni in hkrati predstavljajo vsa stanja v katerih mora učenec delovati. V neznanem okolju, kjer bi si predstavljali, da je učenje najbolj koristno, se mora učenec učiti iz svojih izkušenj \cite{Intro}.
 
-Eden od izzivov okrepitvenega učenja, ki jih ne najdemo v ostalih oblikah strojnega učenja, je kompromis med ___raziskovanjem___ (angl. exploration) in izkoriščanjem (angl. exploitation). 
+%Eden od izzivov okrepitvenega učenja, ki jih ne najdemo v ostalih oblikah strojnega učenja, je kompromis med ?raziskovanjem? (angl. exploration) in izkoriščanjem (angl. exploitation). 
 
 
 %One of the challenges that arise in reinforcement learning and not in other kinds of learning is the trade-off between exploration and exploitation. To obtain a lot of reward, a reinforcement learning agent must prefer actions that it has tried in the past and found to be effective in producing reward. But to discover such actions, it has to try actions that it has not selected before. The agent has to exploit what it already knows in order to obtain reward, but it also has to explore in order to make better action selections in the future. The dilemma is that neither exploration nor exploitation can be pursued exclusively without failing at the task. The agent must try a variety of actions and progressively favor those that appear to be best. On a stochastic task, each action must be tried many times to gain a reliable estimate its expected reward. The exploration-exploitation dilemma has been intensively studied by mathematicians for many decades (see Chapter 2). For now, we simply note that the entire issue of balancing exploration and exploitation does not even arise in supervised learning as it is usually defined.
@@ -138,7 +143,20 @@ Eden od izzivov okrepitvenega učenja, ki jih ne najdemo v ostalih oblikah stroj
 \section{Zaključek}
 \newpage
 
-\section{Literatura}
+% [1] Prvi A. Avtor, Drugi B. Avtor in Tretji C. Avtor, Naslov članka, Naslov revije 34 (2007), 24-56.
+%[1] D. Marušič, R. Scapellato in B. Zgrablić, On quasiprimitive pqr-graphs, Algebra Colloq. 4 (1995), 295–314.
+%[2] Prvi A. Avtor, Naslov knjige, druga izdaja. Založba, Ljubljana, 2008.
+%Primer:
+%[2] W. T. Tutte, Connnectivity in graphs, University of Toronto Press, Toronto, 1966.
+%[3] Prvi A. Avtor in Drugi B. Avtor, Naslov poglavja v knjigi, v: Prvi urednik, Drugi urednik (ur.), Naslov knjige, Založba, Ljubljana, 1998, 2542–2603.
+%Primer:
+%[3] R. K. Guy, The decline and fall of Zarankiewicz's theorem, v: F. Harary (ur.), Proof Techniques in Graph Theory, Academic Press, New York, London, 1969, 63–69.
+\begin{thebibliography}{99}
+\bibitem{Intro}
+Richard S. Sutton, Andrew G. Barto,
+\newblock{\em The Long Tail},
+\newblock{MIT Press, Cambridge, MA, 1998}
+\end{thebibliography}
 \newpage
 
 \section{Priloge}
