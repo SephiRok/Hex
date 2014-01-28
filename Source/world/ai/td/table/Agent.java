@@ -46,7 +46,8 @@ public class Agent implements world.ai.Agent {
 	 */
 	private final static float TRACE_DECAY = 0.6f;
 
-	private TreeMap<Value, Short> actionValues = new TreeMap<Value, Short>();
+	private TreeMap<Value, ArrayList<Short>> actionValues 
+			= new TreeMap<Value, ArrayList<Short>>();
 	private float error;
 	private ArrayList<State> pathStates = new ArrayList<State>();
 	private AIPlayer player;
@@ -73,26 +74,43 @@ public class Agent implements world.ai.Agent {
 	public int chooseAction(world.State worldState) {
 		synchronized (this) {
 			actionValues.clear();
-			for (short action : worldState.getAvailableActions()) {
+			ArrayList<Short> availableActions = worldState.getAvailableActions();
+			for (short action : availableActions) {				
 				worldState.getFields()[action].setController(player);
-				actionValues.put(getStateValue(worldState), action);
+				Value value = getStateValue(worldState);
+				ArrayList<Short> actions = actionValues.get(value);
+				if (actions == null) {
+					actions = new ArrayList<Short>();
+				}
+				actions.add(action);
+				actionValues.put(value, actions);
 				worldState.getFields()[action].reset();
 //				System.out.println(getStateValue(nextState).get());
 			}
-//			System.out.println("-");
 			if (rng.nextInt(100) >= GREEDINESS * 100) {
-				Object[] array = actionValues.entrySet().toArray();
-				Map.Entry<Value, Short> entry 
-						= (Map.Entry<Value, Short>) array[rng.nextInt(
-						array.length)];
-				return entry.getValue();
+				short action = availableActions.get(rng.nextInt(
+						availableActions.size()));
+//				System.out.println("Picked action: " + action);
+				return action;
 			}
-			return actionValues.get(actionValues.lastKey());
+			ArrayList<Short> highestValueActions = actionValues.get(
+					actionValues.lastKey());
+//			System.out.println(highestValueActions.size());
+
+			// Less losses until learned with .get(0) for 3x3.
+//			short action = highestValueActions.get(rng.nextInt(
+//					highestValueActions.size()));
+			short action = highestValueActions.get(0);
+
+//			System.out.println("Picked action: " + action);
+			return action;
 		}
 	}
 	
 	public double getError() {
-		return error;
+		synchronized (this) {
+			return error;	
+		}
 	}
 	
 	private State getState(int stateNumStepsBack) {
@@ -187,7 +205,7 @@ public class Agent implements world.ai.Agent {
 	
 	public void printStats() {
 		System.out.println(states.size() + " states/values.");
-		System.out.println(player.getStats());
+		System.out.println(player.getWL());
 	}
 
 	public void reward(world.State worldState, double reward) {

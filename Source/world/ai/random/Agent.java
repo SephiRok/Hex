@@ -41,7 +41,7 @@ public class Agent implements world.ai.Agent {
 	public void writeToFile(String filename) {}
 	
 	public void printStats() {
-		System.out.println(player.getStats());
+		System.out.println(player.getWL());
 	}
 
 	public void reward(world.State worldState, double reward) {}

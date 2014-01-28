@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -15,10 +16,10 @@ import world.ai.AIPlayer;
 public class Agent implements world.ai.Agent {
 	
 	public final static float DISCOUNTING_RATE = 1.0f;
-	public final static float GREEDINESS = 1.00f;
+	public final static float GREEDINESS = 0.90f;
 	public final static float LEARNING_RATE = 1.0f;
-	public final static float MOMENTUM = 0.0f;
-	public final static float TRACE_DECAY = 0.6f;
+	public final static float MOMENTUM = 0.0f; // produces NaN
+	public final static float TRACE_DECAY = 0.6f; // maybe this should decrease towards 0 too, together with the learning rate? board game paper .. ?
 	
 	/* interesting values:
 	 * size: learning rate, hidden layer size, trace decay
@@ -29,7 +30,8 @@ public class Agent implements world.ai.Agent {
 	
 	private static Random rng = new Random();
 
-	private TreeMap<Double, Short> actionValues = new TreeMap<Double, Short>();
+	private TreeMap<Double, ArrayList<Short>> actionValues 
+			= new TreeMap<Double, ArrayList<Short>>();
 	private double error;
 	private Layer hiddenLayer;
 	private Layer inputLayer;
@@ -43,7 +45,7 @@ public class Agent implements world.ai.Agent {
 		inputLayer = new Layer((player.getWorld().getWidth() 
 				* player.getWorld().getHeight()) * 3, 1);
 		hiddenLayer = new Layer((int) ((inputLayer.getNeurons().length - 1) 
-				* 1.0), 1);
+				* 1), 1);
 		inputLayer.setOutput(hiddenLayer);
 		hiddenLayer.setOutput(outputLayer);
 		reset();
@@ -51,22 +53,32 @@ public class Agent implements world.ai.Agent {
 	
 	public int chooseAction(world.State worldState) {
 		actionValues.clear();
-		for (short action : worldState.getAvailableActions()) {
+		ArrayList<Short> availableActions = worldState.getAvailableActions();
+		for (short action : availableActions) {
 			worldState.getFields()[action].setController(player);
 			double value = evaluate(worldState);
-			actionValues.put(value, action);
+			ArrayList<Short> actions = actionValues.get(value);
+			if (actions == null) {
+				actions = new ArrayList<Short>();
+			}
+			actions.add(action);
+			actionValues.put(value, actions);
 			worldState.getFields()[action].reset();
 //			System.out.println(value);
 		}
-//		System.out.println("-");
 		if (rng.nextInt(100) >= GREEDINESS * 100) {
-			Object[] array = actionValues.entrySet().toArray();
-			Map.Entry<Double, Short> entry 
-					= (Map.Entry<Double, Short>) array[rng.nextInt(
-					array.length)];
-			return entry.getValue();
+			short action = availableActions.get(rng.nextInt(
+					availableActions.size()));
+//			System.out.println("Picked action: " + action);
+			return action;
 		}
-		return actionValues.get(actionValues.lastKey());
+		ArrayList<Short> highestValueActions = actionValues.get(
+				actionValues.lastKey());
+//		System.out.println(highestValueActions.size());
+		short action = highestValueActions.get(rng.nextInt(
+				highestValueActions.size()));
+//		System.out.println("Picked action: " + action);
+		return action;
 	}
 	
 	private double computeOutput() {
@@ -142,7 +154,7 @@ public class Agent implements world.ai.Agent {
 				+ " output neurons, " + hiddenLayer.getNeurons().length 
 				+ " hidden neurons, " + inputLayer.getNeurons().length 
 				+ " input neurons.");
-		System.out.println(player.getStats());
+		System.out.println(player.getWL());
 	}
 	
 	public void readFromFile(String filename) {
@@ -179,7 +191,7 @@ public class Agent implements world.ai.Agent {
 	}
 	
 	private void updateEligibilityTraces() {
-		double outputDerivative = Neuron.valueDerivative(output);
+		double outputDerivative = Neuron.transferDerivative(output);
 		outputLayer.updateEligibilityTraces0(outputDerivative);
 		hiddenLayer.updateEligibilityTraces1(outputDerivative);
 	}

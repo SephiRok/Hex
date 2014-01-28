@@ -25,7 +25,11 @@ public class Neuron {
 			weightedSum += inputLayer.getNeurons()[i].getValue()
 					* weights[i];
 		}
-		value = value(weightedSum);
+//		if (outputLayer == null) {
+//			value = weightedSum;
+//		} else {
+			value = transfer(weightedSum);
+//		}
 		return value;
 	}
 	
@@ -51,7 +55,7 @@ public class Neuron {
 	
 	public void resetEligibilityTraces() {
 		for (int i = 0; i < eligibilityTraces.length; ++i) {
-			eligibilityTraces[i] = 0;
+			eligibilityTraces[i] = 0.0;
 		}
 	}
 	
@@ -86,7 +90,7 @@ public class Neuron {
 		for (int i = 0; i < eligibilityTraces.length; ++i) {
 			eligibilityTraces[i] = Agent.TRACE_DECAY 
 					* eligibilityTraces[i] + outputDerivative 
-					* outputWeight * valueDerivative(value) 
+					* outputWeight * transferDerivative(value) 
 					* inputLayer.getNeurons()[i].getValue();
 		}
 	}
@@ -100,26 +104,26 @@ public class Neuron {
 		}
 	}
 	
-	// Activation function.
-	static public double value(double x) {
+	// Transfer/activation function.
+	static public double transfer(double x) {
 		
 		// sigmoid
-//		return 1.0 / (1.0 + Math.pow(Math.E, -x));
+		return 1.0 / (1.0 + Math.exp(-x));
 		
 		// tanh
-		return Math.tanh(x);
+//		return Math.tanh(x);
 		
 	}
 	
-	// Derivative of activation function.
-	static public double valueDerivative(double x) {
+	// Derivative of transfer/activation function.
+	static public double transferDerivative(double x) {
 		
 		// sigmoid
 //		return value(x) * (1.0 - value(x));
-//		return x * (1.0 - x);
+		return x * (1.0 - x);
 		
 		// tanh
-		return 1.0 - x * x;
+//		return 1.0 - x * x;
 	
 	}
 	

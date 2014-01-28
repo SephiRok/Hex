@@ -36,6 +36,14 @@ public class Player implements MessageReceiver {
 		return color;
 	}
 	
+	public long getGamesBeforeLossStreak() {
+		return getGamesPlayed() - getGamesLostStreak();
+	}
+	
+	public long getGamesBeforeWinStreak() {
+		return getGamesPlayed() - getGamesWonStreak();
+	}
+	
 	public long getGamesLost() {
 		return gamesLost;
 	}
@@ -60,20 +68,26 @@ public class Player implements MessageReceiver {
 		return id;
 	}
 	
-	public String getStats() {
-		long winPercent = getGamesPlayed() > 0
-				? Math.round((double) getGamesWon() 
-						/ (double) getGamesPlayed() * 100.0)
-				: 0;
+	public String getStreak() {
 		String streak = getGamesLostStreak() > 0 
-				? String.valueOf(getGamesLostStreak()) + " loss streak"
-				: String.valueOf(getGamesWonStreak()) + " win streak" ;
-		return "W/L: " + getGamesWon() + "/" + getGamesLost() 
-				+ " (" + winPercent + "%), " + streak;
+				? String.valueOf(getGamesLostStreak()) + " losses since "
+						+ String.valueOf(getGamesBeforeLossStreak()) + ""
+				: String.valueOf(getGamesWonStreak()) + " wins since "
+						+ String.valueOf(getGamesBeforeWinStreak()) + "";
+		return "Streak: " + streak;
 	}
 	
 	public TYPE getType() {
 		return type;
+	}
+
+	public String getWL() {
+		long winPercent = getGamesPlayed() > 0
+				? Math.round((double) getGamesWon() 
+						/ (double) getGamesPlayed() * 100.0)
+				: 0;
+		return "W/L: " + getGamesWon() + "/" + getGamesLost() 
+				+ " (" + winPercent + "%)";
 	}
 	
 	public World getWorld() {

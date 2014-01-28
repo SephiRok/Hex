@@ -52,8 +52,9 @@ public class Parameters extends JPanel implements ActionListener, MessageReceive
 	private TextFieldParameter heightParameter;
 	private TextFieldParameter lossRewardParameter;
 	private JPanel[] playerParameters = new JPanel[2];
+	private JLabel[] playerStreak = new JLabel[2];
 	private JComboBox[] playerType = new JComboBox[2];
-	private JLabel[] playerStats = new JLabel[2];
+	private JLabel[] playerWL = new JLabel[2];
 	private TextFieldParameter processingDelayParameter;
 	private JButton resetPlayersButton;
 	private JButton resetWorldButton;
@@ -189,7 +190,8 @@ public class Parameters extends JPanel implements ActionListener, MessageReceive
 				"[AI] ANN TD(λ)"};
 		playerParameters[playerID].add(playerType[playerID] = new JComboBox(
 				playerTypes));
-		playerParameters[playerID].add(playerStats[playerID] = new JLabel());
+		playerParameters[playerID].add(playerWL[playerID] = new JLabel());
+		playerParameters[playerID].add(playerStreak[playerID] = new JLabel());
 		aiParameters[playerID] = new JPanel();
 		aiParameters[playerID].setLayout(new BoxLayout(aiParameters[playerID], 
 				BoxLayout.Y_AXIS));
@@ -204,7 +206,8 @@ public class Parameters extends JPanel implements ActionListener, MessageReceive
 		add(playerParameters[playerID]);
 
 		playerType[playerID].setAlignmentX(LEFT_ALIGNMENT);
-		playerStats[playerID].setAlignmentX(LEFT_ALIGNMENT);
+		playerWL[playerID].setAlignmentX(LEFT_ALIGNMENT);
+		playerStreak[playerID].setAlignmentX(LEFT_ALIGNMENT);
 		aiStateValue[playerID].setAlignmentX(LEFT_ALIGNMENT);
 		aiError[playerID].setAlignmentX(LEFT_ALIGNMENT);
 		aiButtons.setAlignmentX(LEFT_ALIGNMENT);
@@ -228,7 +231,8 @@ public class Parameters extends JPanel implements ActionListener, MessageReceive
 			} else if (message instanceof World.MessageGameOver) {
 				for (int i = 0; i < 2; ++i) {
 					if (world.getPlayer(i) != null) {
-						playerStats[i].setText(world.getPlayer(i).getStats());
+						playerWL[i].setText(world.getPlayer(i).getWL());
+						playerStreak[i].setText(world.getPlayer(i).getStreak());
 					}
 				}
 			}
@@ -249,17 +253,19 @@ public class Parameters extends JPanel implements ActionListener, MessageReceive
 		aiError[playerID].setText("Error: "
 				+ String.valueOf(ai.getAgent().getError()));
 		aiParameters[playerID].setVisible(true);
-		
 	}	
 	
 	private void refreshStats(int playerID) {
 		Player player = world.getPlayer(playerID);
 		if (player == null) {
-			playerStats[playerID].setVisible(false);
+			playerWL[playerID].setVisible(false);
+			playerStreak[playerID].setVisible(false);
 			return;
 		}
-		playerStats[playerID].setText(player.getStats());
-		playerStats[playerID].setVisible(true);
+		playerWL[playerID].setText(player.getWL());
+		playerWL[playerID].setVisible(true);
+		playerStreak[playerID].setText(player.getStreak());
+		playerStreak[playerID].setVisible(true);
 	}
 
 }
