@@ -24,7 +24,7 @@ public class Agent implements world.ai.Agent {
 		return 0.0;
 	}
 	
-	public double getStateValue() {
+	public double getStateValue(world.State worldState) {
 		return 0.0;
 	}
 	

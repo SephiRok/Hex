@@ -25,11 +25,14 @@ public class Neuron {
 			weightedSum += inputLayer.getNeurons()[i].getValue()
 					* weights[i];
 		}
-//		if (outputLayer == null) {
-//			value = weightedSum;
-//		} else {
+		if (outputLayer == null) {
+			value = weightedSum;
+		} else {
 			value = transfer(weightedSum);
-//		}
+		}
+		if (Double.isNaN(value)) {
+			System.err.println("value NaN");
+		}
 		return value;
 	}
 	
@@ -46,11 +49,16 @@ public class Neuron {
 	}
 	
 	public void reset() {
-		double r = 1 / Math.sqrt(inputLayer.getNeurons().length);
+//		for (int i = 0; i < weights.length; ++i) {
+//			weights[i] = 0.1;
+//		}
+
+		// From: http://www.willamette.edu/~gorr/classes/cs449/precond.html
+		double r = 1 / Math.sqrt(weights.length);
 		for (int i = 0; i < weights.length; ++i) {
 			weights[i] = Math.pow(-1.0, Agent.getRNG().nextInt(2)) 
 					* Agent.getRNG().nextDouble() * r;
-		}		
+		}
 	}
 	
 	public void resetEligibilityTraces() {
@@ -79,6 +87,9 @@ public class Neuron {
 			eligibilityTraces[i] = Agent.TRACE_DECAY 
 					* eligibilityTraces[i] + outputDerivative
 					* inputLayer.getNeurons()[i].getValue();
+			if (Double.isNaN(eligibilityTraces[i])) {
+				System.err.println("e2 NaN");
+			}
 		}
 	}
 	
@@ -92,6 +103,9 @@ public class Neuron {
 					* eligibilityTraces[i] + outputDerivative 
 					* outputWeight * transferDerivative(value) 
 					* inputLayer.getNeurons()[i].getValue();
+			if (Double.isNaN(eligibilityTraces[i])) {
+				System.err.println("e1 NaN");
+			}
 		}
 	}
 	
@@ -101,6 +115,9 @@ public class Neuron {
 					* eligibilityTraces[i];
 			weightDelta += Agent.MOMENTUM * weights[i];
 			weights[i] += weightDelta;
+			if (Double.isNaN(weights[i])) {
+				System.err.println("weight NaN");
+			}
 		}
 	}
 	
@@ -108,10 +125,10 @@ public class Neuron {
 	static public double transfer(double x) {
 		
 		// sigmoid
-		return 1.0 / (1.0 + Math.exp(-x));
+//		return 1.0 / (1.0 + Math.exp(-x));
 		
 		// tanh
-//		return Math.tanh(x);
+		return Math.tanh(x);
 		
 	}
 	
@@ -119,11 +136,10 @@ public class Neuron {
 	static public double transferDerivative(double x) {
 		
 		// sigmoid
-//		return value(x) * (1.0 - value(x));
-		return x * (1.0 - x);
+//		return x * (1.0 - x);
 		
 		// tanh
-//		return 1.0 - x * x;
+		return 1.0 - x * x;
 	
 	}
 	

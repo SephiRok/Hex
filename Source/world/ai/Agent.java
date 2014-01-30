@@ -6,7 +6,7 @@ public interface Agent {
 
 	public double getError();
 	
-	public double getStateValue();
+	public double getStateValue(world.State worldState);
 	
 	public String getType();
 	

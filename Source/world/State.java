@@ -12,18 +12,21 @@ public class State implements Serializable {
 	
 	private ArrayList<Short> availableActions;
 	private Field[] fields;
-	private World world;
+	private byte worldHeight;
+	private byte worldWidth;
 	
 	public State(World world) {
-		this.world = world;
-		fields = new Field[world.getHeight() * world.getWidth()];
+		worldHeight = world.getHeight();
+		worldWidth = world.getWidth();
+		fields = new Field[worldHeight * worldWidth];
 		createFields();
 		connectFields();
 		availableActions = new ArrayList<Short>();
 	}
 	
 	public State(State state) {
-		world = state.world;
+		worldHeight = state.worldHeight;
+		worldWidth = state.worldWidth;
 		fields = new Field[state.getFields().length];
 		for (Field field : state.fields) {
 			fields[field.getID()] = new Field(field);
@@ -31,20 +34,20 @@ public class State implements Serializable {
 	}
 	
 	public void connectFields() {
-		for (int y = 0; y < world.getHeight(); ++y) {
-			for (int x = 0; x < world.getWidth(); ++x) {
+		for (int y = 0; y < worldHeight; ++y) {
+			for (int x = 0; x < worldWidth; ++x) {
 				int fieldID = getFieldID(x, y);
 				Field field = fields[fieldID];
 				
 				// Left.
 				int neighborID = fieldID - 1;
-				if ((neighborID >= 0) && (fieldID % world.getWidth() != 0)) {
+				if ((neighborID >= 0) && (fieldID % worldWidth != 0)) {
 					field.addNeighbor(fields[neighborID]);
 				}
 
 				// Up right.
-				neighborID = fieldID - world.getWidth() + 1;
-				if ((neighborID >= 0) && ((fieldID + 1) % world.getWidth() != 0)) {
+				neighborID = fieldID - worldWidth + 1;
+				if ((neighborID >= 0) && ((fieldID + 1) % worldWidth != 0)) {
 					field.addNeighbor(fields[neighborID]);
 				}
 				
@@ -57,14 +60,14 @@ public class State implements Serializable {
 				// Right.
 				neighborID = fieldID + 1;
 				if ((neighborID < fields.length) 
-						&& ((fieldID + 1) % world.getWidth() != 0)) {
+						&& ((fieldID + 1) % worldWidth != 0)) {
 					field.addNeighbor(fields[neighborID]);
 				}
 				
 				// Down left.
-				neighborID = fieldID + world.getWidth() - 1;
+				neighborID = fieldID + worldWidth - 1;
 				if ((neighborID < fields.length) 
-						&& (fieldID % world.getWidth() != 0)) {
+						&& (fieldID % worldWidth != 0)) {
 					field.addNeighbor(fields[neighborID]);
 				}
 				
@@ -78,9 +81,9 @@ public class State implements Serializable {
 	}
 	
 	private void createFields() {
-		for (short y = 0; y < world.getHeight(); ++y) {
-			for (short x = 0; x < world.getWidth(); ++x) {
-				short id = (short) (y * world.getWidth() + x);
+		for (short y = 0; y < worldHeight; ++y) {
+			for (short x = 0; x < worldWidth; ++x) {
+				short id = (short) (y * worldWidth + x);
 				fields[id] = new Field(id);
 			}
 		}
@@ -118,7 +121,7 @@ public class State implements Serializable {
 	}
 	
 	public int getFieldID(int x, int y) {
-		return y * world.getWidth() + x;
+		return y * worldWidth + x;
 	}
 	
 	public Field[] getFields() {
@@ -145,10 +148,12 @@ public class State implements Serializable {
 	
 	private void readObject(ObjectInputStream stream)
 			throws IOException, ClassNotFoundException {
-		fields = new Field[world.getHeight() * world.getWidth()];
-		for (short y = 0; y < world.getHeight(); ++y) {
-			for (short x = 0; x < world.getWidth(); ++x) {
-				short id = (short) (y * world.getWidth() + x);
+		worldHeight = stream.readByte();
+		worldWidth = stream.readByte();
+		fields = new Field[worldHeight * worldWidth];
+		for (short y = 0; y < worldHeight; ++y) {
+			for (short x = 0; x < worldWidth; ++x) {
+				short id = (short) (y * worldWidth + x);
 				fields[id] = (Field) stream.readObject();
 				fields[id].setID(id);
 			}
@@ -157,6 +162,8 @@ public class State implements Serializable {
 	
 	private void writeObject(ObjectOutputStream stream)
 			throws IOException {
+		stream.writeByte(worldHeight);
+		stream.writeByte(worldWidth);
 		for (Field field : fields) {
 			stream.writeObject(field);
 		}

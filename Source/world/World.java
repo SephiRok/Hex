@@ -164,14 +164,14 @@ public class World implements Runnable {
 	}
 	
 	public void resetPlayer(int id) {
-		setPlayer(id, getPlayer(id).getType());
+		if (players[id] != null) {
+			setPlayer(id, players[id].getType());
+		}
 	}
 	
 	public void resetPlayers() {
 		for (int i = 0; i < players.length; ++i) {
-			if (players[i] != null) {
-				setPlayer(i, players[i].getType());
-			}
+			resetPlayer(i);
 		}
 	}
 	

@@ -249,7 +249,7 @@ public class Parameters extends JPanel implements ActionListener, MessageReceive
 		}
 		AIPlayer ai = (AIPlayer) player;
 		aiStateValue[playerID].setText("State value: "
-				+ String.valueOf(ai.getAgent().getStateValue()));
+				+ String.valueOf(ai.getAgent().getStateValue(world.getState())));
 		aiError[playerID].setText("Error: "
 				+ String.valueOf(ai.getAgent().getError()));
 		aiParameters[playerID].setVisible(true);

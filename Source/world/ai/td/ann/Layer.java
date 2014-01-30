@@ -60,20 +60,14 @@ public class Layer {
 		return neurons;
 	}
 	
-	public void reset(double v) {
+	public void reset() {
 		if (inputLayer == null) {
 			return;
 		}
-		v = v / inputLayer.getNeurons().length;
-		// From: http://www.willamette.edu/~gorr/classes/cs449/precond.html
-		learningRate = Agent.LEARNING_RATE 
-				/ (inputLayer.getNeurons().length * Math.sqrt(v));
-//		learningRate = Agent.LEARNING_RATE 
-//				/ inputLayer.getNeurons().length;
 		for (Neuron neuron : neurons) {
 			neuron.reset();
 		}
-		inputLayer.reset(v);
+		inputLayer.reset();
 	}
 	
 	public void resetEligibilityTraces() {
@@ -110,10 +104,25 @@ public class Layer {
 		}
 	}
 	
-	public void updateLearningRate(double runs) {
-		learningRate = (Agent.LEARNING_RATE 
-				/ inputLayer.getNeurons().length) / (1 + runs / 100000);
+	public void updateLearningRate(double v, double runs) {
+		if (inputLayer == null) {
+			return;
+		}
+//		learningRate = Agent.LEARNING_RATE 
+//				/ (inputLayer.getNeurons().length * Math.sqrt(v)) 
+//				/ (1 + runs / 10000);
+		
+		// From: http://www.willamette.edu/~gorr/classes/cs449/precond.html
+		v = v / inputLayer.getNeurons().length;
+		if (outputLayer != null) {
+			v *= outputLayer.getNeurons().length;
+		}
+		learningRate = Agent.LEARNING_RATE 
+				/ (inputLayer.getNeurons().length * Math.sqrt(v)) 
+				/ (1 + runs / 1000);
+		
 //		System.out.println("learningRate: " + learningRate);
+		inputLayer.updateLearningRate(v, runs);
 	}
 	
 	public void updateWeights(double error) {

@@ -15,11 +15,11 @@ import world.ai.AIPlayer;
 
 public class Agent implements world.ai.Agent {
 	
-	public final static float DISCOUNTING_RATE = 1.0f;
-	public final static float GREEDINESS = 0.90f;
-	public final static float LEARNING_RATE = 1.0f;
-	public final static float MOMENTUM = 0.0f; // produces NaN
-	public final static float TRACE_DECAY = 0.6f; // maybe this should decrease towards 0 too, together with the learning rate? board game paper .. ?
+	public final static double DISCOUNTING_RATE = 1.0;
+	public final static double GREEDINESS = 0.90;
+	public final static double LEARNING_RATE = 0.001;
+	public final static double MOMENTUM = 0.0; // produces NaN
+	public final static double TRACE_DECAY = 0.0; // has to be 0 or decrease towards 0 to converge to local optimum ... how can it get to optimal if always 0???
 	
 	/* interesting values:
 	 * size: learning rate, hidden layer size, trace decay
@@ -43,9 +43,9 @@ public class Agent implements world.ai.Agent {
 	public Agent(AIPlayer player) {
 		this.player = player;
 		inputLayer = new Layer((player.getWorld().getWidth() 
-				* player.getWorld().getHeight()) * 3, 1);
+				* player.getWorld().getHeight()) * 2, 1);
 		hiddenLayer = new Layer((int) ((inputLayer.getNeurons().length - 1) 
-				* 1), 1);
+				* 2), 1);
 		inputLayer.setOutput(hiddenLayer);
 		hiddenLayer.setOutput(outputLayer);
 		reset();
@@ -105,7 +105,7 @@ public class Agent implements world.ai.Agent {
 		return outputLayer.getNeurons()[0];
 	}
 	
-	public double getStateValue() {
+	public double getStateValue(world.State worldState) {
 		return output;
 	}
 	
@@ -116,6 +116,8 @@ public class Agent implements world.ai.Agent {
 	public void onEpisodeBegin() {
 		outputLayer.resetEligibilityTraces();
 		hiddenLayer.resetEligibilityTraces();
+//		output = 0.0;
+		outputLayer.updateLearningRate(1.0, player.getGamesPlayed());
 		output = evaluate(player.getWorld().getState());
 		updateEligibilityTraces();
 	}
@@ -131,9 +133,6 @@ public class Agent implements world.ai.Agent {
 //				System.out.println("RESET!");
 //			}
 //		}
-		
-//		outputLayer.updateLearningRate(player.getGamesPlayed());
-//		hiddenLayer.updateLearningRate(player.getGamesPlayed());
 		
 //		if (player.getGamesPlayed() == 5000) {
 //			printStats();
@@ -178,13 +177,14 @@ public class Agent implements world.ai.Agent {
 	}
 	
 	private void reset() {
-		outputLayer.reset(1.0);
+		outputLayer.reset();
 	}
 	
 	public void reward(world.State worldState, double reward) {
 		previousOutput = output;
 		output = evaluate(worldState); // forward pass -- compute activities
 		error = reward + DISCOUNTING_RATE * output - previousOutput; // form error
+//		updateEligibilityTraces();
 		updateWeights(); // backward pass (backward propagation) -- learn
 		output = evaluate(worldState); // forward pass must be done twice to form TD errors
 		updateEligibilityTraces();
@@ -210,14 +210,14 @@ public class Agent implements world.ai.Agent {
 		 * 010 == controller 0
 		 * 001 == controller 1
 		 */
-		for (world.Field field : state.getFields()) {
-			inputLayer.getNeurons()[field.getID() * 3 + 0].setValue(
-					field.getControllerID() == -1 ? 1 : 0);
-			inputLayer.getNeurons()[field.getID() * 3 + 1].setValue(
-					field.getControllerID() == 0 ? 1 : 0);
-			inputLayer.getNeurons()[field.getID() * 3 + 2].setValue(
-					field.getControllerID() == 1 ? 1 : 0);
-		}
+//		for (world.Field field : state.getFields()) {
+//			inputLayer.getNeurons()[field.getID() * 3 + 0].setValue(
+//					field.getControllerID() == -1 ? 1 : 0);
+//			inputLayer.getNeurons()[field.getID() * 3 + 1].setValue(
+//					field.getControllerID() == 0 ? 1 : 0);
+//			inputLayer.getNeurons()[field.getID() * 3 + 2].setValue(
+//					field.getControllerID() == 1 ? 1 : 0);
+//		}
 
 		/*
 		 * Reduced boolean input mapping:
@@ -228,12 +228,12 @@ public class Agent implements world.ai.Agent {
 		 * 01 == controller 1
 		 * 11 is not possible
 		 */
-//		for (world.Field field : state.getFields()) {
-//			inputLayer.getNeurons()[field.getID() * 2 + 0].setValue(
-//					field.getControllerID() == 0 ? 1 : 0);
-//			inputLayer.getNeurons()[field.getID() * 2 + 1].setValue(
-//					field.getControllerID() == 1 ? 1 : 0);
-//		}
+		for (world.Field field : state.getFields()) {
+			inputLayer.getNeurons()[field.getID() * 2 + 0].setValue(
+					field.getControllerID() == 0 ? 1 : 0);
+			inputLayer.getNeurons()[field.getID() * 2 + 1].setValue(
+					field.getControllerID() == 1 ? 1 : 0);
+		}
 		
 		/*
 		 * Line input mapping:

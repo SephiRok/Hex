@@ -22,7 +22,7 @@ public class Agent implements world.ai.Agent {
 	/**
 	 * From 0.00 (random) to 1.00 (greedy).
 	 */
-	private final static float GREEDINESS = 1.00f;
+	private final static float GREEDINESS = 1.0f; // May not discover shortest path with -1.0 field reward without at least 1% randomness?
 	
 	/**
 	 * Gamma.
@@ -77,7 +77,7 @@ public class Agent implements world.ai.Agent {
 			ArrayList<Short> availableActions = worldState.getAvailableActions();
 			for (short action : availableActions) {				
 				worldState.getFields()[action].setController(player);
-				Value value = getStateValue(worldState);
+				Value value = getStateValueInstance(worldState);
 				ArrayList<Short> actions = actionValues.get(value);
 				if (actions == null) {
 					actions = new ArrayList<Short>();
@@ -85,7 +85,7 @@ public class Agent implements world.ai.Agent {
 				actions.add(action);
 				actionValues.put(value, actions);
 				worldState.getFields()[action].reset();
-//				System.out.println(getStateValue(nextState).get());
+//				System.out.println(getStateValueInstance(nextState).get());
 			}
 			if (rng.nextInt(100) >= GREEDINESS * 100) {
 				short action = availableActions.get(rng.nextInt(
@@ -98,9 +98,9 @@ public class Agent implements world.ai.Agent {
 //			System.out.println(highestValueActions.size());
 
 			// Less losses until learned with .get(0) for 3x3.
-//			short action = highestValueActions.get(rng.nextInt(
-//					highestValueActions.size()));
-			short action = highestValueActions.get(0);
+			short action = highestValueActions.get(rng.nextInt(
+					highestValueActions.size()));
+//			short action = highestValueActions.get(0);
 
 //			System.out.println("Picked action: " + action);
 			return action;
@@ -124,7 +124,7 @@ public class Agent implements world.ai.Agent {
 	
 	public double getStateValue() {
 		synchronized (this) {
-			State state = getState(0);
+			world.ai.td.table.State state = getState(0);
 			if (state == null) {
 				return DEFAULT_VALUE;
 			}
@@ -132,8 +132,16 @@ public class Agent implements world.ai.Agent {
 		}
 	}
 	
-	private Value getStateValue(world.State worldState) {
-		State aiState = states.get(worldState);
+	public double getStateValue(world.State worldState) {
+		world.ai.td.table.State aiState = states.get(worldState);
+		if (aiState == null) {
+			return DEFAULT_VALUE;
+		}
+		return aiState.getValue().get();
+	}
+	
+	private Value getStateValueInstance(world.State worldState) {
+		world.ai.td.table.State aiState = states.get(worldState);
 		if (aiState == null) {
 			return new Value(DEFAULT_VALUE);
 		}
@@ -216,9 +224,11 @@ public class Agent implements world.ai.Agent {
 			error = (float) reward 
 					+ DISCOUNT_RATE * currentState.getValue().get() 
 					- previousState.getValue().get();
-			previousState.getEligibilityTrace().set(1);
+			currentState.getEligibilityTrace().set(1);
 			for (ListIterator<world.ai.td.table.State> it = pathStates.listIterator(
-					pathStates.size() - 1); it.hasPrevious();) {
+					pathStates.size() - 1); it.hasPrevious(); ) {
+				// XXXXX??? Why do we set the value of the previous state and not the current one?
+				// We don't know if the end state is good like this .........
 				world.ai.td.table.State state = it.previous();
 				if (state.getEligibilityTrace().get() <= 0) {
 					break;
