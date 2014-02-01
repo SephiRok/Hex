@@ -19,11 +19,15 @@ public class Agent implements world.ai.Agent {
 
 	private final static float DEFAULT_VALUE = 0.0f;
 	
+	// Only guaranteed to converge to the optimal solution if exploration and step size decrease over time.
+	
 	/**
 	 * From 0.00 (random) to 1.00 (greedy).
+	 *
 	 */
-	private final static float GREEDINESS = 1.0f; // May not discover shortest path with -1.0 field reward without at least 1% randomness?
-	
+	// May not discover shortest path with -1.0 field reward without at least 1% randomness?
+	// Could keep decreasing randomness.
+	private final static float GREEDINESS = 1.0f;
 	/**
 	 * Gamma.
 	 * 
@@ -36,6 +40,8 @@ public class Agent implements world.ai.Agent {
 	 * 
 	 * Only guaranteed to converge (in the mean) to the optimal solution if 
 	 * sufficiently small.
+	 * 
+	 * For any fixed policy ¹, the TD algorithm described above has been proved to converge to v¹, in the mean for a constant step-size parameter if it is sufficiently small, and with probability 1 if the step-size parameter decreases according to the usual stochastic approximation conditions (2.7). 
 	 * 
 	 * Has to keep decreasing with function approximation to converge (?).
 	 */
@@ -51,6 +57,7 @@ public class Agent implements world.ai.Agent {
 	private float error;
 	private ArrayList<State> pathStates = new ArrayList<State>();
 	private AIPlayer player;
+	private float reward;
 	private Random rng = new Random();
 	private HashMap<State, State> states = new HashMap<State, State>();
 	
@@ -61,7 +68,6 @@ public class Agent implements world.ai.Agent {
 	private void addWorldState(world.State worldState) {
 		State state = states.get(worldState);
 		if (state != null) {
-//			System.out.println("Found past experience for current state.");
 			pathStates.add(state);
 			return;
 		}
@@ -73,6 +79,8 @@ public class Agent implements world.ai.Agent {
 	
 	public int chooseAction(world.State worldState) {
 		synchronized (this) {
+			
+			// Evaluate available actions.
 			actionValues.clear();
 			ArrayList<Short> availableActions = worldState.getAvailableActions();
 			for (short action : availableActions) {				
@@ -85,24 +93,32 @@ public class Agent implements world.ai.Agent {
 				actions.add(action);
 				actionValues.put(value, actions);
 				worldState.getFields()[action].reset();
-//				System.out.println(getStateValueInstance(nextState).get());
 			}
+			
+			// Select action.
+			short action;
 			if (rng.nextInt(100) >= GREEDINESS * 100) {
-				short action = availableActions.get(rng.nextInt(
+				action = availableActions.get(rng.nextInt(
 						availableActions.size()));
-//				System.out.println("Picked action: " + action);
-				return action;
+			} else {
+				ArrayList<Short> highestValueActions = actionValues.get(
+						actionValues.lastKey());
+				
+				// Faster convergence with .get(0) for 3x3.
+//				action = highestValueActions.get(rng.nextInt(
+//						highestValueActions.size()));
+				action = highestValueActions.get(0);
+				
 			}
-			ArrayList<Short> highestValueActions = actionValues.get(
-					actionValues.lastKey());
-//			System.out.println(highestValueActions.size());
 
-			// Less losses until learned with .get(0) for 3x3.
-			short action = highestValueActions.get(rng.nextInt(
-					highestValueActions.size()));
-//			short action = highestValueActions.get(0);
-
-//			System.out.println("Picked action: " + action);
+			// Learn (on-policy SARSA-style).
+			// For off-policy Q-style, when non-greedy action is picked, learn
+			// as if optimal was picked, but set eligibility trace to 0.
+			worldState.getFields()[action].setController(player);
+			learn((float) getStateValue(worldState));
+			addWorldState(worldState);
+			worldState.getFields()[action].reset();
+			
 			return action;
 		}
 	}
@@ -122,18 +138,8 @@ public class Agent implements world.ai.Agent {
 		}
 	}
 	
-	public double getStateValue() {
-		synchronized (this) {
-			world.ai.td.table.State state = getState(0);
-			if (state == null) {
-				return DEFAULT_VALUE;
-			}
-			return state.getValue().get();
-		}
-	}
-	
 	public double getStateValue(world.State worldState) {
-		world.ai.td.table.State aiState = states.get(worldState);
+		State aiState = states.get(worldState);
 		if (aiState == null) {
 			return DEFAULT_VALUE;
 		}
@@ -141,7 +147,7 @@ public class Agent implements world.ai.Agent {
 	}
 	
 	private Value getStateValueInstance(world.State worldState) {
-		world.ai.td.table.State aiState = states.get(worldState);
+		State aiState = states.get(worldState);
 		if (aiState == null) {
 			return new Value(DEFAULT_VALUE);
 		}
@@ -152,17 +158,37 @@ public class Agent implements world.ai.Agent {
 		return "td.table";
 	}
 	
+	private void learn(float nextStateValue) {
+		world.ai.td.table.State currentState = getState(0);
+		error = reward + DISCOUNT_RATE * nextStateValue
+				- currentState.getValue().get();
+		currentState.getEligibilityTrace().set(1);
+		for (ListIterator<world.ai.td.table.State> it = pathStates.listIterator(
+				pathStates.size()); it.hasPrevious(); ) {
+			world.ai.td.table.State state = it.previous();
+			if (state.getEligibilityTrace().get() <= 0) {
+				break;
+			}
+			state.getValue().add(STEP_SIZE * error 
+					* state.getEligibilityTrace().get());
+			state.getEligibilityTrace().set(DISCOUNT_RATE * TRACE_DECAY
+					* state.getEligibilityTrace().get());
+		}
+	}
+	
 	public void onEpisodeBegin() {
 		synchronized (this) {
-			for (world.ai.td.table.State state : pathStates) {
+			for (State state : pathStates) {
 				state.getEligibilityTrace().set(0);
 			}
 			pathStates.clear();
 			addWorldState(player.getWorld().getState());
+			reward = 0.0f;
 		}
 	}
 	
 	public void onEpisodeEnd(boolean goalAchieved) {
+		learn(0.0f);
 //		if (runs >= 500) {
 //			player.getWorld().quit();
 //		}
@@ -218,26 +244,7 @@ public class Agent implements world.ai.Agent {
 
 	public void reward(world.State worldState, double reward) {
 		synchronized (this) {
-			addWorldState(worldState);
-			world.ai.td.table.State currentState = getState(0);
-			world.ai.td.table.State previousState = getState(1);
-			error = (float) reward 
-					+ DISCOUNT_RATE * currentState.getValue().get() 
-					- previousState.getValue().get();
-			currentState.getEligibilityTrace().set(1);
-			for (ListIterator<world.ai.td.table.State> it = pathStates.listIterator(
-					pathStates.size() - 1); it.hasPrevious(); ) {
-				// XXXXX??? Why do we set the value of the previous state and not the current one?
-				// We don't know if the end state is good like this .........
-				world.ai.td.table.State state = it.previous();
-				if (state.getEligibilityTrace().get() <= 0) {
-					break;
-				}
-				state.getValue().add(STEP_SIZE * error 
-						* state.getEligibilityTrace().get());
-				state.getEligibilityTrace().set(DISCOUNT_RATE * TRACE_DECAY
-						* state.getEligibilityTrace().get());
-			}
+			this.reward = (float) reward;
 		}
 	}
 

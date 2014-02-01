@@ -5,7 +5,7 @@
 * Sampling: online or offline (no further interaction with the environment)
 * Learning: on-policy (learn the value of the policy used to make decisions) or off-policy (behavior differs from the policy being evaluated)
 * Prediction (predict the value): dynamic programming, monte carlo, temporal difference
-* Control (choose the action): exploration vs exploitation, SARSA (on-policy, learns the value of the policy being followed), Q-learning (off-policy, always learns the optimal policy independent of the policy followed)
+* Control (choose the action): exploration vs exploitation, SARSA (on-policy, learns the value of the policy being followed, takes into account exploration actions when learning), Q-learning (off-policy, always learns the optimal policy independent of the policy followed, does not learn from exploration actions) -- see Example 6.6 Cliff Walking in An Introduction -- SARSA online performance may be better with e-greedy, but Q learns optimal policy right away, they both converge to optimal if e-greediness is gradually reduced.
 * ???: table, linear function approximation, non-linear function approximation
 * Value iteration: state, afterstate, action
 * Action selection: greedy, e-greedy, softmax

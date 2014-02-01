@@ -19,7 +19,10 @@ public class Agent implements world.ai.Agent {
 	public final static double GREEDINESS = 0.90;
 	public final static double LEARNING_RATE = 0.001;
 	public final static double MOMENTUM = 0.0; // produces NaN
-	public final static double TRACE_DECAY = 0.0; // has to be 0 or decrease towards 0 to converge to local optimum ... how can it get to optimal if always 0???
+
+	// has to be 0 or decrease towards 0 to converge to local optimum ... how can it get to optimal if always 0???
+	// only for linear function approximation or any func approx???
+	public final static double TRACE_DECAY = 0.0; 
 	
 	/* interesting values:
 	 * size: learning rate, hidden layer size, trace decay
