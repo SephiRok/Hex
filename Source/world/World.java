@@ -27,7 +27,9 @@ public class World implements Runnable {
 	public class MessageNewGame extends Message {}
 	public class MessageResized extends Message {}
 	
-	// (WIDTH * HEIGHT)^3 is the simple upper bound for the size of the state space.
+	// 3^(n*n) is the simple upper bound for the size of the state space.
+	// More detailed: http://math.stackexchange.com/questions/89128/how-many-states-in-the-game-of-hex
+	// Check tic-tac-toe combinatorics for reasoning and additional info.
 	
 	private int currentPlayerID;
 	private int processingDelay = 0;

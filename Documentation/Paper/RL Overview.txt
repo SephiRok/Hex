@@ -17,3 +17,37 @@
 
 
 Actor-critic -- explicitly represent the policy independent of the value function
+
+
+
+
+simplify … remove traces etc …
+
+stuff to try:
+- linear output neuron
+- check bias implementation (remove bias?) update bias value?
+
+- go through algorithm
+- debug
+- apply to easier problem … LEARN SHORTEST PATH ALONE
+
+
+- measure, measure, measure (error) / validate, validate, validate
+
+fix table greediness
+
+
+
+CHECK IF VALUE & ERROR REPORTS MAKE SENSE FOR THE SAME STATE ….
+
+
+Minima at infinity. It is common for hidden-to-output weights to approach infinity while input-to-hidden weights approach zero during training (Cardell, Joerding, and Li 1994). This problem can be ameliorated by using weight decay or similar regularization methods on the hidden-to-output weights.
+
+Cardell, N.S., Joerding, W., and Li, Y. (1994), "Why Some Feedforward Networks Cannot Learn Some Polynomials," Neural Computation, 6, 761-766.
+
+In addition to @mrig's answer (+1), for practical application of neural networks it is better to use a more advanced optimisation algorithm, such as Levenberg-Marquardt (small-medium sized networks) or scaled conjugate gradient descent (medium-large networks), as these will be much faster, and there is no need to set the learning rate (both algorithms essentially adapt the learning rate using curvature as well as gradient). Any decent neural network package or library will have implementations of one of these methods, any package that doesn't is probably obsolete. I use the NETLAB libary for MATLAB, which is a great piece of kit.
+
+
+
+
+organize github !! <3 (inverz matrik, …..)

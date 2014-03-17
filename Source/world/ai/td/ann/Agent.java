@@ -18,11 +18,13 @@ public class Agent implements world.ai.Agent {
 	public final static double DISCOUNTING_RATE = 1.0;
 	public final static double GREEDINESS = 0.90;
 	public final static double LEARNING_RATE = 0.001;
-	public final static double MOMENTUM = 0.0; // produces NaN
+	public final static double MOMENTUM = 0.0;
 
 	// has to be 0 or decrease towards 0 to converge to local optimum ... how can it get to optimal if always 0???
 	// only for linear function approximation or any func approx???
-	public final static double TRACE_DECAY = 0.0; 
+	public final static double TRACE_DECAY = 0.0;
+	
+	public final static double WEIGHT_DECAY = 0.5;
 	
 	/* interesting values:
 	 * size: learning rate, hidden layer size, trace decay
@@ -36,25 +38,29 @@ public class Agent implements world.ai.Agent {
 	private TreeMap<Double, ArrayList<Short>> actionValues 
 			= new TreeMap<Double, ArrayList<Short>>();
 	private double error;
+	private double greediness;
 	private Layer hiddenLayer;
 	private Layer inputLayer;
 	private double output; // value
 	private Layer outputLayer = new Layer(1, 0);
 	private AIPlayer player;
 	private double previousOutput;
+	private double reward;
 	
 	public Agent(AIPlayer player) {
 		this.player = player;
 		inputLayer = new Layer((player.getWorld().getWidth() 
 				* player.getWorld().getHeight()) * 2, 1);
 		hiddenLayer = new Layer((int) ((inputLayer.getNeurons().length - 1) 
-				* 2), 1);
+				* 1.5), 1);
 		inputLayer.setOutput(hiddenLayer);
 		hiddenLayer.setOutput(outputLayer);
 		reset();
 	}
 	
 	public int chooseAction(world.State worldState) {
+		
+		// Evaluate available actions.
 		actionValues.clear();
 		ArrayList<Short> availableActions = worldState.getAvailableActions();
 		for (short action : availableActions) {
@@ -67,20 +73,34 @@ public class Agent implements world.ai.Agent {
 			actions.add(action);
 			actionValues.put(value, actions);
 			worldState.getFields()[action].reset();
-//			System.out.println(value);
 		}
-		if (rng.nextInt(100) >= GREEDINESS * 100) {
-			short action = availableActions.get(rng.nextInt(
+		
+		// Select action.
+		short action;
+		if (rng.nextInt(100) >= greediness * 100) {
+//			System.out.println("Non-greedy move!");
+			action = availableActions.get(rng.nextInt(
 					availableActions.size()));
-//			System.out.println("Picked action: " + action);
-			return action;
+		} else {
+			ArrayList<Short> highestValueActions = actionValues.get(
+					actionValues.lastKey());
+			
+			// Faster convergence with .get(0) for 3x3.
+			action = highestValueActions.get(rng.nextInt(
+					highestValueActions.size()));
+//			action = highestValueActions.get(0);
+			
 		}
-		ArrayList<Short> highestValueActions = actionValues.get(
-				actionValues.lastKey());
-//		System.out.println(highestValueActions.size());
-		short action = highestValueActions.get(rng.nextInt(
-				highestValueActions.size()));
-//		System.out.println("Picked action: " + action);
+		
+		// Learn.
+		worldState.getFields()[action].setController(player);
+		previousOutput = output;
+		output = evaluate(worldState); // forward pass -- compute activities
+		learn(output);
+		output = evaluate(worldState); // forward pass must be done twice to form TD errors
+		updateEligibilityTraces();
+		worldState.getFields()[action].reset();
+		
 		return action;
 	}
 	
@@ -116,16 +136,26 @@ public class Agent implements world.ai.Agent {
 		return "td.ann";
 	}
 	
+	public void learn(double output) {
+		error = reward + DISCOUNTING_RATE * output - previousOutput; // form error
+//		updateEligibilityTraces();
+		updateWeights(); // backward pass (backward propagation) -- learn
+	}
+	
 	public void onEpisodeBegin() {
 		outputLayer.resetEligibilityTraces();
 		hiddenLayer.resetEligibilityTraces();
-//		output = 0.0;
+		output = 0.0;
+		reward = 0.0;
+//		greediness = 1.0 - 1.0 / (player.getGamesPlayed() + 1.0);
 		outputLayer.updateLearningRate(1.0, player.getGamesPlayed());
-		output = evaluate(player.getWorld().getState());
-		updateEligibilityTraces();
+//		output = evaluate(player.getWorld().getState());
+//		updateEligibilityTraces();
 	}
 	
 	public void onEpisodeEnd(boolean goalAchieved) {
+		learn(0.0);		
+		
 //		if (!goalAchieved) {
 //			if (player.getID() == 1 && player.getGamesLostStreak() >= 10
 //					|| player.getGamesLostStreak() >= 100000) {
@@ -180,17 +210,12 @@ public class Agent implements world.ai.Agent {
 	}
 	
 	private void reset() {
+		greediness = GREEDINESS;
 		outputLayer.reset();
 	}
 	
 	public void reward(world.State worldState, double reward) {
-		previousOutput = output;
-		output = evaluate(worldState); // forward pass -- compute activities
-		error = reward + DISCOUNTING_RATE * output - previousOutput; // form error
-//		updateEligibilityTraces();
-		updateWeights(); // backward pass (backward propagation) -- learn
-		output = evaluate(worldState); // forward pass must be done twice to form TD errors
-		updateEligibilityTraces();
+		this.reward = reward;
 	}
 	
 	private void updateEligibilityTraces() {

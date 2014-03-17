@@ -16,14 +16,9 @@
 % Strojno učenje: okrepitveno učenje
 % Učenje z interakcijo z okoljem
 
-\lhead{\footnotesize Breulj R. Učenje iz interakcije\\UP FAMNIT, 2014}
+\lhead{\footnotesize Breulj R. Strojno učenje iz interakcije\\UP FAMNIT, 2014}
 \rhead{\thepage}
 \cfoot{}
-
-% I was looking for a way to learn without prior knowledge of the problem. A universal learner.
-% Reinforcement learning is one way -- trial and error interaction with the environment
-% Observation (of the correct approach) is another, faster way of getting it right
-% Teaching is the fastest way -- supervised learning
 
 \begin{document}
 \begin{titlepage}
@@ -37,8 +32,8 @@ INFORMACIJSKE TEHNOLOGIJE\\[6cm]
 
 \begin{center}
 Zaključna naloga\\
-{\large Učenje iz interakcije}\\
-Learning from interaction\\[6cm]
+{\large Strojno učenje iz interakcije}\\
+Machine learning from interaction\\[6cm]
 \end{center}
 
 \noindent
@@ -48,7 +43,7 @@ Mentor: doc. dr. Peter Rogelj\\
 
 \vfill
 \begin{center}
-{\large Koper, Februar 2014}
+{\large Koper, Marec 2014}
 \end{center}
 \end{titlepage}
 
@@ -59,6 +54,11 @@ Mentor: doc. dr. Peter Rogelj\\
 \newpage
 
 \section*{Zahvala}
+Preface? Foreword?
+% I was looking for a way to learn without prior knowledge of the problem. A universal learner.
+% Reinforcement learning is one way -- trial and error interaction with the environment
+% Observation (of the correct approach) is another, faster way of getting it right
+% Teaching is the fastest way -- supervised learning
 \newpage
 
 %\section*{Kazala}
@@ -79,14 +79,18 @@ Mentor: doc. dr. Peter Rogelj\\
 %\subsection*{Seznam kratic}
 
 \section{Uvod}
+% Meh, just translated. Rewrite.
+Ideja učenja iz interakcije z našim okoljem je ena od prvih, ki nam pride na misel, ko razmišljamo o naravi učenja. Ko se dojenček igra, maha z rokami ali gleda naokoli nima izrecnega učitelja, ima pa neposredno senzomotorično povezavo z okoljem. Uporaba te povezave proizvede ogromno informacije o vzrokih in učinkih, o posledicah dejanj in načinih kako doseči cilje. Skozi naše življenje so takšne interakcije nedvoumno velik izvir znanja o našem okolju in samim sebi. Ko se učimo voziti avto ali pogovarjati, se zavedamo kako se okolje odziva na naša dejanja in iščemo način kako vplivati na rezultat z našim vedenjem. \cite{Intro}
 
+%children playing with blocks
+%matching shapes
+%dog clicker
+%positive reinforcement, negative reinforcement
+%positive punishment, negative punishment
 
 What's in this work.
 
-% Meh, just translated. Rewrite.
-%children playing with blocks
-%matching shapes
-%Ideja učenja iz interakcije z našim okoljem je ena od prvih, ki nam pride na misel, ko razmišljamo o naravi učenja. Ko se dojenček igra, maha z rokami ali gleda naokoli nima izrecnega učitelja, ima pa neposredno senzomotorično povezavo z okoljem. Uporaba te povezave proizvede ogromno informacije o vzrokih in učinkih, o posledicah dejanj in načinih kako doseči cilje. Skozi naše življenje so takšne interakcije nedvoumno velik izvir znanja o našem okolju in samim sebi. Ko se učimo voziti avto ali pogovarjati, se zavedamo kako se okolje odziva na naša dejanja in iščemo način kako vplivati na rezultat z našim vedenjem.
+
 
 \subsection{Okrepitveno učenje}
 %Okrepitveno učenje (angl. reinforcement learning) je učenje kaj narediti, kako izbirati dejanje, da povečamo številčni nagrajevalni signal. Učencu niso nikoli predstavljena pravilna ali optimalna dejanja kot pri večini oblik strojnega učenja. Katera dejanja prinesejo največjo nagrado mora sam odkriti s poizkušanjem. Skozi interakcijo z okoljem se uči posledic svojih dejanj. V najbolj zanimivih in težavnih primerih imajo dejanja vpliv ne le na takojšnjo nagrado ampak tudi na naslednji položaj in posledične nagrade. Te dve karakteristiki, iskanje s poizkušanjem in zamudne nagrade, so dve najpomembnejši lastnosti okrepitvenega učenja.
@@ -106,7 +110,6 @@ What's in this work.
 
 % The reinforcement signal that the RL-agent receives is a numerical reward, which encodes the success of an action's outcome, and the agent seeks to learn to select actions that maximize the accumulated reward over time. (The use of the term reward is used here in a neutral fashion and does not imply any pleasure, hedonic impact or other psychological interpretations.)
 
-% Ask Peter for input on copying too much. :'(
 
 \subsection{Primeri}
 \subsection{Elementi okrepitvenega učenja}
@@ -118,7 +121,7 @@ What's in this work.
 \subsection{Celoten problem okrepitvenega učenja}
 \newpage
 
-\section{Rešitve}
+\section{Tabularne rešitve}
 \subsection{Dinamično programiranje}
 \subsection{Predvidevanje - vrednost stanja}
 \subsubsection{Monte Carlo metode}
@@ -131,13 +134,18 @@ What's in this work.
 \newpage
 
 \section{Posploševanje in funkcijska aproksimacija}
-\subsection{Predvidevanje - vrednost stanja}
-\subsection{Krmiljenje - vrednost dejanja}
+%\subsection{Predvidevanje - vrednost stanja}
+
+%\subsection{Krmiljenje - vrednost dejanja}
+
+% artificial neural network
+% overfitting -- early stopping and weight decay
+% compare size of ann to our brain
 \newpage
 
-\section{Učenje na namizni igri Hex}
+\section{Namizna igra Hex}
 \subsection{Ozadje}
-\subsection{Implementacija}
+\subsection{Učenje}
 \newpage
 
 \section{Zaključek}
@@ -154,7 +162,7 @@ What's in this work.
 \begin{thebibliography}{99}
 \bibitem{Intro}
 Richard S. Sutton, Andrew G. Barto,
-\newblock{\em The Long Tail},
+\newblock{\em Reinforcement Learning: An Introduction},
 \newblock{MIT Press, Cambridge, MA, 1998}
 \end{thebibliography}
 \newpage

@@ -31,7 +31,7 @@ public class Neuron {
 			value = transfer(weightedSum);
 		}
 		if (Double.isNaN(value)) {
-			System.err.println("value NaN");
+//			System.err.println("value NaN");
 		}
 		return value;
 	}
@@ -88,7 +88,7 @@ public class Neuron {
 					* eligibilityTraces[i] + outputDerivative
 					* inputLayer.getNeurons()[i].getValue();
 			if (Double.isNaN(eligibilityTraces[i])) {
-				System.err.println("e2 NaN");
+//				System.err.println("e2 NaN");
 			}
 		}
 	}
@@ -104,7 +104,7 @@ public class Neuron {
 					* outputWeight * transferDerivative(value) 
 					* inputLayer.getNeurons()[i].getValue();
 			if (Double.isNaN(eligibilityTraces[i])) {
-				System.err.println("e1 NaN");
+//				System.err.println("e1 NaN");
 			}
 		}
 	}
@@ -113,10 +113,12 @@ public class Neuron {
 		for (int i = 0; i < weights.length; ++i) {
 			double weightDelta = layer.getLearningRate() * error 
 					* eligibilityTraces[i];
-			weightDelta += Agent.MOMENTUM * weights[i];
+			//weightDelta += Agent.MOMENTUM * weightsDelta[i];
+			weightDelta -= layer.getLearningRate() * Agent.WEIGHT_DECAY 
+					* weights[i];
 			weights[i] += weightDelta;
 			if (Double.isNaN(weights[i])) {
-				System.err.println("weight NaN");
+//				System.err.println("weight NaN");
 			}
 		}
 	}
