@@ -1,0 +1,69 @@
+To Do
+----
+simplify … remove traces etc …
+
+stuff to try:
+- linear output neuron
+- check bias implementation (remove bias?) update bias value?
+
+- go through algorithm
+- debug
+- apply to easier problem … LEARN SHORTEST PATH ALONE
+
+- measure, measure, measure (error) / validate, validate, validate
+
+fix table greediness
+
+CHECK IF VALUE & ERROR REPORTS MAKE SENSE FOR THE SAME STATE ….
+
+Minima at infinity. It is common for hidden-to-output weights to approach infinity while input-to-hidden weights approach zero during training (Cardell, Joerding, and Li 1994). This problem can be ameliorated by using weight decay or similar regularization methods on the hidden-to-output weights.
+
+Cardell, N.S., Joerding, W., and Li, Y. (1994), "Why Some Feedforward Networks Cannot Learn Some Polynomials," Neural Computation, 6, 761-766.
+
+In addition to @mrig's answer (+1), for practical application of neural networks it is better to use a more advanced optimisation algorithm, such as Levenberg-Marquardt (small-medium sized networks) or scaled conjugate gradient descent (medium-large networks), as these will be much faster, and there is no need to set the learning rate (both algorithms essentially adapt the learning rate using curvature as well as gradient). Any decent neural network package or library will have implementations of one of these methods, any package that doesn't is probably obsolete. I use the NETLAB libary for MATLAB, which is a great piece of kit.
+
+Miscellaneous
+----
+DOGS ALSO GENERALIZE POORLY
+http://www.livescience.com/5613-dogs-smart-2-year-kids.html
+
+* Each error is proportional to the change over time of the prediction, that is, to the temporal differences in predictions.
+* Show shortest path learning
+* Values are probabilities to win from that state … map them in a nice grid?
+* Hex table TD is a variation on regular TD and SARSA/Q, instead of using state or action-state values it uses after state values.
+
+java < c < gpu?
+
+http://vicarious.com/
+
+http://www.technologyreview.com/news/524026/is-google-cornering-the-market-on-deep-learning/
+
+DeepMind’s expertise is in an area called reinforcement learning, which involves getting computers to learn about the world even from very limited feedback. “Imagine if I only told you what grades you got on a test, but didn’t tell you why, or what the answers were,” says Bengio. “It’s a difficult problem to know how you could do better.”
+
+But in December, DeepMind published a paper showing that its software could do that by learning how to play seven Atari2600 games using as inputs only the information visible on a video screen, such as the score. For three of the games, the classics Breakout, Enduro, and Pong, the computer ended up playing better than an expert human. It performed less well on Q*bert and Space Invaders, games where the best strategy is less obvious.
+
+http://www.theguardian.com/technology/shortcuts/2014/jan/28/demis-hassabis-15-facts-deepmind-technologies-founder-google
+
+http://arxiv.org/abs/1312.5602
+http://www.cs.toronto.edu/~vmnih/docs/dqn.pdf
+
+Reinforcement Learning Overview
+----
+* Agent-environment interface
+* Tasks: episodic or continuing
+* State-space: n-dimensional discrete or continuous
+* Action-space: m-dimensional discrete or continuous
+* Sampling: online or offline (no further interaction with the environment)
+* Learning: on-policy (learn the value of the policy used to make decisions) or off-policy (behavior differs from the policy being evaluated)
+* Prediction (predict the value): dynamic programming, monte carlo, temporal difference
+* Control (choose the action): exploration vs exploitation, SARSA (on-policy, learns the value of the policy being followed, takes into account exploration actions when learning), Q-learning (off-policy, always learns the optimal policy independent of the policy followed, does not learn from exploration actions) -- see Example 6.6 Cliff Walking in An Introduction -- SARSA online performance may be better with e-greedy, but Q learns optimal policy right away, they both converge to optimal if e-greediness is gradually reduced.
+* ???: table, linear function approximation, non-linear function approximation
+* Value iteration: state, afterstate, action
+* Action selection: greedy, e-greedy, softmax
+* Elementary methods: dynamic programming, monte carlo, temporal-difference TD(0)
+* Combined methods: eligibility traces TD(lambda)
+* Function approximation: gradient descent
+* Linear function approximation: gradient descent over a linear function
+* Non-linear function approximation: artificial neural networks using gradient descent error backpropagation
+
+Actor-critic: explicitly represent the policy independent of the value function
