@@ -76,7 +76,7 @@ public class AIPlayer extends Player {
 	public void setAgent(Agent agent) {
 		this.agent = agent;
 		filename = getWorld().getWidth() + "x" + getWorld().getHeight() + "." 
-				+ getID() + "." + agent.getType() + ".ai";
+				+ getID() + "." + agent.getType() + ".ai.bin";
 	}
 	
 }
