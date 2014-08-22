@@ -1,4 +1,5 @@
 \backcite {IntroductionToPsychology}{{vii}{(document)}{Doc-Start}}
+\backcite {ReinforcementLearningAnIntroduction}{{vii}{(document)}{Doc-Start}}
 \backcite {ACollectionOfDefinitionsOfIntelligence}{{1}{1}{}}
 \backcite {TDANNForStrategicControlProblems}{{2}{1}{}}
 \backcite {AMathematicalTheoryOfCommunication}{{2}{1}{}}
@@ -25,6 +26,10 @@
 \backcite {IntroductionToPsychology}{{7}{1.1.2}{}}
 \backcite {MusicDiscriminationByPigeons}{{7}{1.1.2}{}}
 \backcite {PigeonsDiscriminationOfPaintings}{{7}{1.1.2}{}}
-\backcite {ReinforcementLearningAnIntroduction}{{7}{1.2}{}}
-\backcite {ReinforcementLearningAnIntroduction}{{13}{6}{}}
-\backcite {TheSingularityIsNear}{{13}{6}{}}
+\backcite {ReinforcementLearningAnIntroduction}{{8}{2}{}}
+\backcite {ReinforcementLearningAnIntroduction}{{9}{2.1}{}}
+\backcite {ReinforcementLearningAnIntroduction}{{12}{2.3}{}}
+\backcite {TheRoleOfExplorationInLearningControl}{{13}{2.4}{}}
+\backcite {ReinforcementLearningAnIntroduction}{{13}{2.4}{}}
+\backcite {ReinforcementLearningAnIntroduction}{{18}{6}{}}
+\backcite {TheSingularityIsNear}{{18}{6}{}}

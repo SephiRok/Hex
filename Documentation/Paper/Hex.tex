@@ -6,6 +6,7 @@
 \usepackage{etoolbox}
 \usepackage{graphicx}
 \usepackage{tabulary}
+\usepackage{mathtools}
 
 % TOC.
 \usepackage[nottoc]{tocbibind}
@@ -16,7 +17,7 @@
 \addto\captionsslovene{
 	\renewcommand{\contentsname}{Kazalo vsebine}
 	\renewcommand{\listfigurename}{Kazalo slik}
-	\renewcommand{\listtablename}{Kazalo preglednic}
+	\renewcommand{\listtablename}{Kazalo tabel}
 %	\renewcommand{\listappendicesname}{Kazalo prilog}
 }
 
@@ -72,7 +73,6 @@
 %% To Do
 % Read Reinforcement Learning: A Survey.
 % Read Deepming research paper.
-% Set up github, CC licence.
 
 %% Alternative Titles
 % Strojno učenje: učenje iz interakcije
@@ -209,7 +209,7 @@ Math.~Subj.~Class.~(2010):\vspace{0.5cm}\\
 \chapter{Uvod}
 \thispagestyle{fancy}
 % learning, interaction, no teacher, environment, trial and error, influence through behavior, environment responds (input), intelligence, draw conclusions
-Učimo se skozi naše celotno življenje. En od osnovnih načinov učenja temelji na podlagi interakcije z okoljem. V računalništvu velikokrat radi odidemo po tej eksperimentalni poti, posebej ko verjamemo, da smo blizu rešitvi. Ampak ni potrebno pogledati tako daleč kot je računalništvo. Že kot otroci, ko mahamo z rokami in gledamo naokoli, nimamo izrecnega učitelja, imamo pa neposredno senzomotorično povezavo z našo okolico. S svojim vedenjem vplivamo na okolje in naša čutila izkoriščamo za pridobitev ogromne količine podatkov o vzrokih in učinkih, o posledicah dejanj in kako doseči cilje. Skozi naše življenje so takšne interakcije nedvoumno velik izvir znanja o našem okolju in samih sebe. Ko se učimo voziti avto ali pogovarjati, se zavedamo kako se okolje odziva na naša dejanja in iščemo način kako vplivati na rezultat z našim vedenjem.
+Učimo se skozi naše celotno življenje. Eden izmed osnovnih načinov učenja temelji na podlagi interakcije z okoljem. V računalništvu pogosto radi odidemo po tej eksperimentalni poti, posebej ko verjamemo, da smo blizu rešitvi. Vendar pa se ni potrebno zazreti tako daleč, kot je računalništvo. Že kot otroci, ko mahamo z rokami in gledamo naokoli, nimamo izrecnega učitelja, imamo pa neposredno senzomotorično povezavo z našo okolico. S svojim vedenjem vplivamo na okolje in naša čutila izkoriščamo za pridobitev ogromne količine podatkov o vzrokih in učinkih, o posledicah dejanj in načinih, kako doseči cilje. Skozi naše življenje predstavljajo tovrstne interakcije velik vir znanja o našem okolju in o nas samih. Ko se učimo voziti avto ali pogovarjati, se zavedamo kako se okolje odziva na naša dejanja in iščemo način kako vplivati na rezultat z našim vedenjem.
 %Ideja učenja iz interakcije z našim okoljem je ena od prvih, ki nam pride na misel, ko razmišljamo o naravi učenja. Ko se dojenček igra, maha z rokami ali gleda naokoli nima izrecnega učitelja, ima pa neposredno senzomotorično povezavo z okoljem. Uporaba te povezave proizvede ogromno informacije o vzrokih in učinkih, o posledicah dejanj in načinih kako doseči cilje. Skozi naše življenje so takšne interakcije nedvoumno velik izvir znanja o našem okolju in samih sebe. Ko se učimo voziti avto ali pogovarjati, se zavedamo kako se okolje odziva na naša dejanja in iščemo način kako vplivati na rezultat z našim vedenjem.~\cite{Intro}
 %Learning from interaction is a foundational idea underlying nearly all theories of learning and intelligence.
 
@@ -343,40 +343,181 @@ Tudi domači ljubljenčki se naučijo obnašanja na podlagi teh konceptov; in ne
 
 Operantno pogojevanje se razlikuje od klasičnega v tem, da spremeni vedenje do okolja. Ne obravnava več samo problema napovedovanja, ampak širši problem krmiljenja.
 
-\section{Okrepitveno učenje} % Maybe move this stuff into problem?
-Okrepitveno učenje (angl. reinforcement learning) po~\cite{ReinforcementLearningAnIntroduction} je učenje kaj narediti, kako izbirati dejanje, da povečamo številčni nagrajevalni signal. Učencu niso nikoli predstavljena pravilna ali optimalna dejanja kot pri večini oblik strojnega učenja. Katera dejanja prinesejo največjo nagrado mora sam odkriti s poizkušanjem. Skozi interakcijo z okoljem se uči posledic svojih dejanj. V najbolj zanimivih in težavnih primerih imajo dejanja vpliv ne le na takojšnjo nagrado ampak tudi na naslednji položaj in posledične nagrade. Te dve karakteristiki, iskanje s poizkušanjem in zamudne nagrade, so dve najpomembnejši lastnosti okrepitvenega učenja.
+\chapter{Problem okrepitvenega učenja} \label{chapter:Problem}
+\thispagestyle{fancy}
+{\em Okrepitveno učenje (angl. reinforcement learning)} po~\cite{ReinforcementLearningAnIntroduction} je učenje kaj narediti, kako izbirati dejanje, da povečamo številčni nagrajevalni signal. Učencu niso nikoli predstavljena pravilna ali optimalna dejanja kot pri večini oblik strojnega učenja. Katera dejanja prinesejo največjo nagrado mora sam odkriti s poizkušanjem. Skozi interakcijo z okoljem se uči posledic svojih dejanj. V najbolj zanimivih in težavnih primerih imajo dejanja vpliv ne le na takojšnjo nagrado ampak tudi na naslednji položaj in posledične nagrade. Te dve karakteristiki, iskanje s poizkušanjem in zamudne nagrade, so dve najpomembnejši lastnosti okrepitvenega učenja.
 
-Okrepitveno učenje ni definirano s karakterističnimi metodami učenja temveč kot karakterizacija problema učenja. Katerokoli metodo primerno za rešitev problema smatramo kot metodo okrepitvenega učenja. Celoten problem okrepitvenega učenja je predstavljen na strani \pageref{chapter:Problem}. Osnovna ideja je zajeti najpomembnejše vidike realnega problema s katerim se sooča učenec (angl. learning agent) pri interakciji s svojim okoljem za dosego cilja. Takšen učenec mora imeti nekakšna čutila za pridobivanje informacij o stanju okolja in mora biti sposoben vplivati na to stanje z dejanji. Imeti mora tudi cilj ali pa cilje, ki se nanašajo na stanje okolja. Namen opisa problema je predstaviti te vidike, čutenje, dejanje in cilj, v najenostavnejši obliki brez poenostavljenja.
+%Okrepitveno učenje ni definirano s karakterističnimi metodami učenja temveč kot karakterizacija problema učenja. Katerokoli metodo primerno za rešitev problema smatramo kot metodo okrepitvenega učenja. Celoten problem okrepitvenega učenja je predstavljen na strani \pageref{chapter:Problem}. Osnovna ideja je zajeti najpomembnejše vidike realnega problema s katerim se sooča učenec (angl. learning agent) pri interakciji s svojim okoljem za dosego cilja. Takšen učenec mora imeti nekakšna čutila za pridobivanje informacij o stanju okolja in mora biti sposoben vplivati na to stanje z dejanji. Imeti mora tudi cilj ali pa cilje, ki se nanašajo na stanje okolja. Namen opisa problema je predstaviti te vidike, čutenje, dejanje in cilj, v najenostavnejši obliki brez poenostavljenja.
 
-Okrepitveno učenje se razlikuje od nadzorovanega učenja (angl. supervised learning) v tem, da nima izobraženega zunanjega nadzornika, ki predloži učencu primere in rezultate. Nadzorovano učenje je pomemben tip učenja vendar ni primerno za učenje iz interakcije. V interaktivnih problemih je velikokrat nepraktično pridobiti primere želenega vedenja, ki so pravilni in hkrati predstavljajo vsa stanja v katerih mora učenec delovati. V neznanem okolju, kjer bi si predstavljali, da je učenje najbolj koristno, se mora učenec učiti iz svojih izkušenj.
-
-Eden od izzivov okrepitvenega učenja, ki jih ne najdemo v ostalih oblikah strojnega učenja, je kompromis med ?raziskovanjem? (angl. exploration) in izkoriščanjem (angl. exploitation). 
-
-%One of the challenges that arise in reinforcement learning and not in other kinds of learning is the trade-off between exploration and exploitation. To obtain a lot of reward, a reinforcement learning agent must prefer actions that it has tried in the past and found to be effective in producing reward. But to discover such actions, it has to try actions that it has not selected before. The agent has to exploit what it already knows in order to obtain reward, but it also has to explore in order to make better action selections in the future. The dilemma is that neither exploration nor exploitation can be pursued exclusively without failing at the task. The agent must try a variety of actions and progressively favor those that appear to be best. On a stochastic task, each action must be tried many times to gain a reliable estimate its expected reward. The exploration-exploitation dilemma has been intensively studied by mathematicians for many decades (see Chapter 2). For now, we simply note that the entire issue of balancing exploration and exploitation does not even arise in supervised learning as it is usually defined.
+Okrepitveno učenje se razlikuje od nadzorovanega učenja (angl. supervised learning) v tem, da nima izobraženega zunanjega nadzornika, ki predloži učencu primere in rezultate. Nadzorovano učenje je pomemben tip učenja vendar ni primerno za učenje iz interakcije. V interaktivnih problemih je velikokrat nepraktično pridobiti primere želenega vedenja, ki so pravilni in hkrati predstavljajo vsa stanja v katerih mora učenec delovati. V neznanem okolju, kjer bi si lahko predstavljali, da je učenje najbolj koristno, se mora učenec učiti iz svojih izkušenj.
 
 %Another key feature of reinforcement learning is that it explicitly considers the whole problem of a goal-directed agent interacting with an uncertain envi- ronment. This is in contrast with many approaches that consider subproblems without addressing how they might fit into a larger picture. For example, we have mentioned that much of machine learning research is concerned with supervised learning without explicitly specifying how such an ability would finally be useful. Other researchers have developed theories of planning with general goals, but without considering planning’s role in real-time decision- making, or the question of where the predictive models necessary for planning would come from. Although these approaches have yielded many useful results, their focus on isolated subproblems is a significant limitation.
 
 %Reinforcement learning takes the opposite tack, starting with a complete, interactive, goal-seeking agent. All reinforcement learning agents have ex- plicit goals, can sense aspects of their environments, and can choose actions to influence their environments. Moreover, it is usually assumed from the beginning that the agent has to operate despite significant uncertainty about the environment it faces. When reinforcement learning involves planning, it has to address the interplay between planning and real-time action selection, as well as the question of how environmental models are acquired and im- proved. When reinforcement learning involves supervised learning, it does so for specific reasons that determine which capabilities are critical and which are not. For learning research to make progress, important subproblems have to be isolated and studied, but they should be subproblems that play clear roles in complete, interactive, goal-seeking agents, even if all the details of the complete agent cannot yet be filled in.
 
-
-
 % Further, there is a focus on on-line performance, which involves finding a balance between exploration (of uncharted territory) and exploitation (of current knowledge).
 
-% The reinforcement signal that the RL-agent receives is a numerical reward, which encodes the success of an action's outcome, and the agent seeks to learn to select actions that maximize the accumulated reward over time. (The use of the term reward is used here in a neutral fashion and does not imply any pleasure, hedonic impact or other psychological interpretations.)
+To poglavje formalno definira dele okrepitvenega učenja ter določi predpostavke potrebne za opis rešitev v sledečih poglavjih.
 
+\section{Elementi okrepitvenega učenja} \label{section:ReinforcementLearningElements}
+%IS THIS THE ISSUE I HAD IN THE ALG?
+%We use Rt+1 instead of Rt to denote the immediate reward due to the action taken at time t because it emphasizes that the next reward and the next state, St+1, are jointly determined.
 
-\section{Primeri}
+% agent and the environment
+% policy
+% reward func
+% value func
+% model
+
+%% agent
+% learner, decision maker
+% interacts with the environment to solve tasks, learning algorithms optimize his behavior, he learns
+Cilj algoritmov okrepitvenega učenja je optimizirati vedenje {\em učenca (angl. agent)}. Učenec je tisti, ki se skozi interakcijo odloča o {\em dejanjih (angl. action)} za rešitev zadane {\em naloge (angl. task)}.
+
+%% environment
+% signal to the agent
+% anything the agent cannot change arbitrarily is considered part of the environment
+% reward computation is always external and part of the environment, the agent does not have absolute control over it
+% More specifically, the agent and environment interact at each of a sequence ofdiscretetimesteps,t=0,1,2,3,....2 Ateachtimestept,theagentreceives some representation of the environment’s state, St ∈ S, where S is the set of possible states, and on that basis selects an action, At ∈ A(St), where A(St) is the set of actions available in state St. One time step later, in part as a consequence of its action, the agent receives a numerical reward , Rt+1 ∈ R, and finds itself in a new state, St+1.3 Figure 3.1 diagrams the agent–environment interaction.
+% this is an abstract and flexible framework and applies to many problems
+% time steps don't need to be fixed interval of time, actions could be low level controls, voltages, or high-level decisions like what school to go to or who to marry
+Učenec se s svojimi dejanji vede na {\em okolje (angl. environment)}. Vse kar učenec ni zmožen poljubno spremeniti se smatra kot izven učenca in pripada okolju. Učenec in okolje neprestano vplivata na drug drugega; učenec izbira dejanja in okolje se odziva na ta dejanja s predstavitvijo novih {\em stanj (angl. state)} učencu. Okolje, ob prehodih na nova stanja, oddaja tudi številčne {\em nagrade (angl. reward)}, katere učenec poizkuša povečati skozi čas. Natančneje, učenec in okolje so v interakciji v vsakem koraku diskretnega zaporedja časa $t = 0, 1, 2, 3, \dots$. V vsakem koraku učenec prejme predstavitev stanja okolja, $s_t \in S$, kjer je $S$ množica vseh možnih stanj. Glede na stanje se odloči za dejanje, $a_t \in A(s)$, iz množice možnih dejanj. En časovni korak pozneje prejme učenec, kot posledica svojega dejanja, številčno nagrado, $r_{t+1} \in R$, in se znajde v novem stanju, $s_{t+1}$. Slika \ref{figure:AgentEnvironment} prikazuje opisan potek interakcije med učencem in okoljem. Takšna opredelitev elementov okrepitvenega učenja ustreza številnim težavam. Ni nujno, da časovni koraki predstavljajo fiksne intervale v resničnem času, lahko se nanašajo na poljubne zaporedne faze odločanja oziroma delovanja. Dejanja so lahko v zelo nizkem nivoju, na primer napetosti, ki krmilijo roko robota, ali pa odločitve v visokem nivoju, na primer v katero šolo se vpisati ali pa kakšno hrano pripraviti za večerjo. Stanja so lahko tudi v zelo različnih predstavitvah, od nizko-nivojskih odčitkov senzorjev do abstraktnih simboličnih opisov sob. V splošnem so lahko dejanja katerekoli odločitve o katerih se želimo učiti in stanja karkoli, ki nam lahko pomaga pri teh odločitvah. Edini cilj učenca je povečati prejete nagrade čez čas.
+
+\begin{figure}[htbp]
+\includegraphics[scale=1.0]{AgentEnvironment.png}
+\caption{Interakcija med učencem in njegovim okoljem~\cite{ReinforcementLearningAnIntroduction}.}
+\label{figure:AgentEnvironment}
+\end{figure}
+
+%% policy
+% sufficient to define behavior
+% instructs the agent what to do in each state
+% maps EACH state to an action
+% agent uses policy to choose the next action
+% This mapping is called the agent’s policy and is denoted πt, where πt(a|s) is the probability that At = a if St = s.
+% correspondts to psychology's stimulus-response rules or associacions
+% may be stochastic
+{\em Politiko (angl. policy)} $\pi$ imenujemo pravilo po katerem se učenec odloča katero dejanje izvesti v vsakem od stanj. Z drugimi besedami: politika preslikuje stanja v dejanja. Sama po sebi zadostuje za popolno definirano vedenje. V času $t$ predstavlja $\pi_t(a_t|s_t)$ verjetnost, da učenec izvede dejanje $a_t$ v stanju $s_t$. V psihologiji koncept politike ustreza povezavam spodbud z odzivi. V splošnem so politike lahko stohastične.
+
+%% reward function
+% defines the goal, sole objective is ot maximize the reward in the long run
+% maps states to rewards, scalar values, Rt element of real numbers
+% indicates how well the agent is doing
+% positive encourages state visits, negative discourages
+% defines what is good and bad events
+% in biology, it could be pleasure and pain; positive/negative simulus(?)
+% may be stochastic
+{\em Nagrajevalna funkcija (angl. reward function)} opredeljuje cilje v nalogi okrepitvenega učenja, saj povečava nagrad čez čas predstavlja edini cilj učenca. V grobem, stanja okolja preslikuje v realno število, $r_t$, nagrado, ki predstavlja trenutno zaželenost stanja. Pozitivne nagrade spodbujajo obiske stanj, negativne pa jih odvračajo. Številne nagrade so pogosto preprosto definirane kot $+1$ ali $-1$. Oddane nagrade predstavljajo, kako dobro se učenec vede v okolju. Nagrade definirajo dobre in slabe dogodke. V biološkem sistemu bi lahko nagrade identificirali kot užitek ali bolečina. V psihologiji so to okrepitve ali kaznovanje. Nagrajevalna funkcija je nujno del okolja in je učenec ne sme biti zmožen spremeniti. V splošnem so nagrajevalne funkcije lahko stohastične.
+% about how to choose +1, -1? seems limiting. From Intro 3.2 Goals and Rewards.
+
+%% value function (V)
+% reward function indicates what is good in an immediate sense, value function specifies what is good in the long run
+% rl algorithms model this function
+% maps states to values values; a state's desariability
+% expresses expected reward (return?) gained from visiting the state, immediate and in the long run; the total amount an agent can expect to accumulate over the future, starting from a state
+% takes into account states that are likely to follow and the rewards from those states
+% make analogy to biology; long term reward
+% rewards primary, values secondary, without rewards there would be no values, but we make decisions based on values
+% rewards are given by the environment, values must be estimated and reestimated
+% most important component of almost all rl algos is a method for efficiently estimating values
+% the value function is specific to the policy
+Med tem ko nagrajevalna funkcija označuje kaj je dobro v takojšnjem smislu, {\em vrednostna funkcija (angl. value function)} $V$ določa kaj je dobro na dolgi rok. Vrednostna funkcija izraža pričakovano nagrado iz obiska stanja, hkrati takojšnjo in dolgoročno; to je, izraža skupno količino nagrade, ki jo učenec lahko predvideva nabrati čez čas z začetkom v določenem stanju. Vrednosti upoštevajo stanja, ki verjetno sledijo, in nagrade iz teh stanj. Vrednostna funkcija $V$ preslikuje stanja $s$ v vrednosti $v$. Najpomembnejši del skoraj vseh algoritmov okrepitvenega učenja je učinkovito ocenjevanje vrednosti. Tudi v vsakdanjem življenju velikokrat ocenjujemo in napovedujemo dolgoročno vrednost situacij, kar nam predstavlja nemajhen izziv. Stanja, ki imajo visoko takojšnjo nagrado so lahko dolgoročno slaba in imajo nižjo vrednost kot alternativna. Slaščica, na primer, ima kratkoročen užitek, ampak velikokrat ni najboljša izbira prehrane kar se tiče našega telesnega zdravja. Obratno je tudi mogoče, stanje ima lahko zelo nizko takojšnjo nagrado, ampak se skozi prihodnost izkaže za najboljšo izbiro. Naša pot do službe je lahko hitrejša, če ne izberemo očitno najkrajšo pot, ampak upoštevamo promet do katerega nas zadana pot pripelje. Tudi živali se pri operantnem učenju učijo vrednosti in ne le takojšnjih nagrad. Hitro se naučijo, da dolgoročno prejmejo nagrade hitreje, če se pravilno vedejo, kot pa če ne. Nagrade so primarne med tem, ko so vrednosti sekundarne. Brez nagrad ne bi bilo vrednosti, ampak vedemo se glede na ocene vrednosti. Razlika je tudi v tem, da so nagrade oddane iz okolja, vrednosti pa moramo neprestano ocenjevati učenci sami. Vrednostna funkcija določa politiko vedenja, saj s svojim vedenjem želimo povečati nagrade katere vrednostna funkcija opisuje.
+
+%% action value function (Q)
+% same as for V, but maps states to actions
+{\em Vrednostna funkcija dejanj (angl. action-value function)} $Q$ je enakovredna vrednostni funkciji, s to razliko, da stanja $s$ slika direktno v dejanja $a$. Vrednostna funckija $V$ določa vrednost $v$ stanju $s$ ($V(s) = v$) med tem, ko vrednostna funkcija dejanj določa vrednost $v$ dejanju $a$ ($Q(a) = v$).
+
+%% optinal environment model
+% mimics the behavior of the environment, for given state and action it predicts the next state and reward
+% used for planning
+% dynamic programing methods use models
+% in some algorithms a model of the environment can be used, in others it's omitted
+%Even if the agent has a complete and accurate environment model, the agent is typically unable to perform enough computation per time step to fully use it. The memory available is also an important constraint. Memory may be required to build up accurate approximations of value functions, policies, and models. In most cases of practical interest there are far more states than could possibly be entries in a table, and approximations must be made.
+Nekateri algoritmi lahko uporabijo tudi model okolja, pri drugih je pa opuščen.
+
+\section{Končen Markov proces odločanja}
+% MARKOV REF?
+V okrepitvenem učenju se učenec vede na podlagi signala iz okolja, ki ga imenujemo tudi stanje okolja. V tem razdelku je opisano kaj je zahtevano od signala stanja in kakšne informacije je smiselno od signala pričakovati.
+
+Po eni strani lahko signal stanja pove veliko več, kot samo trenutne meritve. Stanja so lahko predstavljena z močno obdelanimi originalnimi meritvami, ali pa s kompleksnimi strukturami, ki so zgrajena skozi čas. Če slišimo odgovor ``da'' se znajdemo v zelo različnih stanjih odvisno od predhodnega vprašanja, ki ga ne slišimo več.
+
+Po drugi strani pa ne smemo predpostavljati, da nam signal stanja zna povedati vse o okolju, ali celo vse kar nam bi prišlo prav za odločanje. Če igramo igro s kartami ne smemo predvidevati, da bomo izvedeli kaj imajo drugi igralci v rokah ali pa katera je naslednja karta na vrhu kupa. Če učenec odgovori na telefon, ne smemo predpostavljati, da ve kdo ga kliče vnaprej. V obeh primerih obstajajo skrite informacije stanja, ki jih učenec ne more vedeti, ker jih ni nikoli prejel.
+
+Kar bi radi, idealno, je signal stanja, ki povzame vse uporabne predhodne informacije. Za to je ponavadi potrebna več kot samo trenutna informacija, ampak nikoli več kot celotna preteklost vseh prejetih informacij. Signal stanja, ki zadrži vse uporabne predhodne informacije, pravimo, da je {\em Markov}, oziroma, da ima {\em Markovo lastnost}. Na primer, pri igri štiri v vrsto je trenutna konfiguracija vseh polj Markovo stanje, ker povzame vse kar je pomembno o poteku igre. Čeprav je veliko informacije o poteku igre izgubljeno, je vse pomembno še vedno na voljo.
+
+Pri končnem številu stanj in nagrad, je v splošnem dinamika okolja definirana samo s popolno porazdelitvijo verjetnosti
+\begin{equation} \label{equation:GeneralCompleteProbabilityDistribution}
+Pr\{r_{t+1} = r, s_{t+1} = s' | s_0, a_0, r_1, \dots, s_{t-1}, a_{t-1}, r_t, s_t, a_t\}
+\end{equation}
+na odziv okolja v času $t+1$, na dejanje v času $t$ in za vse vrednosti $r$, $s'$ in prejšnjih dogodkov $s_0, a_0, r_1, \dots, s_{t-1}, a_{t-1}, r_t, s_t, a_t$. Če ima signal stanja {\em Markovo lastnost}, pa je odziv okolja v času $t+1$ odvisen samo od stanja in dejanja v času $t$ in lahko dinamiko okolja definiramo z določitvijo le porazdelitve verjetnosti
+\begin{equation} \label{equation:MarkovCompleteProbabilityDistribution}
+Pr\{r_{t+1} = r, s_{t+1} = s' | s_t, a_t\},
+\end{equation}
+za vse $r$, $s'$, $s_t$ in $a_t$. Z drugimi besedami, signal stanja ima {\em Markovo lastnost}, in je {\em Markovo stanje}, če in samo če je (\ref{equation:GeneralCompleteProbabilityDistribution}) enako (\ref{equation:MarkovCompleteProbabilityDistribution}) za vse $s'$, $r$, in preteklosti $s_0, a_0, r_1, \dots, s_{t-1}, a_{t-1}, r_t, s_t, a_t$. V tem primeru pravimo, da ima celotno okolje in naloga Markovo lastnost.
+
+Če ima okolje Markovo lastnost, lahko iz enostavne dinamike predhodnega stanja (\ref{equation:MarkovCompleteProbabilityDistribution}) napovedujemo naslednje stanje in naslednjo nagrado za trenutno stanje in dejanje. V tem okolju lahko napovedujemo vsa stanja in nagrade v prihodnosti enako dobro kot bi lahko s popolno preteklostjo do trenutnega časa. Sledi enako, da je najboljša politika izbire dejanj enako dobra v Markovem stanju kot najboljša politika izbire dejanj s trenutnim stanjem in popolno zgodovino.
+
+Čeprav Markova lastnost velikokrat ne drži popolnoma v nalogah okrepitvenega učenja, je vseeno zelo primerno razmišljati o stanju v okrepitvenem učenju kot približnemu Markovemu stanju. Omogoča nam razmišljati o odločitvah in vrednostih na podlagi trenutnega stanja.
+
+Naloga okrepitvenega učenja, ki zadovoljuje Markovo lastnost imenujemo {\em Markov proces odločanja (angl. MDP -- Markov decision process)}. Če je prostor stanj in dejanj končno, potem to imenujemo {\em končen Markov proces odločanja (angl. finite MDP)}.
+
+Končen MDP je torej popolnoma definiran s:
+\begin{itemize}
+\item končno množico dosegljivih stanj $S$,
+\item končno množico izvedljivih dejanj $A$,
+\item prehodno funkcijo, definirano na vseh stanjih iz $S$ in za vsa dejanja iz $A$, ki je za prehod v stanje $s' \in S$ odvisna samo od trenutnega stanja $s \in S$ in dejanja $a \in A$: 
+\begin{equation}
+p(s' | s, a) = Pr\{s_{t+1} = s' | s_t = s, a_t = a\},
+\end{equation}
+\item nagrajevalno funkcijo, ki je, posledično od prehodne funkcije, tudi odvisna samo od trenutnega stanja in trenutnega dejanja:
+\begin{equation}
+r(s, a, s') = E[r_{t+1} | s_t = s, a_t = a, s_{t+1} = s'].
+\end{equation}
+\end{itemize}
+
+\section{Diskretno okrepitveno učenje}
+Ta razdelek povzame okrepitveno učenje \cite{ReinforcementLearningAnIntroduction} v diskretnem primeru, to je, v primeru, ko je prostor stanj okolja diskreten in končen in čas je razdeljen v diskretne korake.
+
+Politika $\pi$ slika stanje v dejanje, kot omenjeno v razdelku \ref{section:ReinforcementLearningElements}. Za končne MDP lahko definiramo tudi {\em optimalno politiko (angl. optimal policy)} $\pi^\star$. Naj bosta $\pi$ in $\pi^\star$ politiki in $V^\pi$ vrednostna funkcija politike $\pi$ ter $V^{\pi^\star}$ vrednostna funkcija politike $\pi^\star$. Politika $\pi^\star$ je optimalna, če ima vrednostno funkcijo  $V^{\pi^\star}$ z naslednjo lastnostjo
+\begin{equation}
+V^{\pi^\star}(s) >= V^\pi(s), \forall s,
+\end{equation}
+za vse možne politike $\pi$.
+
+% episodic vs continuing tasks, returns, unified notation
+Kar je bilo do sedaj navedeno kot pričakovana dolgoročna nagrada je pogosto imenovan {\em pričakovan donos (angl. expected return)}. Formalna definicija donosa nekega stanja v času $t$ za poslednje nagrade $r_{t+1}, r_{t+2}, r_{t+3} \dots$ je
+\begin{equation}
+R_t = r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \dots = \sum_{k=0}^{T-t-1} \gamma^k r_{t+k+1},
+\end{equation}
+kjer je $0 \le \gamma \le 1$. Donos je vsota vseh nadaljnjih nagrad, ki jih pričakujemo po času $t$ do končnega stanja v času $T$. V končnem stanju definiramo, da je prehod možen samo v isto stanje in nagrada ob prehodu vedno ničelna. S tem lahko poenotimo {\em epizodične} in {\em neskončne naloge} z uvedbo konstante $\gamma$, ki predstavlja {\em faktor popuščanja (angl. discount factor)}, s tem, da je lahko $T = \infty$ ali $\gamma = 1$, ampak ne oba hkrati. Pri neskončnih nalogah, ki jih ne moremo razdeliti na epizode, je $T = \infty$, saj se nikoli ne končajo, hkrati pa mora biti $\gamma < 1$, drugače lahko donos postane neskončen. Faktor popuščanja določa koliko želimo upoštevati prihodnje nagrade. Z $\gamma = 0$ se začne učenec brigati samo za trenutno nagrado. Pri epizodičnih nalogah, kot so igre, je navadno $\gamma = 1$.
+
+Za končne MDP lahko {\em vrednost stanja $s$ po politiki $\pi$, t.i. vrednostno funkcijo $V^\pi(s)$}, definiramo kot pričakovan donos iz stanja $s$ z nadaljnjim upoštevanjem politike $\pi$, formalno:
+\begin{equation}
+V^\pi(s) = E_\pi[R_t | s_t = s] = E_\pi\Bigg[\sum_{k=0}^\infty \gamma^k r_{t+k+1} \Bigg| s_t = s\Bigg],
+\end{equation}
+kjer $E_\pi[.]$ predstavlja pričakovano vrednostjo, če učenec sledi politiki $\pi$.
+
+Podobno lahko {\em vrednost dejanja $a$ v stanju $s$} po politiki $\pi$, t.i. vrednostno funkcijo dejanj $Q^\pi(s, a)$, definiramo kot pričakovan donos iz stanja $s$ ob dejanju $a$ in nadaljnjim upoštevanjem politike $\pi$, formalno:
+\begin{equation}
+Q^\pi(s, a) = E_\pi[R_t | s_t = s, a_t = a] = E_\pi\Bigg[\sum_{k=0}^\infty \gamma^k r_{t+k+1} \Bigg| s_t = s, a_t = a\Bigg].
+\end{equation}
+
+\section{Raziskovanje in izkoriščanje}
+Eden od izzivov okrepitvenega učenja, ki jih ne najdemo v ostalih oblikah strojnega učenja, je kompromis med raziskovanjem (angl. exploration) in izkoriščanjem (angl. exploitation). Med učenjem, ko učenec uporablja približek optimalne vrednostne funkcije za svoje vedenje, mu to omogoča pridobiti največjo znano nagrado, ampak nikjer ni zagotovil, da je ta znana politika tudi v splošnem najboljša. Boljša rešitev bi mogoče lahko bila najdena, če bi učenec imel dovoljenje raziskovati dejanja, ki jih še ni poizkusil.
+
+Spodaj opisana $\epsilon$-požrešna izbira dejanj je zelo preprosta in v praksi pogosto uporabljena. Obstaja še veliko drugih metod, nekaterih bolj kompleksnih od drugih. Več primerov je v delu Thrun \cite{TheRoleOfExplorationInLearningControl} ter Sutton in Barto \cite{ReinforcementLearningAnIntroduction}.
+
+\subsection{$\epsilon$-požrešna izbira dejanj}
+Ena izmed najbolj enostavnih pristopov k izbiri dejanja za ravnovesje med raziskovanjem in izkoriščanjem je uvod parametra $\epsilon$, ki določi verjetnost izbire naključnega dejanja. Na vsakem koraku po tej metodi učenec izbere naključno dejanje z verjetnostjo $\epsilon$ in požrešno dejanje z verjetnostjo $1 - \epsilon$.
+
+Velikokrat je koristno izbrati veliko naključnih dejanj ob začetku učenja in nato kot učenje napreduje znižati pogostost naključnih dejanj. S tem v fazi največjega učenja čimbolj raziščemo prostor stanj. Znižanje vrednosti $\epsilon$ logično zniža stopnjo raziskovanja in zviša stopnjo izkoriščanja. Težava pri {\em $\epsilon$-požrešni metodi izbiranja dejanj (angl. $\epsilon$-greedy action selection}) je, da ne obstaja preprostega načina za izbiro vrednosti $\epsilon$. V veliko primerih je težavno izbrati kdaj povečati ali znižati število naključnih dejanj, ki naj jih učenec izbere.
+
+%\section{Primeri}
 %children playing with blocks
 %matching shapes
 
-\section{Elementi okrepitvenega učenja}
-\newpage
+% Reinforcement learning is about learning from interaction how to behave in order to achieve a goal.
 
-\chapter{Problem} \label{chapter:Problem}
-\thispagestyle{fancy}
-\section{Ocenjevanje povratne informacije}
-\section{Celoten problem okrepitvenega učenja}
-\newpage
 
 %1. Prediction only: RL is used to learn the value function for the policy followed. At the end of learning this value function describes for every visited state how much future reward we can expect when performing actions starting at this state.
 %2. Control: By means of RL, we wish to find that particular set of policies which maximizes the reward when travelling through state space. This way we have at the end obtained an optimal policy which allows for action planning and optimal control.
@@ -392,31 +533,46 @@ Eden od izzivov okrepitvenega učenja, ki jih ne najdemo v ostalih oblikah stroj
 \subsection{Monte Carlo metode}
 \subsection{Učenje na podlagi časovne razlike - TD(0)} \label{subsection:TD0Control}
 \subsection{Združitev metod - TD($\lambda$)}
-\newpage
 
 \chapter{Posploševanje in funkcijska aproksimacija}
+%%%%% PONG GUY HAD MUCH BETTER SUCCESS WITH LINEAR OUPUT NEURON INSTEAD OF OTHER THINGIE.
 \thispagestyle{fancy}
+\section{Umetne nevronske mreže} %rename nevrološke mreže in nevronske mreže to umetne nevronske mreže
+% overfitting -- early stopping and weight decay
+\section{Metode gradient descent}
+% instead just say what was implemented to generalize Hex?
 %\section{Napovedovanje - vrednost stanja}
 
 %\section{Krmiljenje - vrednost dejanja}
 
-% artificial neural network
-% overfitting -- early stopping and weight decay
 % compare size of ann to our brain
-\newpage
 
 \chapter{Namizna igra Hex}
 \thispagestyle{fancy}
 \section{Ozadje}
 \section{Učenje}
+\section{Rezultati}
 % graphs, errors
-\newpage
 
 \chapter{Zaključek}
 \thispagestyle{fancy}
 Iz okrepitvenega učenja so se razvili solidni matematični temelji in impresivne aplikacije. Računska študija okrepitvenega učenja je sedaj obsežna, z aktivnimi raziskovalci na raznolikih disciplinah kot so psihologija, teorija krmiljenja (angl. control theory), operacijske raziskave (angl. operations research), umetna inteligenca in nevroznanost. Posebej pomembne so zveze z optimalnim nadzorom in dinamičnim programiranjem. Celoten problem učenja iz interakcije za dosego ciljev ni še zdaleč rešen, vendar se je naše razumevanje na tem področju bistveno izboljšalo. Sedaj lahko postavimo sestavne ideje kot so učenje na podlagi časovne razlike, dinamično programiranje in funkcijske aproksimacije skladno s celotnim problemom.
 
 Eden večjih trendov katerih je okrepitveno učenje deležno je večji stik med umetno inteligenco in ostalimi inženirskimi disciplinami. Nedolgo nazaj se je umetno inteligenco smatralo kot popolnoma ločeno od teorije nadzora in statistiko~\cite{ReinforcementLearningAnIntroduction}. Imelo je opravka z logiko in simboli, ne pa s števili. Umetna inteligenca so bili obširni LISP programi, ne linearna algebra, diferencialne enačbe ali statistika. V zadnjih desetletjih se je ta pogled spremenil. Moderni raziskovalci umetne inteligence sprejemajo statistične in nadzorne algoritme kot pomembne konkurenčne metode ali pa enostavno kot orodja. Prej prezrta področja med umetno inteligenco in konvencionalnega inženirstva so sedaj med najbolj aktivnimi, vključno z nevronskimi mrežami, pametnim nadzorom in okrepitvenim učenjem. V okrepitvenem učenju se ideje optimalne teorije nadora in stohastične aproksimacije razširijo za nasloviti širše in bolj ambiciozne cilje umetne inteligence.
+
+% while table td converges, function approximation td is tricky and not yet fully understood:
+% 3.3 Scaling up in Tutorial survey and Recent Advances says something about ANN failures
+% td with function approximation convergence
+% td with non-linear function approximation does not converge
+% some recent advances from Sutton: http://webdocs.cs.ualberta.ca/~sutton/publications.html
+
+% Convergent Temporal-Difference Learning with Arbitrary Smooth Function Approximation
+% We introduce the first temporal-difference learning algorithms that converge with smooth value function approximators, such as neural networks. Conventional temporal-difference (TD) methods, such as TD(λ), Q-learning and Sarsa have been used successfully with function approximation in many applications. How- ever, it is well known that off-policy sampling, as well as nonlinear function ap- proximation, can cause these algorithms to become unstable (i.e., the parameters of the approximator may diverge). Sutton et al. (2009a, 2009b) solved the prob- lem of off-policy learning with linear TD algorithms by introducing a new objec- tive function, related to the Bellman error, and algorithms that perform stochastic gradient-descent on this function. These methods can be viewed as natural gener- alizations to previous TD methods, as they converge to the same limit points when used with linear function approximation methods. We generalize this work to non- linear function approximation. We present a Bellman error objective function and two gradient-descent TD algorithms that optimize it. We prove the asymptotic almost-sure convergence of both algorithms, for any finite Markov decision pro- cess and any smooth value function approximator, to a locally optimal solution. The algorithms are incremental and the computational complexity per time step scales linearly with the number of parameters of the approximator. Empirical re- sults obtained in the game of Go demonstrate the algorithms’ effectiveness.
+% In this paper, we solved a long-standing open problem in reinforcement learning, by establishing a family of temporal-difference learning algorithms that converge with arbitrary differentiable func- tion approximators (including neural networks). The algorithms perform gradient descent on a nat- ural objective function, the projected Bellman error. The local optima of this function coincide with solutions that could be obtained by TD(0). Of course, TD(0) need not converge with non-linear function approximation. Our algorithms are on-line, incremental and their computational cost per update is linear in the number of parameters. Our theoretical results guarantee convergence to a local optimum, under standard technical assumptions. Local optimality is the best one can hope for, since nonlinear function approximation creates non-convex optimization problems. The early empirical results obtained for computer Go are very promising. However, more practical experience with these algorithms is needed. We are currently working on extensions of these algorithms using eligibility traces, and on using them for solving control problems.
+
+%A general gradient algorithm for temporal-difference prediction learning with eligibility traces
+%ABSTRACT: A new family of gradient temporal-difference learning algorithms have recently been introduced by Sutton, Maei and others in which function approximation is much more straightforward. In this paper, we introduce the GQ(λ) algorithm which can be seen as extension of that work to a more general setting including eligibility traces and off-policy learning of temporally abstract predictions. These extensions bring us closer to the ultimate goal of this work—the development of a universal prediction learning algorithm suitable for learning experientially grounded knowledge of the world. Eligibility traces are essential to this goal because they bridge the temporal gaps in cause and effect when experience is processed at a temporally ﬁne resolution. Temporally abstract predictions are also essential as the means for representing abstract, higher-level knowledge about courses of action, or options. GQ(λ) can be thought of as an extension of Q-learning. We extend existing convergence results for policy evaluation to this setting and carry out a forward-view/backward-view analysis to derive and prove the validity of the new algorithm.
+%The GQ(λ) algorithm, which has been introduced in this paper, incorporates varying eligibility traces and option-conditional probabilities for policy evalu- ation. To derive GQ(λ), we carried out a forward- view/backward-view analysis. We extended the exist- ing convergence results to show that GQ(λ) is guaran- teed to converge to the TD(λ) fixed-point. GQ(λ) is a general gradient TD method for off-policy learning and as such can be seen as extension of Q-learning. GQ(λ) is able to learn about temporally abstract predictions, which makes it suitable to use for learning experientially grounded knowledge. In addition, GQ(λ) is online, in- cremental and its computational complexity scales only linearly with the size of features. Thus, it is suitable for large-scale applications. Our work, however, is limited to policy evaluation. Interesting future works is to ex- tend GQ(λ) for control problems and gather extensive empirical data on large-scale real-world applications.
 
 Ray Kurzweil, inventor in futurist, je, v svoji nefiktivni knjigi ``The Singularity Is Near: When Humans Transcend Biology''~\cite{TheSingularityIsNear}, opisal svoj zakon o pospeševanju donosov, ki napoveduje eksponentno povečanje v tehnologijah kot so računalništvo, genetika, nanotehnologija, robotika in umetna inteligenca. Predvideva, da bo do okrog leta 2020 obstajal računalnik za tisoč ameriških dolarjev, ki bo imel računsko zmožnost posnemati človeško inteligenco. Po tem, pričakuje, da bo tehnologija optičnega zajemanja človeških možganov pripomogla k učinkovitemu modelu človeške inteligence do okrog 2025. Ta dva elementa bosta omogočala računalnikom opraviti Turingov preizkus do leta 2029. In do zgodnjih 2030 bo količina nebiološkega računanja prekoračilo zmožnost vse žive biološke inteligence človeštva. Končno eksponentno povečanje v računski zmožnosti bo privedlo do dogodka Singularnosti -- močno in moteče preoblikovanje v človeški sposobnosti -- leta 2045.
 
@@ -428,7 +584,6 @@ Ray Kurzweil, inventor in futurist, je, v svoji nefiktivni knjigi ``The Singular
 %http://www.theguardian.com/technology/shortcuts/2014/jan/28/demis-hassabis-15-facts-deepmind-technologies-founder-google
 
 %http://www.technologyreview.com/news/524026/is-google-cornering-the-market-on-deep-learning/
-\newpage
 
 \begin{thebibliography}{99}
 \thispagestyle{fancy}
@@ -537,6 +692,11 @@ N. N. Schraudolf, P. Dayan, T. Sejnowski,
 \newblock{\em Learning to evaluate go positions via temporal difference methods},
 \newblock{Vol. 62 of Studies in fuzziness and soft computing, Springer Verlag, 2001.}
 
+\bibitem{TheRoleOfExplorationInLearningControl}
+S. B. Thrun,
+\newblock{\em The Role of Exploration in Learning Control},
+\newblock{Department of Computer Science, Carnegie-Mellon University, 1992.}
+
 \bibitem{CognitionEvolutionAndBehavior}
 S. J. Shettleworth,
 \newblock{\em Cognition, Evolution and Behavior},
@@ -563,7 +723,6 @@ V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, M. Ri
 \newblock{arXiv preprint arXiv:1312.5602, 2013.}
 
 \end{thebibliography}
-\newpage
 
 %\pagestyle{fancyplain}
 %\vspace*{\fill}
