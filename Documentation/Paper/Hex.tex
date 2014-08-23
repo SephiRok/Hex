@@ -363,12 +363,6 @@ To poglavje formalno definira dele okrepitvenega učenja ter določi predpostavk
 %IS THIS THE ISSUE I HAD IN THE ALG?
 %We use Rt+1 instead of Rt to denote the immediate reward due to the action taken at time t because it emphasizes that the next reward and the next state, St+1, are jointly determined.
 
-% agent and the environment
-% policy
-% reward func
-% value func
-% model
-
 %% agent
 % learner, decision maker
 % interacts with the environment to solve tasks, learning algorithms optimize his behavior, he learns
@@ -381,7 +375,7 @@ Cilj algoritmov okrepitvenega učenja je optimizirati vedenje {\em učenca (angl
 % More specifically, the agent and environment interact at each of a sequence ofdiscretetimesteps,t=0,1,2,3,....2 Ateachtimestept,theagentreceives some representation of the environment’s state, St ∈ S, where S is the set of possible states, and on that basis selects an action, At ∈ A(St), where A(St) is the set of actions available in state St. One time step later, in part as a consequence of its action, the agent receives a numerical reward , Rt+1 ∈ R, and finds itself in a new state, St+1.3 Figure 3.1 diagrams the agent–environment interaction.
 % this is an abstract and flexible framework and applies to many problems
 % time steps don't need to be fixed interval of time, actions could be low level controls, voltages, or high-level decisions like what school to go to or who to marry
-Učenec se s svojimi dejanji vede na {\em okolje (angl. environment)}. Vse kar učenec ni zmožen poljubno spremeniti se smatra kot izven učenca in pripada okolju. Učenec in okolje neprestano vplivata na drug drugega; učenec izbira dejanja in okolje se odziva na ta dejanja s predstavitvijo novih {\em stanj (angl. state)} učencu. Okolje, ob prehodih na nova stanja, oddaja tudi številčne {\em nagrade (angl. reward)}, katere učenec poizkuša povečati skozi čas. Natančneje, učenec in okolje so v interakciji v vsakem koraku diskretnega zaporedja časa $t = 0, 1, 2, 3, \dots$. V vsakem koraku učenec prejme predstavitev stanja okolja, $s_t \in S$, kjer je $S$ množica vseh možnih stanj. Glede na stanje se odloči za dejanje, $a_t \in A(s)$, iz množice možnih dejanj. En časovni korak pozneje prejme učenec, kot posledica svojega dejanja, številčno nagrado, $r_{t+1} \in R$, in se znajde v novem stanju, $s_{t+1}$. Slika \ref{figure:AgentEnvironment} prikazuje opisan potek interakcije med učencem in okoljem. Takšna opredelitev elementov okrepitvenega učenja ustreza številnim težavam. Ni nujno, da časovni koraki predstavljajo fiksne intervale v resničnem času, lahko se nanašajo na poljubne zaporedne faze odločanja oziroma delovanja. Dejanja so lahko v zelo nizkem nivoju, na primer napetosti, ki krmilijo roko robota, ali pa odločitve v visokem nivoju, na primer v katero šolo se vpisati ali pa kakšno hrano pripraviti za večerjo. Stanja so lahko tudi v zelo različnih predstavitvah, od nizko-nivojskih odčitkov senzorjev do abstraktnih simboličnih opisov sob. V splošnem so lahko dejanja katerekoli odločitve o katerih se želimo učiti in stanja karkoli, ki nam lahko pomaga pri teh odločitvah. Edini cilj učenca je povečati prejete nagrade čez čas.
+Učenec se s svojimi dejanji vede na {\em okolje (angl. environment)}. Vse kar učenec ni zmožen poljubno spremeniti se smatra kot izven učenca in pripada okolju. Učenec in okolje neprestano vplivata na drug drugega; učenec izbira dejanja in okolje se odziva na ta dejanja s predstavitvijo novih {\em stanj (angl. state)} učencu. Okolje, ob prehodih na nova stanja, oddaja tudi številčne {\em nagrade (angl. reward)}, katere učenec poizkuša povečati skozi čas. Natančneje, učenec in okolje so v interakciji v vsakem koraku diskretnega zaporedja časa $t = 0, 1, 2, 3, \dots$. V vsakem koraku učenec prejme predstavitev stanja okolja, $s_t \in S$, kjer je $S$ množica vseh možnih stanj. Glede na stanje se odloči za dejanje, $a_t \in A_s$, iz množice možnih dejanj. En časovni korak pozneje prejme učenec, kot posledica svojega dejanja, številčno nagrado, $r_{t+1} \in R$, in se znajde v novem stanju, $s_{t+1}$. Slika \ref{figure:AgentEnvironment} prikazuje opisan potek interakcije med učencem in okoljem. Takšna opredelitev elementov okrepitvenega učenja ustreza številnim težavam. Ni nujno, da časovni koraki predstavljajo fiksne intervale v resničnem času, lahko se nanašajo na poljubne zaporedne faze odločanja oziroma delovanja. Dejanja so lahko v zelo nizkem nivoju, na primer napetosti, ki krmilijo roko robota, ali pa odločitve v visokem nivoju, na primer v katero šolo se vpisati ali pa kakšno hrano pripraviti za večerjo. Stanja so lahko tudi v zelo različnih predstavitvah, od nizko-nivojskih odčitkov senzorjev do abstraktnih simboličnih opisov sob. V splošnem so lahko dejanja katerekoli odločitve o katerih se želimo učiti in stanja karkoli, ki nam lahko pomaga pri teh odločitvah. Edini cilj učenca je povečati prejete nagrade čez čas.
 
 \begin{figure}[htbp]
 \includegraphics[scale=1.0]{AgentEnvironment.png}
@@ -407,8 +401,7 @@ Učenec se s svojimi dejanji vede na {\em okolje (angl. environment)}. Vse kar u
 % defines what is good and bad events
 % in biology, it could be pleasure and pain; positive/negative simulus(?)
 % may be stochastic
-{\em Nagrajevalna funkcija (angl. reward function)} opredeljuje cilje v nalogi okrepitvenega učenja, saj povečava nagrad čez čas predstavlja edini cilj učenca. V grobem, stanja okolja preslikuje v realno število, $r_t$, nagrado, ki predstavlja trenutno zaželenost stanja. Pozitivne nagrade spodbujajo obiske stanj, negativne pa jih odvračajo. Številne nagrade so pogosto preprosto definirane kot $+1$ ali $-1$. Oddane nagrade predstavljajo, kako dobro se učenec vede v okolju. Nagrade definirajo dobre in slabe dogodke. V biološkem sistemu bi lahko nagrade identificirali kot užitek ali bolečina. V psihologiji so to okrepitve ali kaznovanje. Nagrajevalna funkcija je nujno del okolja in je učenec ne sme biti zmožen spremeniti. V splošnem so nagrajevalne funkcije lahko stohastične.
-% about how to choose +1, -1? seems limiting. From Intro 3.2 Goals and Rewards.
+{\em Nagrajevalna funkcija (angl. reward function)} opredeljuje cilje v nalogi okrepitvenega učenja, saj povečava nagrad čez čas predstavlja edini cilj učenca. V grobem, nagrajevalna funkcija stanja okolja preslikuje v realno število, $r_t$, nagrado, ki predstavlja trenutno zaželenost stanja. Pozitivne nagrade spodbujajo obiske stanj, negativne pa jih odvračajo. Oddane nagrade predstavljajo, kako dobro se učenec vede v okolju; nagrade definirajo dobre in slabe dogodke. Uporaba nagrajevalnega signala za formalizacijo ideje cilja je eno izmed najbolj značilnih lastnosti okrepitvenega učenja. Čeprav se takšno formuliranje ciljev morda prvotno zdi omejujoče, se je v praksi izkazalo za zelo fleksibilno in primerno. Številne nagrade so pogosto preprosto definirane kot $+1$ ali $-1$. Kritično je, da nagrade točno določajo zadan cilj. Nagrajevalni signal ni primerno mesto za podeljevanje učenca s predhodnim znanjem kako doseči cilj. Pri primeru učenca, ki igra šah, je pravilno nagrajevanje samo v primeru zmage, ne pa za dosego podciljev, kot je zavzemanje nasprotnikovih figur. Če nagrajujemo takšne podcilje, se zna zgoditi, da učenec najde pot, kako doseči podcilje brez, da doseže končen cilj. V primeru šaha, bi lahko našel način zavzemanja nasprotnikovih figur tudi na račun izgubljene igre. Nagrajevalna funkcija je način komuniciranja z robotom kaj naj doseže, ne pa kako naj to doseže. V biološkem sistemu bi lahko nagrade identificirali kot užitek ali bolečina. V psihologiji so to okrepitve ali kaznovanje. Nagrajevalna funkcija je nujno del okolja in je učenec ne sme biti zmožen spremeniti. V splošnem so nagrajevalne funkcije lahko stohastične.
 
 %% value function (V)
 % reward function indicates what is good in an immediate sense, value function specifies what is good in the long run
@@ -433,7 +426,7 @@ Med tem ko nagrajevalna funkcija označuje kaj je dobro v takojšnjem smislu, {\
 % dynamic programing methods use models
 % in some algorithms a model of the environment can be used, in others it's omitted
 %Even if the agent has a complete and accurate environment model, the agent is typically unable to perform enough computation per time step to fully use it. The memory available is also an important constraint. Memory may be required to build up accurate approximations of value functions, policies, and models. In most cases of practical interest there are far more states than could possibly be entries in a table, and approximations must be made.
-Nekateri algoritmi lahko uporabijo tudi model okolja, pri drugih je pa opuščen.
+Nekateri algoritmi znajo uporabijo tudi model okolja, pri drugih je pa opuščen.
 
 \section{Končen Markov proces odločanja}
 % MARKOV REF?
@@ -467,11 +460,11 @@ Končen MDP je torej popolnoma definiran s:
 \item končno množico izvedljivih dejanj $A$,
 \item prehodno funkcijo, definirano na vseh stanjih iz $S$ in za vsa dejanja iz $A$, ki je za prehod v stanje $s' \in S$ odvisna samo od trenutnega stanja $s \in S$ in dejanja $a \in A$: 
 \begin{equation}
-p(s' | s, a) = Pr\{s_{t+1} = s' | s_t = s, a_t = a\},
+P(s' | s, a) = Pr\{s_{t+1} = s' | s_t = s, a_t = a\},
 \end{equation}
 \item nagrajevalno funkcijo, ki je, posledično od prehodne funkcije, tudi odvisna samo od trenutnega stanja in trenutnega dejanja:
 \begin{equation}
-r(s, a, s') = E[r_{t+1} | s_t = s, a_t = a, s_{t+1} = s'].
+R(s, a, s') = E[r_{t+1} | s_t = s, a_t = a, s_{t+1} = s'].
 \end{equation}
 \end{itemize}
 
@@ -519,20 +512,81 @@ Velikokrat je koristno izbrati veliko naključnih dejanj ob začetku učenja in 
 % Reinforcement learning is about learning from interaction how to behave in order to achieve a goal.
 
 
+%The most important feature distinguishing reinforcement learning from other types of learning is that it uses training information that evaluates the actions taken rather than instructs by giving correct actions. This is what creates the need for active exploration, for an explicit trial-and-error search for good behavior. Purely evaluative feedback indicates how good the action taken is, but not whether it is the best or the worst action possible. Evaluative feed- back is the basis of methods for function optimization, including evolutionary methods. Purely instructive feedback, on the other hand, indicates the cor- rect action to take, independently of the action actually taken. This kind of feedback is the basis of supervised learning, which includes large parts of pattern classification, artificial neural networks, and system identification. In their pure forms, these two kinds of feedback are quite distinct: evaluative feedback depends entirely on the action taken, whereas instructive feedback is independent of the action taken. There are also interesting intermediate cases in which evaluation and instruction blend together.
+
+
 %1. Prediction only: RL is used to learn the value function for the policy followed. At the end of learning this value function describes for every visited state how much future reward we can expect when performing actions starting at this state.
 %2. Control: By means of RL, we wish to find that particular set of policies which maximizes the reward when travelling through state space. This way we have at the end obtained an optimal policy which allows for action planning and optimal control.
 %1Thus, RL also assumes that such systems “follow the Markov property”. Essentially this means that it is unimportant along which path a certain state has been reached. Once there, the state itself contains all relevant information for future calculations. Many times the Markow Property cannot be guaranteed in real world decision problem which poses practical problems when wanting to employ RL-methods. Also, we note that conventional RL needs to be augmented by additional mechanisms, if one wants to employ it to more complex, for example time and space-continuous, systems. These aspects shall not be discussed here, but see Reynolds (2002); Santos and Touzet (1999a,b).
 \chapter{Tabularne rešitve}
 \thispagestyle{fancy}
+% RL Intro has good bibliography sections for references.
+V tem poglavju so opisani ključni algoritmi okrepitvenega učenja v svojih enostavnih oblikah -- ko je prostor stanj in dejanj dovolj majhen za predstavitev ocenjene vrednostne funkcije s poljem ali tabelo. V teh primerih znajo algoritmi najti optimalno vrednostno funkcijo in optimalno politiko vedenja. To je v nasprotju z aproksimacijskimi metodami opisanimi v naslednjem poglavju, ki znajo najti le približne rešitve, ampak jih lahko uporabimo učinkovito na veliko večjih problemih.
+
+\section{Metoda ocenjevanja vrednosti v posamezni situaciji, naloga je dolga en časovni whatever}
+
+
 \section{Dinamično programiranje}
-\section{Napovedovanje - vrednost stanja}
-\subsection{Monte Carlo metode}
-\subsection{Učenje na podlagi časovne razlike - TD(0)} \label{subsection:TD0Prediction}
-\subsection{Združitev metod - TD($\lambda$)}
-\section{Krmiljenje - vrednost dejanja}
-\subsection{Monte Carlo metode}
-\subsection{Učenje na podlagi časovne razlike - TD(0)} \label{subsection:TD0Control}
-\subsection{Združitev metod - TD($\lambda$)}
+Leta 1957 je Bellman [REF] objavil ključen članek, ko je uvedel izraz {\em dinamično programiranje (angl. DP -- dynamic programming)}, ki se nanaša na zbirko algoritmov, ki jih lahko uporabimo za izračunati optimalno politiko za MDP. Algoritmi dinamičnega programiranja potrebujejo popoln in natančen model okolja za delovanje. Vsi se nanašajo na Bellmanovo enačbo
+\begin{equation}
+\begin{aligned}
+V_\pi(s) &= E_\pi[R_t | s_t = s]
+\\ &= E_\pi\Bigg[\sum_{k=0}^\infty \gamma^k r_{t+k+1} \Bigg| s_t = s\Bigg]
+\\ &= E_\pi\Bigg[r_{t+1} + \gamma \sum_{k=0}^\infty \gamma^k r_{t+k+2} \Bigg| s_t = s \Bigg]
+\\ &= \sum_a \pi(a | s) \sum_{s'} P(s' | s, a) \Bigg[R(s, a, s') + \gamma E_\pi\Bigg[\sum_{k=0}^\infty \gamma^k r_{t+k+2} \Bigg| s_{t+1} = s' \Bigg]\Bigg]
+\\ &= \sum_a \pi(a | s) \sum_{s'} P(s' | s, a) \Big[R(s, a, s') + \gamma V_\pi(s')\Big].
+\end{aligned}
+\end{equation}
+Bellmanova enačba pravi, da je možno izračunati vrednost vseh stanj $s$, to je, $V(s)$, z rekurzivnimi koraki čez vsa stanja ki so {\em povezana} s stanjem $s$. Izraz povezana je tukaj definiran kot: dva stanja $s$ in $s'$ sta povezana če in samo če je $P(s' | s, a) > 0$ pri vseh $a \in A$. Postopek je ponovljen za vsak $s'$ povezan s $s$ dokler ne pridemo do končnega stanja. Verjetnost $P(s' | s, a)$ določa koliko ima izraz $R(s, a, s') + \gamma V_\pi(s')$ vpliv na vrednost stanja $s$. Pomembno se je zavedati, da potrebujemo prehodno funkcijo $P$ za izračun enačbe. Če je $P$ znan se enačba razširi na sistem enačb, ki ga lahko rešimo enostaven način.
+
+Bellman je opozoril na težavo, ki jo je imenoval {\em prekletstvo dimenzionalnosti (angl. the curse of dimensionality)}, to je število izračunov potrebnih za rešitev sistema enačb se veča eksponentno z številom vhodnih dimenzij. To je dobro znana težava v področju strojnega učenja. Težava je bolj v tem, da se prostor stanj veča eksponentno s številom vhodnih dimenzij, kot pa v Bellmanovem pristopu k rešitvi MDPjev.
+
+{\em Teorem izboljšanja politike (angl. policy imporvement theorem)} navaja, da ko spremenimo pot politike na pot, ki je po vrednostni funkciji boljša, dobimo izboljšano politiko. Ta lastnost je uporabljena v metodah dinamičnega programiranja tako kot tudi v veliki meri drugih algoritmov okrepitvenega učenja, vključno s algoritmi opisanimi v nadaljevanju.
+
+\section{Monte Carlo metode}
+%McKay’s work provides a survey of MC-methods [14].
+Za razliko od DP metod, {\em Monte Carlo (MC)} metode ocenjujejo vrednostno funkcijo na podlagi interakcije z okoljem in ne potrebujejo popolnega znanja o okolju. Monte Carlo metode potrebujejo samo izkušnje -- vzorčna zaporedja stanj, dejanj in nagrad -- ki jih pridobijo med interakcijo z okoljem ali pa iz  simuliranih interakcij z okoljem. Za presenetljivo veliko aplikacij je enostavno simulirati vzorčne epizode čeprav je težko zgraditi celoten ekspliciten model prehodnih verjetnosti, ki jih potrebujejo DP metode.
+
+Monte Carlo metode so način rešitve problema okrepitvenega učenja z povprečenjem donosov stanj iz celotnih epizod. Ker so vrednosti stanj enostavno samo predviden donos -- predvidena nabrana zakasnjena nagrada -- z začetkom v tem stanju, lahko za oceno iz izkušenj preprosto povprečimo pridobljene donose iz tega stanja. Postopa s pridobitvijo večje količine donosov povprečje konvergira k pričakovani vrednosti. Samo po zaključku epizode so ocenjene vrednosti in politika spremenjene. Učenje je torej postopoma iz epizode do epizode in ne iz enega stanja v drugega.
+
+Če želimo oceniti $V_\pi(s)$, vrednost nekega stanja $s$ po politiki $\pi$, imenujemo vsak pojav stanja $s$ v enem od epizod {\em obisk (angl. visit)} stanja $s$. {\em Every-visit MC metoda} oceni $V_\pi(s) kot povprečje donosov po vsakem obisku stanja $s$ v vsaki epizodi, {\em first-visit MC metoda} pa povpreči samo donose po prvem obisku stanja $s$ v vsaki epizodi. Oba algoritma konverkirata k pričakovani vrednosti $V_\pi(s)$, ko gre število obiskov stanja $s$ v neskončnost [SINGH AND SUTTON, 1996 REF].
+
+% algoritem
+
+Pomemben dejavnik v MC metodah je to, da so ocene vsakega stanja neodvisne. Ocena enega stanja ne gradi na oceni kateregakoli drugega stanja, kot velja pri DP metodah. Lastnost grajenja ocene vrednosti enega stanja na podlagi ocene vrednosti sledečih stanj imenujemo {\em zagon (angl. bootstrapping)}.
+
+Rečeno v grobem, Monte Carlo metode počakajo dokler ni celoten donos stanja po obisku znan, preden ga uporabijo za oceno $V_\pi(s_t)$. Enostavno pravilo posodobitve vrednosti stanja na podlagi every-visit MC metode je
+\begin{equation}
+V(s_t) \gets V(s_t) + \alpha[R_t - V(s_t)],
+\end{equation}
+kjer je $R_t$ dejanski donos in $\alpha$ konstanta, ki določa ???.
+
+%If a model is not available, then it is particularly useful to estimate action values rather than state values. With a model, state values alone are sufficient to determine a policy; one simply looks ahead one step and chooses whichever action leads to the best combination of reward and next state, as we did in the chapter on DP. Without a model, however, state values alone are not sufficient. One must explicitly estimate the value of each action in order for the values to be useful in suggesting a policy. Thus, one of our primary goals for Monte Carlo methods is to estimate q∗. To achieve this, we first consider another policy evaluation problem.
+
+%The policy evaluation problem for action values is to estimate qπ(s,a), the expected return when starting in state s, taking action a, and thereafter following policy π. The Monte Carlo methods here are essentially the same as just presented for state values. The every-visit MC method estimates the value of a state–action pair as the average of the returns that have followed visits to the state in which the action was selected. The first-visit MC method averages the returns following the first time in each episode that the state was visited and the action was selected. These methods converge quadratically, as before, to the true expected values as the number of visits to each state–action pair approaches infinity.
+
+\section{Učenje na podlagi časovne razlike - TD(0)} \label{subsection:TD0Prediction} % rename label
+\begin{equation}
+V(s_t) \gets V(s_t) + \alpha[R_{t+1} + \gamma V(s_{t+1}) - V(s_t)]
+\end{equation}
+
+\section{Združitev metod - TD($\lambda$)}
+
+
+
+
+
+%require no model and are fully incremental, but are more complex to analyze
+
+
+%\section{Napovedovanje - vrednost stanja}
+%\subsection{Monte Carlo metode}
+%\subsection{Učenje na podlagi časovne razlike - TD(0)} \label{subsection:TD0Prediction}
+%\subsection{Združitev metod - TD($\lambda$)}
+%\section{Krmiljenje - vrednost dejanja}
+%\subsection{Monte Carlo metode}
+%\subsection{Učenje na podlagi časovne razlike - TD(0)} \label{subsection:TD0Control}
+%\subsection{Združitev metod - TD($\lambda$)}
 
 \chapter{Posploševanje in funkcijska aproksimacija}
 %%%%% PONG GUY HAD MUCH BETTER SUCCESS WITH LINEAR OUPUT NEURON INSTEAD OF OTHER THINGIE.
@@ -551,6 +605,10 @@ Velikokrat je koristno izbrati veliko naključnih dejanj ob začetku učenja in 
 \thispagestyle{fancy}
 \section{Ozadje}
 \section{Učenje}
+%If a model is not available, then it is particularly useful to estimate action values rather than state values. With a model, state values alone are sufficient to determine a policy; one simply looks ahead one step and chooses whichever action leads to the best combination of reward and next state, as we did in the chapter on DP. Without a model, however, state values alone are not sufficient. One must explicitly estimate the value of each action in order for the values to be useful in suggesting a policy. Thus, one of our primary goals for Monte
+￼
+%5.2. MONTE CARLO ESTIMATION OF ACTION VALUES 113 Carlo methods is to estimate q∗. To achieve this, we first consider another policy evaluation problem.
+% i guess i use a partial model! CHECK MODEL DESCRIPTION IN ELEMENTS OF RL IN INTRO!
 \section{Rezultati}
 % graphs, errors
 

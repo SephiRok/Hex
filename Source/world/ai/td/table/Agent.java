@@ -41,7 +41,7 @@ public class Agent implements world.ai.Agent {
 	 * Only guaranteed to converge (in the mean) to the optimal solution if 
 	 * sufficiently small.
 	 * 
-	 * For any fixed policy ¹, the TD algorithm described above has been proved to converge to v¹, in the mean for a constant step-size parameter if it is sufficiently small, and with probability 1 if the step-size parameter decreases according to the usual stochastic approximation conditions (2.7). 
+	 * For any fixed policy ï¿½, the TD algorithm described above has been proved to converge to vï¿½, in the mean for a constant step-size parameter if it is sufficiently small, and with probability 1 if the step-size parameter decreases according to the usual stochastic approximation conditions (2.7). 
 	 * 
 	 * Has to keep decreasing with function approximation to converge (?).
 	 */
@@ -111,8 +111,8 @@ public class Agent implements world.ai.Agent {
 				
 			}
 
-			// Learn (on-policy SARSA-style).
-			// For off-policy Q-style, when non-greedy action is picked, learn
+			// Learn (on-policy value prediction).
+			// For off-policy, when non-greedy action is picked, learn
 			// as if optimal was picked, but set eligibility trace to 0.
 			worldState.getFields()[action].setController(player);
 			learn((float) getStateValue(worldState));
