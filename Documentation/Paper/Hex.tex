@@ -73,6 +73,8 @@
 %% To Do
 % Read Reinforcement Learning: A Survey.
 % Read Deepming research paper.
+% Use only last names of authors in text?
+% Check proper dash sizes.
 
 %% Alternative Titles
 % Strojno učenje: učenje iz interakcije
@@ -269,9 +271,11 @@ Prihod tehnikov oz. zvok je Pavlov imenoval pogojena spodbuda (angl. conditioned
 
 % Make it black and white to fit the style of the rest?
 \begin{figure}[htbp]
+\begin{center}
 \includegraphics[scale=0.226]{WhistleAndDog.jpg}
 \caption{Klasično pogojevanje piščalke namesto hrane za slinjenje pri psu~\cite{IntroductionToPsychology}.}
 \label{figure:WhistleAndDog}
+\end{center}
 \end{figure}
 
 Pogojevanje je evolucijsko koristno, ker omogoča organizmom razviti pričakovanja, ki jim pomagajo v dobrih in slabih okoliščinah. Razvidno je na primeru živali, ki zavoha novo hrano, jo poje in posledično zboli. Če se žival zna naučiti povezave vonja (CS) s hrano (US), se bo znala izogibati določeni hrani že po vonju.
@@ -378,9 +382,11 @@ Cilj algoritmov okrepitvenega učenja je optimizirati vedenje {\em učenca (angl
 Učenec se s svojimi dejanji vede na {\em okolje (angl. environment)}. Česar učenec ni zmožen poljubno spremeniti se smatra kot izven učenca in pripada okolju. Učenec in okolje neprestano vplivata drug na drugega; učenec izbira dejanja in okolje se nanje odziva s predstavitvijo novih {\em stanj (angl. state)} učencu. Okolje ob prehodih na nova stanja oddaja tudi številčne {\em nagrade (angl. reward)}, katere učenec skuša povečati skozi čas. Natančneje, učenec in okolje sta v interakciji v vsakem koraku diskretnega zaporedja časa $t = 0, 1, 2, 3, \dots$. V vsakem koraku učenec prejme predstavitev stanja okolja, $s_t \in S$, kjer je $S$ množica vseh možnih stanj. Glede na stanje se odloči za dejanje, $a_t \in A_s$, iz množice možnih dejanj. En časovni korak pozneje prejme učenec kot posledico svojega dejanja številčno nagrado, $r_{t+1} \in R$, in se znajde v novem stanju, $s_{t+1}$. Slika \ref{figure:AgentEnvironment} prikazuje opisan potek interakcije med učencem in okoljem. Tovrstna opredelitev elementov okrepitvenega učenja ustreza številnim težavam. Ni nujno, da časovni koraki predstavljajo fiksne intervale v resničnem času, lahko se nanašajo na poljubne zaporedne faze odločanja oziroma delovanja. Dejanja so lahko na zelo nizkem nivoju, kot na primer napetosti, ki krmilijo roko robota, ali pa na visokem nivoju, ko gre na primer za izbiranje, v katero šolo se vpisati ali pa kakšno hrano pripraviti za večerjo. Stanja so lahko tudi v zelo različnih predstavitvah, od nizkonivojskih odčitkov senzorjev do abstraktnih simboličnih opisov sob. Na splošno lahko med dejanja sodijo katerekoli odločitve, o katerih se želimo učiti, med stanja pa vse, kar nam lahko pomaga pri teh odločitvah. Edini cilj učenca je, da poveča prejete nagrade čez čas.
 
 \begin{figure}[htbp]
+\begin{center}
 \includegraphics[scale=1.0]{AgentEnvironment.png}
 \caption{Interakcija med učencem in njegovim okoljem~\cite{ReinforcementLearningAnIntroduction}.}
 \label{figure:AgentEnvironment}
+\end{center}
 \end{figure}
 
 %% policy
@@ -446,13 +452,13 @@ na odziv okolja v času $t+1$, na dejanje v času $t$ in za vse vrednosti $r$, $
 \begin{equation} \label{equation:MarkovCompleteProbabilityDistribution}
 Pr\{r_{t+1} = r, s_{t+1} = s' | s_t, a_t\},
 \end{equation}
-za vse $r$, $s'$, $s_t$ in $a_t$. Povedano drugače, signal stanja ima {\em Markovo lastnost} in je {\em Markovo stanje}, če in samo če je (\ref{equation:GeneralCompleteProbabilityDistribution}) enako (\ref{equation:MarkovCompleteProbabilityDistribution}) za vse $s'$, $r$, in preteklosti $s_0, a_0, r_1, \dots, s_{t-1}, a_{t-1}, r_t, s_t, a_t$. V tem primeru pravimo, da ima celotno okolje in naloga Markovo lastnost.
+za vse $r$, $s'$, $s_t$ in $a_t$. Povedano drugače, signal stanja ima {\em Markovo lastnost} in je {\em Markovo stanje}, če in samo če je \eqref{equation:GeneralCompleteProbabilityDistribution} enako \eqref{equation:MarkovCompleteProbabilityDistribution} za vse $s'$, $r$, in preteklosti $s_0, a_0, r_1, \dots, s_{t-1}, a_{t-1}, r_t, s_t, a_t$. V tem primeru pravimo, da ima celotno okolje in naloga Markovo lastnost.
 
-Če ima okolje Markovo lastnost, lahko iz enostavne dinamike predhodnega stanja (\ref{equation:MarkovCompleteProbabilityDistribution}) napovedujemo naslednje stanje in naslednjo nagrado za trenutno stanje in dejanje. V tem okolju lahko napovedujemo vsa stanja in nagrade v prihodnosti enako dobro kot bi lahko s popolno preteklostjo do trenutnega časa. Sledi enako, da je najboljša politika izbire dejanj v Markovem stanju enako dobra kot najboljša politika izbire dejanj s trenutnim stanjem in popolno zgodovino.
+Če ima okolje Markovo lastnost, lahko iz enostavne dinamike predhodnega stanja \eqref{equation:MarkovCompleteProbabilityDistribution} napovedujemo naslednje stanje in naslednjo nagrado za trenutno stanje in dejanje. V tem okolju lahko napovedujemo vsa stanja in nagrade v prihodnosti enako dobro kot bi lahko s popolno preteklostjo do trenutnega časa. Sledi enako, da je najboljša politika izbire dejanj v Markovem stanju enako dobra kot najboljša politika izbire dejanj s trenutnim stanjem in popolno zgodovino.
 
 Čeprav Markova lastnost velikokrat ne drži popolnoma v nalogah okrepitvenega učenja, je vseeno zelo primerno razmišljati o stanju v okrepitvenem učenju kot približnemu Markovemu stanju, saj name omogoča nam razmišljati o odločitvah in vrednostih na podlagi trenutnega stanja.
 
-Naloga okrepitvenega učenja, ki izpolnjuje Markovo lastnost, se imenuje {\em Markov proces odločanja (angl. MDP -- Markov decision process)}. Če gre pri prostoru stanj in dejanj za končen prostor, temu pravimo {\em končen Markov proces odločanja (angl. finite MDP)}.
+Naloga okrepitvenega učenja, ki izpolnjuje Markovo lastnost, se imenuje {\em Markov proces odločanja (angl. Markov decision process -- MDP)}. Če gre pri prostoru stanj in dejanj za končen prostor, temu pravimo {\em končen Markov proces odločanja (angl. finite MDP)}.
 
 Končen MDP je torej popolnoma definiran s:
 \begin{itemize}
@@ -469,36 +475,36 @@ R(s, a, s') = E[r_{t+1} | s_t = s, a_t = a, s_{t+1} = s'].
 \end{itemize}
 
 \section{Diskretno okrepitveno učenje}
-Ta razdelek povzema okrepitveno učenje \cite{ReinforcementLearningAnIntroduction} v diskretnem primeru, v katerem je prostor stanj okolja diskreten in končen, čas pa je razdeljen v diskretne korake.
+Ta razdelek povzema okrepitveno učenje v diskretnem primeru, v katerem je prostor stanj okolja diskreten in končen, čas pa je razdeljen v diskretne korake.
 
-Politika $\pi$ slika stanje v dejanje, kot je omenjeno v razdelku \ref{section:ReinforcementLearningElements}. Za končne MDP lahko definiramo tudi {\em optimalno politiko (angl. optimal policy)} $\pi^\star$. Naj bosta $\pi$ in $\pi^\star$ politiki in $V^\pi$ vrednostna funkcija politike $\pi$ ter $V^{\pi^\star}$ vrednostna funkcija politike $\pi^\star$. Politika $\pi^\star$ je optimalna, če ima vrednostno funkcijo  $V^{\pi^\star}$ z naslednjo lastnostjo
+Politika $\pi$ slika stanje v dejanje, kot je omenjeno v razdelku \ref{section:ReinforcementLearningElements}. Za končne MDP lahko definiramo tudi {\em optimalno politiko (angl. optimal policy)} $\pi^\star$. Naj bosta $\pi$ in $\pi^\star$ politiki in $V_\pi$ vrednostna funkcija politike $\pi$ ter $V_{\pi^\star}$ vrednostna funkcija politike $\pi^\star$. Politika $\pi^\star$ je optimalna, če ima vrednostno funkcijo  $V_{\pi^\star}$ z naslednjo lastnostjo
 \begin{equation}
-V^{\pi^\star}(s) >= V^\pi(s), \forall s,
+V_{\pi^\star}(s) >= V_\pi(s), \forall s,
 \end{equation}
 za vse možne politike $\pi$.
 
 % episodic vs continuing tasks, returns, unified notation
 Kar je bilo do sedaj navedeno kot pričakovana dolgoročna nagrada, se pogosto imenuje {\em pričakovan donos (angl. expected return)}. Formalna definicija donosa nekega stanja v času $t$ za poslednje nagrade $r_{t+1}, r_{t+2}, r_{t+3} \dots$ je
 \begin{equation}
-R_t = r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \dots = \sum_{k=0}^{T-t-1} \gamma^k r_{t+k+1},
+R_t = r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \dots + \gamma^{T-t-1} r_T = \sum_{k=0}^{T-t-1} \gamma^k r_{t+k+1},
 \end{equation}
 kjer je $0 \le \gamma \le 1$. Donos je vsota vseh nadaljnjih nagrad, ki jih pričakujemo po času $t$ do končnega stanja v času $T$. V končnem stanju definiramo, da je prehod možen samo v isto stanje in nagrada ob prehodu vedno ničelna. S tem lahko poenotimo {\em epizodične} in {\em neskončne naloge} z uvedbo konstante $\gamma$, ki predstavlja {\em faktor popuščanja (angl. discount factor)}, s tem da je lahko $T = \infty$ ali $\gamma = 1$, ampak ne oboje hkrati. Pri neskončnih nalogah, ki jih ne moremo razdeliti na epizode, je $T = \infty$, saj se nikoli ne končajo, hkrati pa mora biti $\gamma < 1$, drugače lahko donos postane neskončen. Faktor popuščanja določa, koliko želimo upoštevati prihodnje nagrade. Z $\gamma = 0$ se osredotoči samo za trenutno nagrado. Pri epizodičnih nalogah, kot so igre, je navadno $\gamma = 1$.
 
-Za končne MDP lahko {\em vrednost stanja $s$ po politiki $\pi$, t. i. vrednostno funkcijo $V^\pi(s)$}, definiramo kot pričakovan donos iz stanja $s$ z nadaljnjim upoštevanjem politike $\pi$, formalno:
+Za končne MDP lahko {\em vrednost stanja $s$ po politiki $\pi$, t. i. vrednostno funkcijo $V_\pi(s)$}, definiramo kot pričakovan donos iz stanja $s$ z nadaljnjim upoštevanjem politike $\pi$, formalno:
 \begin{equation}
-V^\pi(s) = E_\pi[R_t | s_t = s] = E_\pi\Bigg[\sum_{k=0}^\infty \gamma^k r_{t+k+1} \Bigg| s_t = s\Bigg],
+V_\pi(s) = E_\pi[R_t | s_t = s] = E_\pi\left[\sum_{k=0}^\infty \gamma^k r_{t+k+1} \middle| s_t = s\right],
 \end{equation}
 kjer $E_\pi[.]$ predstavlja pričakovano vrednostjo, če učenec sledi politiki $\pi$.
 
-Podobno lahko {\em vrednost dejanja $a$ v stanju $s$} po politiki $\pi$, t. i. vrednostno funkcijo dejanj $Q^\pi(s, a)$, definiramo kot pričakovan donos iz stanja $s$ ob dejanju $a$ in nadaljnjim upoštevanjem politike $\pi$, formalno:
+Podobno lahko {\em vrednost dejanja $a$ v stanju $s$} po politiki $\pi$, t. i. vrednostno funkcijo dejanj $Q_\pi(s, a)$, definiramo kot pričakovan donos iz stanja $s$ ob dejanju $a$ in nadaljnjim upoštevanjem politike $\pi$, formalno:
 \begin{equation}
-Q^\pi(s, a) = E_\pi[R_t | s_t = s, a_t = a] = E_\pi\Bigg[\sum_{k=0}^\infty \gamma^k r_{t+k+1} \Bigg| s_t = s, a_t = a\Bigg].
+Q_\pi(s, a) = E_\pi[R_t | s_t = s, a_t = a] = E_\pi\left[\sum_{k=0}^\infty \gamma^k r_{t+k+1} \middle| s_t = s, a_t = a\right].
 \end{equation}
 
 \section{Raziskovanje in izkoriščanje}
 Eden od izzivov okrepitvenega učenja, ki jih ne najdemo v ostalih oblikah strojnega učenja, je kompromis med raziskovanjem (angl. exploration) in izkoriščanjem (angl. exploitation). Med učenjem, ko učenec uporablja približek optimalne vrednostne funkcije za svoje vedenje, mu to omogoča pridobiti največjo znano nagrado, ampak nikjer ni zagotovil, da je ta znana politika tudi v splošnem najboljša. Boljša rešitev bi mogoče lahko bila najdena, če bi učenec imel dovoljenje raziskovati dejanja, ki jih še ni poizkusil.
 
-Spodaj opisana $\epsilon$-požrešna izbira dejanj je zelo preprosta in se v praksi pogosto uporablja. Obstaja še veliko drugih metod, nekaterih bolj kompleksnih od drugih. Več primerov je v delu Thrun \cite{TheRoleOfExplorationInLearningControl} ter Sutton in Barto \cite{ReinforcementLearningAnIntroduction}.
+Spodaj opisana $\epsilon$-požrešna izbira dejanj je zelo preprosta in se v praksi pogosto uporablja. Obstaja še veliko drugih metod, nekaterih bolj kompleksnih od drugih. Več primerov je v delu Thrun~\cite{TheRoleOfExplorationInLearningControl} ter Sutton in Barto~\cite{ReinforcementLearningAnIntroduction}.
 
 \subsection{$\epsilon$-požrešna izbira dejanj}
 Eden izmed najbolj enostavnih pristopov k izbiri dejanja za ravnovesje med raziskovanjem in izkoriščanjem je uvod parametra $\epsilon$, ki določi verjetnost izbire naključnega dejanja. Po tej metodi učenec ob vsakem koraku izbere naključno dejanje z verjetnostjo $\epsilon$ in požrešno dejanje z verjetnostjo $1 - \epsilon$.
@@ -521,63 +527,196 @@ Velikokrat je koristno izbrati veliko naključnih dejanj ob začetku učenja in 
 \chapter{Tabularne rešitve}
 \thispagestyle{fancy}
 % RL Intro has good bibliography sections for references.
-V tem poglavju so opisani ključni algoritmi okrepitvenega učenja v svojih enostavnih oblikah -- ko je prostor stanj in dejanj dovolj majhen za predstavitev ocenjene vrednostne funkcije s poljem ali tabelo. V teh primerih znajo algoritmi najti optimalno vrednostno funkcijo in optimalno politiko vedenja. To je v nasprotju z aproksimacijskimi metodami opisanimi v naslednjem poglavju, ki znajo najti le približne rešitve, ampak jih lahko uporabimo učinkovito na veliko večjih problemih.
-
-\section{Metoda ocenjevanja vrednosti v posamezni situaciji, naloga je dolga en časovni whatever}
-
+V tem poglavju so opisani ključni algoritmi okrepitvenega učenja v svojih enostavnih oblikah -- ko je prostor stanj in dejanj dovolj majhen za predstavitev ocenjene vrednostne funkcije s poljem ali tabelo. V teh primerih znajo algoritmi najti optimalno vrednostno funkcijo in optimalno politiko vedenja. To je v nasprotju z aproksimacijskimi metodami opisanimi v naslednjem poglavju, katere znajo najti le približne rešitve, ampak jih lahko uporabimo učinkovito na veliko večjih problemih.
 
 \section{Dinamično programiranje}
-Leta 1957 je Bellman [REF] objavil ključen članek, ko je uvedel izraz {\em dinamično programiranje (angl. DP -- dynamic programming)}, ki se nanaša na zbirko algoritmov, ki jih lahko uporabimo za izračunati optimalno politiko za MDP. Algoritmi dinamičnega programiranja potrebujejo popoln in natančen model okolja za delovanje. Vsi se nanašajo na Bellmanovo enačbo
-\begin{equation}
-\begin{aligned}
-V_\pi(s) &= E_\pi[R_t | s_t = s]
-\\ &= E_\pi\Bigg[\sum_{k=0}^\infty \gamma^k r_{t+k+1} \Bigg| s_t = s\Bigg]
-\\ &= E_\pi\Bigg[r_{t+1} + \gamma \sum_{k=0}^\infty \gamma^k r_{t+k+2} \Bigg| s_t = s \Bigg]
-\\ &= \sum_a \pi(a | s) \sum_{s'} P(s' | s, a) \Bigg[R(s, a, s') + \gamma E_\pi\Bigg[\sum_{k=0}^\infty \gamma^k r_{t+k+2} \Bigg| s_{t+1} = s' \Bigg]\Bigg]
-\\ &= \sum_a \pi(a | s) \sum_{s'} P(s' | s, a) \Big[R(s, a, s') + \gamma V_\pi(s')\Big].
-\end{aligned}
-\end{equation}
+Richard Bellman je avtor {\em dinamičnega programiranja (angl. dynamic programming -- DP)}, izraza, ki se nanaša na zbirko algoritmov, ki jih lahko uporabimo za izračunati optimalno politiko za MDP. Algoritmi dinamičnega programiranja potrebujejo popoln in natančen model okolja za delovanje. Vsi se nanašajo na Bellmanovo enačbo \cite{OnTheTheoryOfDynamicProgramming}
+\begin{align}
+V_\pi(s) &= E_\pi[R_t | s_t = s] \nonumber \\
+&= E_\pi\left[\sum_{k=0}^\infty \gamma^k r_{t+k+1} \middle| s_t = s\right] \nonumber \\
+&= E_\pi\left[r_{t+1} + \gamma \sum_{k=0}^\infty \gamma^k r_{t+k+2} \middle| s_t = s \right] \nonumber \\
+&= \sum_a \pi(a | s) \sum_{s'} P(s' | s, a) \left[R(s, a, s') + \gamma E_\pi\left[\sum_{k=0}^\infty \gamma^k r_{t+k+2} \middle| s_{t+1} = s' \right]\right] \nonumber \\
+&= \sum_a \pi(a | s) \sum_{s'} P(s' | s, a) \left[R(s, a, s') + \gamma V_\pi(s')\right]. \label{equation:Bellman}
+\end{align}
 Bellmanova enačba pravi, da je možno izračunati vrednost vseh stanj $s$, to je, $V(s)$, z rekurzivnimi koraki čez vsa stanja ki so {\em povezana} s stanjem $s$. Izraz povezana je tukaj definiran kot: dva stanja $s$ in $s'$ sta povezana če in samo če je $P(s' | s, a) > 0$ pri vseh $a \in A$. Postopek je ponovljen za vsak $s'$ povezan s $s$ dokler ne pridemo do končnega stanja. Verjetnost $P(s' | s, a)$ določa koliko ima izraz $R(s, a, s') + \gamma V_\pi(s')$ vpliv na vrednost stanja $s$. Pomembno se je zavedati, da potrebujemo prehodno funkcijo $P$ za izračun enačbe. Če je $P$ znan se enačba razširi na sistem enačb, ki ga lahko rešimo enostaven način.
 
-Bellman je opozoril na težavo, ki jo je imenoval {\em prekletstvo dimenzionalnosti (angl. the curse of dimensionality)}, to je število izračunov potrebnih za rešitev sistema enačb se veča eksponentno z številom vhodnih dimenzij. To je dobro znana težava v področju strojnega učenja. Težava je bolj v tem, da se prostor stanj veča eksponentno s številom vhodnih dimenzij, kot pa v Bellmanovem pristopu k rešitvi MDPjev.
+Bellman je opozoril na težavo, da se število izračunov potrebnih za rešitev sistema enačb se veča eksponentno z številom vhodnih dimenzij. Poimenoval jo je {\em prekletstvo dimenzionalnosti (angl. the curse of dimensionality)}. To je dobro znana težava v področju strojnega učenja, izvira pa iz dejstva, da se prostor stanj veča eksponentno s številom vhodnih dimenzij.
 
 {\em Teorem izboljšanja politike (angl. policy imporvement theorem)} navaja, da ko spremenimo pot politike na pot, ki je po vrednostni funkciji boljša, dobimo izboljšano politiko. Ta lastnost je uporabljena v metodah dinamičnega programiranja tako kot tudi v veliki meri drugih algoritmov okrepitvenega učenja, vključno s algoritmi opisanimi v nadaljevanju.
 
 \section{Monte Carlo metode}
-%McKay’s work provides a survey of MC-methods [14].
-Za razliko od DP metod, {\em Monte Carlo (MC)} metode ocenjujejo vrednostno funkcijo na podlagi interakcije z okoljem in ne potrebujejo popolnega znanja o okolju. Monte Carlo metode potrebujejo samo izkušnje -- vzorčna zaporedja stanj, dejanj in nagrad -- ki jih pridobijo med interakcijo z okoljem ali pa iz  simuliranih interakcij z okoljem. Za presenetljivo veliko aplikacij je enostavno simulirati vzorčne epizode čeprav je težko zgraditi celoten ekspliciten model prehodnih verjetnosti, ki jih potrebujejo DP metode.
+Za razliko od DP metod, {\em Monte Carlo (MC)} metode ocenjujejo vrednostno funkcijo na podlagi interakcije z okoljem in ne potrebujejo popolnega znanja o okolju. Monte Carlo metode potrebujejo samo izkušnje -- vzorčna zaporedja stanj, dejanj in nagrad -- ki jih pridobijo med interakcijo z okoljem ali pa iz  simuliranih interakcij z okoljem. Za presenetljivo veliko aplikacij je enostavno simulirati vzorčne epizode, čeprav je težko zgraditi celoten ekspliciten model prehodnih verjetnosti, ki jih potrebujejo DP metode.
 
 Monte Carlo metode so način rešitve problema okrepitvenega učenja z povprečenjem donosov stanj iz celotnih epizod. Ker so vrednosti stanj enostavno samo predviden donos -- predvidena nabrana zakasnjena nagrada -- z začetkom v tem stanju, lahko za oceno iz izkušenj preprosto povprečimo pridobljene donose iz tega stanja. Postopa s pridobitvijo večje količine donosov povprečje konvergira k pričakovani vrednosti. Samo po zaključku epizode so ocenjene vrednosti in politika spremenjene. Učenje je torej postopoma iz epizode do epizode in ne iz enega stanja v drugega.
 
-Če želimo oceniti $V_\pi(s)$, vrednost nekega stanja $s$ po politiki $\pi$, imenujemo vsak pojav stanja $s$ v enem od epizod {\em obisk (angl. visit)} stanja $s$. {\em Every-visit MC metoda} oceni $V_\pi(s) kot povprečje donosov po vsakem obisku stanja $s$ v vsaki epizodi, {\em first-visit MC metoda} pa povpreči samo donose po prvem obisku stanja $s$ v vsaki epizodi. Oba algoritma konverkirata k pričakovani vrednosti $V_\pi(s)$, ko gre število obiskov stanja $s$ v neskončnost [SINGH AND SUTTON, 1996 REF].
+Če želimo oceniti $V_\pi(s)$, vrednost nekega stanja $s$ po politiki $\pi$, imenujemo vsak pojav stanja $s$ v enem od epizod {\em obisk (angl. visit)} stanja $s$. {\em Every-visit MC metoda} oceni $V_\pi(s)$ kot povprečje donosov po vsakem obisku stanja $s$ v vsaki epizodi, {\em first-visit MC metoda} pa povpreči samo donose po prvem obisku stanja $s$ v vsaki epizodi. Oba algoritma po pravilu o velikih številih konvergirata k pričakovani vrednosti $V_\pi(s)$, ko gre število obiskov stanja $s$ v neskončnost~\cite{ReinforcementLearningWithReplacingEligibilityTraces}.
 
-% algoritem
+% Algoritem?
 
-Pomemben dejavnik v MC metodah je to, da so ocene vsakega stanja neodvisne. Ocena enega stanja ne gradi na oceni kateregakoli drugega stanja, kot velja pri DP metodah. Lastnost grajenja ocene vrednosti enega stanja na podlagi ocene vrednosti sledečih stanj imenujemo {\em zagon (angl. bootstrapping)}.
+Naivna implementacija povprečenja donosov je hranitev vsakega prejetega donosa $R_t$ za vsako stanje. Nato, ko potrebujemo oceno vrednosti stanja, lahko to enostavno izračunamo z
+\begin{equation}
+V_t(s) = \frac{R_1 + R_2 + \dots + R_{K_s}}{K_s},
+\end{equation}
+kjer so $R_1, \dots, R_{K_s}$ vsi prejeti donosi v stanju $s$ pred časom $t$ in $K$ število prejetih donosov. Problem pri tej preprosti implementaciji je, da se spominske in računske zahteve večajo čez čas brez meje. Vsak nov donos po obisku stanja potrebuje več spomina za shrambo in izračun $V_t(s)$ potrebuje več časa.
 
-Rečeno v grobem, Monte Carlo metode počakajo dokler ni celoten donos stanja po obisku znan, preden ga uporabijo za oceno $V_\pi(s_t)$. Enostavno pravilo posodobitve vrednosti stanja na podlagi every-visit MC metode je
+% Running average.
+Takšna implementacija seveda ni potrebna. Enostavno je oblikovati postopno pravilo posodobitve, ki potrebuje konstanten čas in spomin. Naj bo $V_k$ za neko stanje ocena vrednosti za $k$-ti donos, to je povprečje prvih $k - 1$ donosov. Povprečje vseh $k$ donosov lahko potem izračunamo z
+\begin{align} \label{equation:RunningAverage}
+V_{k+1} &= \frac{1}{k} \sum_{i=1}^k R_i \nonumber \\
+&= \frac{1}{k} \left(R_k + \sum_{i=1}^{k-1} R_i\right) \nonumber \\
+&= \frac{1}{k} \left(R_k + (k - 1) V_k + V_k - V_k\right) \nonumber \\
+&= \frac{1}{k} \left(R_k + kV_k - V_k\right) \nonumber \\
+&= V_k + \frac{1}{k} \left[R_k - V_k\right],
+\end{align}
+kar drži tudi za $k = 1$.
+
+% General update rule.
+To postopno pravilo posodobitve \eqref{equation:RunningAverage} je oblika, ki se pogosto uporablja v algoritmih okrepitvenega učenja, ki svoje ocene posodabljajo čez čas. Splošna oblika tega pravila je
+\begin{equation}
+NovaOcena \leftarrow StaraOcena + VelikostKoraka \left[Cilj - StaraOcena\right].
+\end{equation}
+Izraz $\left[Cilj - StaraOcena\right]$ je {\em napaka (angl. error)} v oceni vrednosti. Napako se zniža s korakom proti {\em cilju (angl. target)}. Cilj predstavlja zaželeno smer v katero bi se radi premaknili, v zgornjem primeru je to $k$-ti donos.
+
+% Steo-size aka learning rate parameter.
+Parameter {\em velikosti koraka (angl. step-size)} se v zgornji metodi spreminja v vsakem časovnem koraku ($\frac{1}{k}$). V literaturi je pogosto zaznamovan z $\alpha$ in je v intervalu ${[0, 1]}$. Imenovan je tudi {\em stopnja učenja (angl. learning rate)}, saj določa hitrost s katerim se pomaknemo proti ciljni vrednosti. V praksi je velikokrat konstanten ali pa se niža čez čas.
+
+Enostavno pravilo posodobitve vrednosti nekega stanja $s_t$ na podlagi every-visit MC metode lahko torej opišemo z
 \begin{equation}
 V(s_t) \gets V(s_t) + \alpha[R_t - V(s_t)],
 \end{equation}
-kjer je $R_t$ dejanski donos in $\alpha$ konstanta, ki določa ???.
+kjer je $R_t$ dejanski donos. Monte Carlo metode počakajo dokler ni znan celoten donos stanja, preden ga uporabijo za oceno $V(s_t)$ -- počakajo do konca epizode.
+
+Pomemben dejavnik pri MC metodah je to, da so ocene vsakega stanja neodvisne. Ocena enega stanja ne gradi na oceni kateregakoli drugega stanja, kot velja pri DP metodah. Lastnost grajenja ene ocene vrednosti na podlagi druge ocene vrednosti imenujemo {\em zagon (angl. bootstrapping)}.
 
 %If a model is not available, then it is particularly useful to estimate action values rather than state values. With a model, state values alone are sufficient to determine a policy; one simply looks ahead one step and chooses whichever action leads to the best combination of reward and next state, as we did in the chapter on DP. Without a model, however, state values alone are not sufficient. One must explicitly estimate the value of each action in order for the values to be useful in suggesting a policy. Thus, one of our primary goals for Monte Carlo methods is to estimate q∗. To achieve this, we first consider another policy evaluation problem.
 
 %The policy evaluation problem for action values is to estimate qπ(s,a), the expected return when starting in state s, taking action a, and thereafter following policy π. The Monte Carlo methods here are essentially the same as just presented for state values. The every-visit MC method estimates the value of a state–action pair as the average of the returns that have followed visits to the state in which the action was selected. The first-visit MC method averages the returns following the first time in each episode that the state was visited and the action was selected. These methods converge quadratically, as before, to the true expected values as the number of visits to each state–action pair approaches infinity.
 
-\section{Učenje na podlagi časovne razlike - TD(0)} \label{subsection:TD0Prediction} % rename label
+Z delnim modelom okolja so vrednostne funkcije zadostne za izbiro dejanj; enostavno pogledamo naprej v katero stanje nas dejanje pelje. Brez modela pa vrednostne funkcije niso zadostne za krmiljenje. Eksplicitno moramo oceniti vrednost vsakega dejanja v vsakem stanju, da se bomo znali vesti. Ocena vrednostne funkcije dejanj, $Q(s,a)$ je v glavnem enaka, kot za $V(s)$:
 \begin{equation}
-V(s_t) \gets V(s_t) + \alpha[R_{t+1} + \gamma V(s_{t+1}) - V(s_t)]
+Q(s_t, a_t) \gets Q(s_t, a_t) + \alpha[R_t - Q(s_t, a_t)].
 \end{equation}
 
+MacKay~\cite{IntroductionToMonteCarloMethods} povzema Monte Carlo metode v splošnem, Sutton in Barto~\cite{ReinforcementLearningAnIntroduction} pa v aplikaciji na okreptivenem učenju.
+
+\section{Učenje na podlagi časovne razlike - TD(0)} \label{subsection:TD0Prediction} % rename label
+{\em Učenje na podlagi časovne razlike (angl. temporal-difference -- TD)} je ena izmed osrednjih idej v okrepitvenem učenju. Medtem, ko Monte Carlo metode čakajo do konca epizode za izračun posodobitve $V(s_t)$, TD metode počakajo le en časovni korak. V času $t+1$ že tvorijo ciljno vrednosti in jo skupaj z zaznano nagrado $r_{t+1}$ in oceno $V(s_{t+1})$ uporabijo za posodobitev ocene prejšnjega stanja $V(s_t)$. Najenostavnejša TD metoda, znana kot {\em TD(0)} je
+\begin{equation}
+V(s_t) \gets V(s_t) + \alpha[r_{t+1} + \gamma V(s_{t+1}) - V(s_t)].
+\end{equation}
+Pri posodobitvi MC metode je ciljna vrednost $R_t$, pri TD pa $r_{t+1} + \gamma V_t(s_{t+1})$. Cilj posodobitvenega pravila za TD je vzet neposredno iz Bellmanove enačbe \eqref{equation:Bellman}.
+
+Tako kot DP metoda, tudi TD uporablja zagonsko lastnost grajenja ocene vrednosti prejšnjega stanja na podlagi ocene vrednosti trenutnega stanja. Hkrati pa ima TD tudi lastnost MC metode, da ne potrebuje modela okolja. Ključna prednost TD metod je, da posodabljajo ocene iz koraka v korak napram MC metodam, ki morajo počakati na celoten donos, še posebej ko so epizode dolge.
+
+% Algoritem TD(0).
+
+Število 0 v TD(0) se nanaša na dejstvo, da algoritem posodobi samo vrednost enega prejšnjega stanja. Obstaja seveda tudi zelo podoben algoritem za oceno vrednosti dejanj:
+\begin{equation}
+Q(s_t, a_t) \gets Q(s_t, a_t) + \alpha[r_{t+1} + \gamma Q(s_{t+1}, a_{t+1}) - Q(s_t, a_t)],
+\end{equation}
+z imenom {\em SARSA(0) $(State_t, Action_t, Reward_{t+1}, State_{t+1}, Action_{t+1})$}.
+
+% Zelo pomembna metoda je tudi Watkinsov {\em Q-learning} [REF], ki se direktno približuje optimalni vrednosti funkcij dejanj, neodvisno od politike vedenja:
+%\begin{equation}
+%Q(s_t, a_t) \gets Q(s_t, a_t) + \alpha[r_{t+1} + \gamma \max_a Q(s_{t+1}, a) - Q(s_t, a_t)].
+%\end{equation}
+
+Obe metodi konvergirata k optimalni politiki, če je $\alpha$ dovolj majhen oziroma se zmanjšuje čez čas in so vsa stanja oziroma vsi pari (stanje, dejanje) obiskani neskončno krat [REF TD, REF SARSA].
+
 \section{Združitev metod - TD($\lambda$)}
+TD(0) glede na obiskano stanje posodobi samo vrednost prejšnjega stanja. Novost pri {\em TD($\lambda$)} algoritmu je sposobnost razširiti znanje nazaj v poljubno število vrednosti prejšnjih stanj.
 
+Za dosego tega je uveden faktor $\lambda$ v intervalu ${[0, 1]}$, ki določa koliko daleč nazaj se znanje širi -- koliko prejšnjih stanj bomo posodabljali, oziroma s kolikšnim vplivom jih bomo posodabljali. Z $\lambda = 0$ dobimo TD(0) metodo (znanje se razširi samo na prejšnje stanje), z $\lambda = 1$ pa MC metodo (znanje se razširi na vsa prejšnja stanja). TD($\lambda$) predstavlja most med MC in TD(0) metodo. 
 
+Splošna ciljna vrednost za TD($\lambda$) je
+\begin{equation}
+R_t^\lambda = (1 - \lambda) \sum_{n=1}^\infty \lambda^{n-1} R_t^{(n)},
+\end{equation}
+kjer je donos $R_t^{(n)}$ razširjen iz ocene vrednosti enega koraka v prihodnosti
+\begin{equation}
+R_t^{(1)} = r_{t+1} + \gamma V(s_{t+1})
+\end{equation}
+na oceno vrednosti n-tega koraka v prihodnosti
+\begin{equation}
+R_t^{(n)} = r_{t+1} + \gamma r_{t+2} + \gamma^2 + \dots + \gamma^{n-1} r_{t+n} + \gamma^n V(s_{t+n}).
+\end{equation}
+Pri MC metodi je, za primerjavo, uporabljen točen donos
+\begin{equation}
+R_t = r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \dots + \gamma^{T-t-1} r_T.
+\end{equation}
+Ciljna vrednost predstavlja povprečje donosov za vse različne dolžine korakov, kjer je vsak donos utežen z $\lambda^{n-1}$. Normalizacijski faktor $1 - \lambda$ zagotovi, da se uteži seštejejo v vsoto~$1$. Donos enega koraka dobi največjo utež, $1 - \lambda$; donos drugega koraka dobi drugo največjo utež $(1 - \lambda)\lambda$; donos tretjega koraka dobi utež $(1 - \lambda)\lambda^2$ in tako dalje. V vsakem koraku se utež zniža za $\lambda$.
 
+Splošno pravilo posodobitve vrednostne funkcije lahko torej podamo z
+\begin{equation}
+V(s_t) \gets V(s_t) + \alpha[R_t^\lambda - V(s_t)].
+\end{equation}
 
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[scale=0.75]{LambdaReturn.png}
+%\caption{Diagram uteži za TD($\lambda$)~\cite{ReinforcementLearningAnIntroduction}.}
+%\label{figure:LambdaReturn}
+%\end{center}
+%\end{figure}
 
-%require no model and are fully incremental, but are more complex to analyze
+Za praktično implementacijo algoritma potrebujemo dodatno spremenljivko za vsako stanje, ki določa kolikšen vpliv bo imelo neko prihodnje dejanje na vrednost tega stanja. Te spremenljivke imenujemo {\em sledi primernosti (angl. eligibility traces)} $e$. Posodabljamo jih po pravilu {\em akumulacijskih sledi (angl. accumulating traces)}
+\begin{equation}
+e_t(s) = \left\{
+\begin{array}{l l}
+\gamma \lambda e_{t-1}(s) & \quad \textrm{če $s \ne s_t$};\\
+\gamma \lambda e_{t-1}(s) + 1 & \quad \textrm{če $s = s_t$},
+\end{array}
+\right.
+\end{equation}
+ali pa {\em zamenjavnih sledi (angl. replacing traces)}
+\begin{equation}
+e_t(s) = \left\{
+\begin{array}{l l}
+\gamma \lambda e_{t-1}(s) & \quad \textrm{če $s \ne s_t$};\\
+1 & \quad \textrm{če $s = s_t$},
+\end{array}
+\right.
+\end{equation}
+kjer je $\gamma$ faktor popuščanja kot je vpisano v predhodnem razdelku. Na vsakem koraku se sledi primernosti znižajo za $\gamma \lambda$, sled obiskanega stanja pa se zviša za 1 ali pa ponastavi na 1. Parameter $\lambda$ je zaradi tega imenovan tudi {\em parameter popuščanja sledi (angl. trace-decay parameter)}. Z akumulacijskimi sledmi se sled poveča za $1$ ob vsakem obisku, kar jo lahko dvigne nad vrednostjo $1$, medtem ko se pri zamenjavnih sled vedno ponastavi na 1. V poljubnem času sledi določajo katera stanja so bila nedavno obiskana. $TD(1)$ z akumulacijskimi sledmi je logično povezan z every-visit MC, $TD(1)$ z zamenjavnimi sledmi, pa z first-visit MC. Čeprav je razlika majhna, lahko zamenjavne sledi pripeljejo do znatno hitrejšega učenja~\cite{ReinforcementLearningAnIntroduction}.
 
+Celoten algoritem $TD(\lambda)$ za napoved vrednosti z zamenjavnimi sledmi je predstavljen v tabeli \ref{table:TDLambda}. Napaka v oceni vrednosti pri TD metodah je
+\begin{equation}
+\delta_t = r_{t+1} + \gamma V_t(s_{t+1}) - V_t(s_t)
+\end{equation}
+katera se prenese na posodobitve vseh vrednosti stanj, ki imajo neničelne sledi:
+\begin{equation}
+\Delta V_t(s) = \alpha \delta_t e_t(s), \quad \forall s \in S.
+\end{equation}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{| l |}
+\hline
+Inicializiraj $V(s)$ poljubno \\
+Za vsako epizodo: \\
+\quad Inicializiraj $e(s) = 0$, $\forall s \in S$ \\
+\quad Inicializiraj $s$ \\
+\quad Za vsak korak: \\
+\quad \quad $a \gets$ dejanje po $\pi$ za $s$ \\
+\quad \quad Izvedi dejanje $a$, opazuj nagrado $r$ in naslednje stanje $s'$ \\
+\quad \quad $\delta \gets r + \gamma V(s') - V(s)$ \\
+\quad \quad $e(s) \gets 1$ \\
+\quad \quad Za vsak $s \in S$: \\
+\quad \quad \quad $V(s) \gets V(s) + \alpha \delta e(s)$ \\
+\quad \quad \quad $e(s) \gets V(s) + \gamma \lambda e(s)$ \\
+\quad \quad $s \gets s'$ \\
+\quad dokler ni $s$ končno stanje \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Algoritem TD($\lambda$) z zamenjavnimi sledmi.}
+\label{table:TDLambda}
+\end{table}
+
+TD algoritem za krmiljenje {\em SARSA($\lambda$)} je iz TD($\lambda$) razvit preprosto z zamenjavo $V_t(s)$ za $Q_t(s, a)$ in $e_t(s)$ za $e_t(s,a)$, podobno kot pri SARSA(0).
+
+% TD(λ) was proved to converge in the mean by Dayan (1992), and with probability 1 by many researchers, including Peng (1993), Dayan and Sejnowski (1994), and Tsitsiklis (1994). Jaakkola, Jordan, and Singh (1994), in addition, first proved convergence of TD(λ) under on-line updating. Gurvits, Lin, and Hanson (1994) proved convergence of a more general class of eligibility trace methods.
+Dayan, Singh in ostali so dokazali, da TD($\lambda$) konvergira k optimalni rešitvi [REF, REF].
 
 %\section{Napovedovanje - vrednost stanja}
 %\subsection{Monte Carlo metode}
@@ -591,7 +730,7 @@ V(s_t) \gets V(s_t) + \alpha[R_{t+1} + \gamma V(s_{t+1}) - V(s_t)]
 \chapter{Posploševanje in funkcijska aproksimacija}
 %%%%% PONG GUY HAD MUCH BETTER SUCCESS WITH LINEAR OUPUT NEURON INSTEAD OF OTHER THINGIE.
 \thispagestyle{fancy}
-\section{Umetne nevronske mreže} %rename nevrološke mreže in nevronske mreže to umetne nevronske mreže
+\section{Umetne nevronske mreže} %rename nevrološke mreže to nevronske mreže
 % overfitting -- early stopping and weight decay
 \section{Metode gradient descent}
 % instead just say what was implemented to generalize Hex?
@@ -605,10 +744,7 @@ V(s_t) \gets V(s_t) + \alpha[R_{t+1} + \gamma V(s_{t+1}) - V(s_t)]
 \thispagestyle{fancy}
 \section{Ozadje}
 \section{Učenje}
-%If a model is not available, then it is particularly useful to estimate action values rather than state values. With a model, state values alone are sufficient to determine a policy; one simply looks ahead one step and chooses whichever action leads to the best combination of reward and next state, as we did in the chapter on DP. Without a model, however, state values alone are not sufficient. One must explicitly estimate the value of each action in order for the values to be useful in suggesting a policy. Thus, one of our primary goals for Monte
-￼
-%5.2. MONTE CARLO ESTIMATION OF ACTION VALUES 113 Carlo methods is to estimate q∗. To achieve this, we first consider another policy evaluation problem.
-% i guess i use a partial model! CHECK MODEL DESCRIPTION IN ELEMENTS OF RL IN INTRO!
+% I guess I use a partial model of the environment when learning. When selecting an action I check what state that action would bring me to. I could have action-values instead, but that would be many more values and the state check is simple. Afterstates are also pretty efficient.
 \section{Rezultati}
 % graphs, errors
 
@@ -685,6 +821,11 @@ C. Stangor,
 \newblock{\em Introduction to Psychology},
 \newblock{MIT Press, Cambridge, MA, 2011.}
 
+\bibitem{IntroductionToMonteCarloMethods}
+D. J. C. MacKay
+\newblock{\em Introduction to Monte Carlo Methods},
+\newblock{Learning in graphical models. Springer Netherlands, 1998.}
+
 \bibitem{MusicDiscriminationByPigeons}
 D. Porter, A. Neuringer,
 \newblock{\em Music Discrimination By Pigeons},
@@ -719,6 +860,11 @@ I. Pavlov,
 R. A. Rescorla,
 \newblock{\em Pavlovian Conditioning: It's Not What You Think It Is},
 \newblock{American Psychologist, 1988.}
+
+\bibitem{OnTheTheoryOfDynamicProgramming}
+R. Bellman,
+\newblock{\em On the Theory of Dynamic Programming},
+\newblock{Proceedings of the National Academy of Sciences of the United States of America 38.8 1952.}
 
 \bibitem{TheSingularityIsNear}
 R. Kurzweil,
@@ -764,6 +910,11 @@ S. J. Shettleworth,
 S. Legg, M. Hutter,
 \newblock{\em A Collection of Definitions of Intelligence},
 \newblock{Frontiers in Aritificial Intelligence and Applications, 2007.}
+
+\bibitem{ReinforcementLearningWithReplacingEligibilityTraces}
+S. Singh, R. S. Sutton,
+\newblock{\em Reinforcement Learning with Replacing Eligibility Traces},
+\newblock{Machine learning 22.1-3, 1996.}
 
 \bibitem{PigeonsDiscriminationOfPaintings}
 S. Watanabe, J. Sakamoto, M. Wakita,

@@ -28,8 +28,12 @@
 \backcite {PigeonsDiscriminationOfPaintings}{{7}{1.1.2}{}}
 \backcite {ReinforcementLearningAnIntroduction}{{8}{2}{}}
 \backcite {ReinforcementLearningAnIntroduction}{{9}{2.1}{}}
-\backcite {ReinforcementLearningAnIntroduction}{{12}{2.3}{}}
 \backcite {TheRoleOfExplorationInLearningControl}{{14}{2.4}{}}
 \backcite {ReinforcementLearningAnIntroduction}{{14}{2.4}{}}
-\backcite {ReinforcementLearningAnIntroduction}{{19}{6}{}}
-\backcite {TheSingularityIsNear}{{19}{6}{}}
+\backcite {OnTheTheoryOfDynamicProgramming}{{15}{3.1}{}}
+\backcite {ReinforcementLearningWithReplacingEligibilityTraces}{{16}{3.2}{}}
+\backcite {IntroductionToMonteCarloMethods}{{18}{3.2}{}}
+\backcite {ReinforcementLearningAnIntroduction}{{18}{3.2}{}}
+\backcite {ReinforcementLearningAnIntroduction}{{20}{3.4}{}}
+\backcite {ReinforcementLearningAnIntroduction}{{24}{6}{}}
+\backcite {TheSingularityIsNear}{{24}{6}{}}

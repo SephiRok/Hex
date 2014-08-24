@@ -8,21 +8,21 @@
 \contentsline {subsection}{\numberline {1.1.2}Operantno pogojevanje}{4}
 \contentsline {chapter}{\numberline {2}Problem okrepitvenega u\IeC {\v c}enja}{8}
 \contentsline {section}{\numberline {2.1}Elementi okrepitvenega u\IeC {\v c}enja}{8}
-\contentsline {section}{\numberline {2.2}Kon\IeC {\v c}en Markov proces odlo\IeC {\v c}anja}{11}
+\contentsline {section}{\numberline {2.2}Kon\IeC {\v c}ni Markov proces odlo\IeC {\v c}anja}{11}
 \contentsline {section}{\numberline {2.3}Diskretno okrepitveno u\IeC {\v c}enje}{12}
 \contentsline {section}{\numberline {2.4}Raziskovanje in izkori\IeC {\v s}\IeC {\v c}anje}{13}
 \contentsline {subsection}{\numberline {2.4.1}$\epsilon $-po\IeC {\v z}re\IeC {\v s}na izbira dejanj}{14}
 \contentsline {chapter}{\numberline {3}Tabularne re\IeC {\v s}itve}{15}
 \contentsline {section}{\numberline {3.1}Dinami\IeC {\v c}no programiranje}{15}
 \contentsline {section}{\numberline {3.2}Monte Carlo metode}{16}
-\contentsline {section}{\numberline {3.3}U\IeC {\v c}enje na podlagi \IeC {\v c}asovne razlike - TD(0)}{16}
-\contentsline {section}{\numberline {3.4}Zdru\IeC {\v z}itev metod - TD($\lambda $)}{16}
-\contentsline {chapter}{\numberline {4}Posplo\IeC {\v s}evanje in funkcijska aproksimacija}{17}
-\contentsline {section}{\numberline {4.1}Umetne nevronske mre\IeC {\v z}e}{17}
-\contentsline {section}{\numberline {4.2}Metode gradient descent}{17}
-\contentsline {chapter}{\numberline {5}Namizna igra Hex}{18}
-\contentsline {section}{\numberline {5.1}Ozadje}{18}
-\contentsline {section}{\numberline {5.2}U\IeC {\v c}enje}{18}
-\contentsline {section}{\numberline {5.3}Rezultati}{18}
-\contentsline {chapter}{\numberline {6}Zaklju\IeC {\v c}ek}{19}
-\contentsline {chapter}{Literatura}{21}
+\contentsline {section}{\numberline {3.3}U\IeC {\v c}enje na podlagi \IeC {\v c}asovne razlike - TD(0)}{18}
+\contentsline {section}{\numberline {3.4}Zdru\IeC {\v z}itev metod - TD($\lambda $)}{19}
+\contentsline {chapter}{\numberline {4}Posplo\IeC {\v s}evanje in funkcijska aproksimacija}{22}
+\contentsline {section}{\numberline {4.1}Umetne nevronske mre\IeC {\v z}e}{22}
+\contentsline {section}{\numberline {4.2}Metode gradient descent}{22}
+\contentsline {chapter}{\numberline {5}Namizna igra Hex}{23}
+\contentsline {section}{\numberline {5.1}Ozadje}{23}
+\contentsline {section}{\numberline {5.2}U\IeC {\v c}enje}{23}
+\contentsline {section}{\numberline {5.3}Rezultati}{23}
+\contentsline {chapter}{\numberline {6}Zaklju\IeC {\v c}ek}{24}
+\contentsline {chapter}{Literatura}{26}
