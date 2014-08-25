@@ -243,8 +243,8 @@ Zamisel o gradnji inteligentni strojev sega v daljno preteklost; o tem so razmi�
 % at the same time, the problem they present are both challenging and interesting
 % Hex
 %Skozi implementacijo namizne igre Hex v nalogi raziščem okrepitveno učenje (angl. reinforcement learning), področje strojnega učenja, ki se ukvarja z vprašanjem kako se vesti v neznanem okolju, da bi povečali številčni nagrajevalni signal. Okrepitveno učenje se razlikuje od nadzorovanega učenja v tem, da nam niso nikoli prikazana pravilna dejanja ali pa napačna popravljena. Poudarek je tudi na zmogljivosti učenja med izvedbo, katero pelje do iskanja ravnovesja med raziskovanjem neznanih stanj in izkoriščanjem obstoječega znanja. Ukvarja se s celotnim problemom učenja iz interakcije z neznanim okoljem.
-V nadaljevanju naloge je v razdelku~\ref{section:Psychology} pregledan izvor okrepitvenega učenja iz vedenjske plati. Temu sledi pogled s stališča umetne inteligence in inženirstva, razišče pa se tudi računski pristop do učenja iz interakcije. V razdelku~\ref{section:} je matematično opredeljen celotni problem okrepitvenega učenja , rešitve pa so predstavljene v razdelku~\ref{section:}. Primerjajo se različni algoritmi, njihove povezave in kombinacije. Ker so cilji in pravila pri abstraktnih namiznih igrah jasno opredeljeni, s čimer se poenostavita model in simulacija, in poleg tega predstavljajo zahteven in hkrati zanimiv problem, so priročno testno okolje za študijo tovrstnega učenja. 
-V razdelku~\ref{} so rešitve iz okrepitvenega učenja uporabljene v namizni igri Hex in na koncu v razdelku~\ref{} razpravljeni rezultati skupaj s pogledom na prihodnost.
+V nadaljevanju naloge je v razdelku~\ref{section:Psychology} pregledan izvor okrepitvenega učenja iz vedenjske plati. Temu sledi pogled s stališča umetne inteligence in inženirstva, razišče pa se tudi računski pristop do učenja iz interakcije. V poglavju~\ref{chapter:Problem} je formalno opredeljen celotni problem okrepitvenega učenja, rešitve pa so predstavljene v poglavju~\ref{chapter:TabularSolutions} in~\ref{chapter:FASolutions}. Primerjajo se različni algoritmi, njihove lastnosti, povezave in kombinacije. Ker so cilji in pravila pri abstraktnih namiznih igrah jasno opredeljeni, s čimer se poenostavita model in simulacija, so priročno testno okolje za študijo tovrstnega učenja. Poleg tega pa predstavljajo tudi zahteven in zanimiv problem.
+V poglavju~\ref{chapter:Hex} so rešitve iz okrepitvenega učenja uporabljene v namizni igri Hex in na koncu v poglavju~\ref{chapter:Conclusion} razpravljeni rezultati skupaj s pogledom na prihodnost.
 % cilj, originalnost dela je v aplikaciji okrepitvenega učenja na Hex igro
 
 \section{Psihologija} \label{section:Psychology}
@@ -292,9 +292,9 @@ Pogojevanje je evolucijsko koristno, ker omogoča organizmom razviti pričakovan
 
 % In some cases, an existing conditioned stimulus can serve as an unconditioned stimulus for a pairing with a new conditioned stimulus—a process known as second-order conditioning. In one of Pavlov’s studies, for instance, he first conditioned the dogs to salivate to a sound, and then repeatedly paired a new CS, a black square, with the sound. Eventually he found that the dogs would salivate at the sight of the black square alone, even though it had never been directly associated with the food. Secondary conditioners in everyday life include our attractions to things that stand for or remind us of something else, such as when we feel good on a Friday because it has become associated with the paycheck that we receive on that day, which itself is a conditioned stimulus for the pleasures that the paycheck buys us.
 
-Klasično pogojevanje obravnava samo problem napovedovanja, ker odziv živali ne vpliva na eksperiment, oziroma na splošno ne vpliva na okolje. Učenje na podlagi časovne razlike (angl. temporal difference learning), ki je opisano pozneje v razdelku~\ref{subsection:TD0Prediction}, je bilo prvotno povezano predvsem s klasičnim pogojevanjem in problemom napovedovanja, kjer pogojena spodbuda (CS), ki je vezana na poznejšo nepogojeno spodbudo (US), povzroči potrebo po ovrednotenju časovne razlike vrednostne funkcije. Cilj izračuna je zagotoviti, da postane pogojena spodbuda (CS) po učenju napovednik nepogojene spodbude (US). Osnutek na temo algoritmičnih pristopov do eksperimentov klasičnega pogojevanja sta sestavila Belkenius in Morén~\cite{ComputationalModelsOfClassicalConditioningAComparativeStudy}.
+Klasično pogojevanje obravnava samo problem napovedovanja, ker odziv živali ne vpliva na eksperiment, oziroma na splošno ne vpliva na okolje. Učenje na podlagi časovne razlike (angl. temporal difference learning), ki je opisano pozneje v razdelku~\ref{section:TD0}, je bilo prvotno povezano predvsem s klasičnim pogojevanjem in problemom napovedovanja, kjer pogojena spodbuda (CS), ki je vezana na poznejšo nepogojeno spodbudo (US), povzroči potrebo po ovrednotenju časovne razlike vrednostne funkcije. Cilj izračuna je zagotoviti, da postane pogojena spodbuda (CS) po učenju napovednik nepogojene spodbude (US). Osnutek na temo algoritmičnih pristopov do eksperimentov klasičnega pogojevanja sta sestavila Belkenius in Morén~\cite{ComputationalModelsOfClassicalConditioningAComparativeStudy}.
 
-Čeprav je bilo učenje na podlagi časovne razlike sprva namenjeno reševanju problema napovedovanja, se uporablja tudi za reševanje problema optimalnega krmiljenja (glej razdelek~\ref{subsection:TD0Control})~\cite{ReinforcementLearningAnIntroduction}. %Zlasti omembe vredno je delo Watkinsa na Q-učenju (angl. Q-learning)~\cite{}, algoritem za krmiljenje na podlagi časovne razlike.
+Čeprav je bilo učenje na podlagi časovne razlike sprva namenjeno reševanju problema napovedovanja, se uporablja tudi za reševanje problema optimalnega krmiljenja (glej razdelek~\ref{section:TD0})~\cite{ReinforcementLearningAnIntroduction}. %Zlasti omembe vredno je delo Watkinsa na Q-učenju (angl. Q-learning)~\cite{}, algoritem za krmiljenje na podlagi časovne razlike.
 
 \subsection{Operantno pogojevanje}
 V klasičnem pogojevanju se organizem nauči povezati nove spodbude z naravnim biološkim odzivom, kot je slinjenje ali strah. Organizem sam se ne nauči ničesar novega, ampak se v prisotnosti novega signala začne vesti na že obstoječi način. Po drugi strani pa gre pri operantnem pogojevanju za učenje, ki se zgodi glede na posledice vedenja in lahko vsebuje nova dejanja. Med operantno pogojevanje sodi primer, ko se pes na ukaz vsede, ker je v preteklosti za to dejanje dobil pohvalo. Za operantno pogojevanje gre tudi, ko nasilnež v šoli grozi sošolcem, ker lahko tako doseže svoje cilje, ali ko otrok domov prinese dobre ocene, ker so mu starši v nasprotnem primeru zagrozili s kaznijo. Pri operantnem pogojevanju se organizem uči iz posledic svojih dejanj.
@@ -524,7 +524,7 @@ Velikokrat je koristno izbrati veliko naključnih dejanj ob začetku učenja in 
 %1. Prediction only: RL is used to learn the value function for the policy followed. At the end of learning this value function describes for every visited state how much future reward we can expect when performing actions starting at this state.
 %2. Control: By means of RL, we wish to find that particular set of policies which maximizes the reward when travelling through state space. This way we have at the end obtained an optimal policy which allows for action planning and optimal control.
 %1Thus, RL also assumes that such systems “follow the Markov property”. Essentially this means that it is unimportant along which path a certain state has been reached. Once there, the state itself contains all relevant information for future calculations. Many times the Markow Property cannot be guaranteed in real world decision problem which poses practical problems when wanting to employ RL-methods. Also, we note that conventional RL needs to be augmented by additional mechanisms, if one wants to employ it to more complex, for example time and space-continuous, systems. These aspects shall not be discussed here, but see Reynolds (2002); Santos and Touzet (1999a,b).
-\chapter{Tabularne rešitve}
+\chapter{Tabularne rešitve} \label{chapter:TabularSolutions}
 \thispagestyle{fancy}
 % RL Intro has good bibliography sections for references.
 V tem poglavju so opisani ključni algoritmi okrepitvenega učenja v svojih enostavnih oblikah -- ko je prostor stanj in dejanj dovolj majhen za predstavitev ocenjene vrednostne funkcije s poljem ali tabelo. V teh primerih znajo algoritmi najti optimalno vrednostno funkcijo in optimalno politiko vedenja. To je v nasprotju z aproksimacijskimi metodami opisanimi v naslednjem poglavju, katere znajo najti le približne rešitve, ampak jih lahko uporabimo učinkovito na veliko večjih problemih.
@@ -599,7 +599,7 @@ Q(s_t, a_t) \gets Q(s_t, a_t) + \alpha[R_t - Q(s_t, a_t)].
 
 MacKay~\cite{IntroductionToMonteCarloMethods} povzema Monte Carlo metode v splošnem, Sutton in Barto~\cite{ReinforcementLearningAnIntroduction} pa v aplikaciji na okreptivenem učenju.
 
-\section{Učenje na podlagi časovne razlike - TD(0)} \label{subsection:TD0Prediction} % rename label
+\section{Učenje na podlagi časovne razlike - TD(0)} \label{section:TD0}
 {\em Učenje na podlagi časovne razlike (angl. temporal-difference -- TD)} je ena izmed osrednjih idej v okrepitvenem učenju. Medtem, ko Monte Carlo metode čakajo do konca epizode za izračun posodobitve $V(s_t)$, TD metode počakajo le en časovni korak. V času $t+1$ že tvorijo ciljno vrednosti in jo skupaj z zaznano nagrado $r_{t+1}$ in oceno $V(s_{t+1})$ uporabijo za posodobitev ocene prejšnjega stanja $V(s_t)$. Najenostavnejša TD metoda, znana kot {\em TD(0)} je
 \begin{equation}
 V(s_t) \gets V(s_t) + \alpha[r_{t+1} + \gamma V(s_{t+1}) - V(s_t)].
@@ -718,7 +718,7 @@ TD algoritem za krmiljenje {\em SARSA($\lambda$)} je iz TD($\lambda$) razvit pre
 % TD(λ) was proved to converge in the mean by Dayan (1992), and with probability 1 by many researchers, including Peng (1993), Dayan and Sejnowski (1994), and Tsitsiklis (1994). Jaakkola, Jordan, and Singh (1994), in addition, first proved convergence of TD(λ) under on-line updating. Gurvits, Lin, and Hanson (1994) proved convergence of a more general class of eligibility trace methods.
 Singh in ostali so dokazali, da TD($\lambda$) konvergira k optimalni rešitvi~\cite{LearningWithoutStateEstimationInPartiallyObservableMarkovianDecisionProcesses}.
 
-\chapter{Posploševanje in funkcijska aproksimacija}
+\chapter{Posploševanje in funkcijska aproksimacija} \label{chapter:FASolutions}
 \thispagestyle{fancy}
 Vsi algoritmi do sedaj so predpostavljali, da ocenjene vrednosti hranimo v tabeli, z enim vpisom za vsako vrednost. Težava je v tem, da je to mogoče le pri majhnemu številu stanj in dejanj. Ni problem samo v količini potrebnega spomina, ampak tudi v času in količini podatkov potrebnih za pravilno oceniti celotno tabelo. Potrebujemo način za posploševanje znanja iz izkušenj omejenega števila stanj.
 
@@ -812,12 +812,33 @@ z $\mathbf{e_0} = \mathbf{0}$.
 % We have run simulations in a variety of domains􏲀including a continuous gridworld􏱪 a car􏱜on􏱜the􏱜hill problem with nonlinear dynamics􏱪 and tic􏱜tac􏱜to e versus a sto chas􏱜 tic opp onent􏲀and using a variety of function approximators􏱪 including p olynomial regression􏱪 backpropagation􏱪 and lo cal weighted regression􏱝 In our exp eriments􏱪 none of these function approximators was immune from divergence􏱝
 Če politika vedenja oziroma vzorčenje sledi dinamiki MDPja v interesu, potem linearni funkcijski aproksimatorji z TD($\lambda$) dokazano konvergirajo z verjetnostjo 1~\cite{AnAnalysisOfTemporalDifferenceLearningWithFunctionApproximation}. Za offline vzorčenjene in nelinearne funkcijske aproksimatorje, kot so nevronske mreže z backpropagation, pa ne obstaja zagotovil konvergence; v znatnih primerih je pokazano, da divergirajo~\cite{GeneralizationInReinforcementLearningSafelyApproximatingTheValueFunction}, čeprav obstajajo tudi empirični uspehi kot je TD-Gammon~\cite{PracticalIssuesInTemporalDifferenceLearning}.
 
-\chapter{Učenje na namizni igri Hex}
+\chapter{Učenje na namizni igri Hex} \label{chapter:Hex}
+V tem poglavju so metode okrepitvenega učenja uporabljene na računalniški simulaciji namizne igre z imenom Hex. Najprej je opisana igra, njena pravila ter lastnosti, nato so predstavljene implementacije različnih metod. Na koncu poglavja so primerjani še rezultati med metodami.
+
 \thispagestyle{fancy}
 \section{Ozadje}
-Število stanj.
+{\em Hex} je abstraktna potezna strategija za dva igralca, ki se igra na hexagonalni mreži, katera je navadno urejena v obliki romba. Velikost mreže je poljubna. Medtem, ko je v namizni različici pogosto v velikosti $11 \times 11$, bodo tukaj zaradi velikega števila stanj raziskane predvsem velikosti $3 \times 3$ in $4 \times 4$.
+
+% Rules.
+Vsak od igralcev ima dodeljeno eno barvo; pogoste so rdeča in modra ali pa bela in črna. Igralci izmenično zavzemajo polja eno po eno, dokler en igralec ne poveže nasprotni stranici svoje barve. Prvi igralec, ki vzpostavi povezavo med svojimi stranicami je zmagovalec.
+
+% No draws. Favors first player.
+Hex spada v kategorijo končnih (konča se v končnem številu korakov) determinističnih (brez naključnih dejavnikov) dvoigralskih iger s popolno informacijo o stanju. Igra se tudi ne more nikoli končati neodločno: edini način, da nasprotniku preprečimo povezavo stranic je s tem, da povežemo svoji stranici. Ko so stranici mreže enako dolge ima prednost prvi igralec. Ker je Hex končna igra s popolno informacijo, ki se ne more končati neodločeno, sledi da ima ali prvi ali drugi igralec zmagovalno strategijo. Če predpostavimo, da ima drugi igralec zmagovalno strategijo, jo lahko prvi igralec ``ukrade'' s tem, da naredi poljubno potezo in nato sledi zmagovalni strategiji drugega igralca. Dodatna poteza za bodisi igralca v katerem koli položaju lahko samo izboljša položaj tega igralca. Kar pomeni, da je prvi igralec v prednosti in ima on zmagovalno strategijo. Formalen dokaz je Maarup opisal v~\cite{Hex}. Ta argument samo dokazuje obstoj zmagovalne strategije brez jo opisati.
+
+Even in Tarjan sta dokazala, da je ugotavljanje, če je določen položaj v igri Hex zmagovalen, PSPACE-polno \cite{ACombinatorialProblemWhichIsCompleteInPolynomialSpace}. Splošno je domnevano, da se PSPACE-polnih problemov ne da rešiti z učinkovitimi algoritmi (v polinomskem času).
+
+% Number of states.
+
+
+% Computational and spatial complexity.
+
+
 \section{Implementacija}
+
+
 \subsection{Učenec tabularne TD($\lambda)$}
+
+
 \subsection{Učenec TD($\lambda$) z nevronsko mrežo}
 %%%%% PONG GUY HAD MUCH BETTER SUCCESS WITH LINEAR OUPUT NEURON INSTEAD OF OTHER THINGIE.
 \subsection{Naključni igralec}
@@ -825,11 +846,13 @@ z $\mathbf{e_0} = \mathbf{0}$.
 \section{Rezultati}
 % graphs, errors; wins vs games
 
-\chapter{Zaključek}
+\chapter{Zaključek} \label{chapter:Conclusion}
 \thispagestyle{fancy}
 Iz okrepitvenega učenja so se razvili solidni matematični temelji in impresivne aplikacije. Računska študija okrepitvenega učenja je sedaj obsežna, z aktivnimi raziskovalci na raznolikih disciplinah kot so psihologija, teorija krmiljenja (angl. control theory), operacijske raziskave (angl. operations research), umetna inteligenca in nevroznanost. Posebej pomembne so zveze z optimalnim nadzorom in dinamičnim programiranjem. Celoten problem učenja iz interakcije za dosego ciljev ni še zdaleč rešen, vendar se je naše razumevanje na tem področju bistveno izboljšalo. Sedaj lahko postavimo sestavne ideje kot so učenje na podlagi časovne razlike, dinamično programiranje in funkcijske aproksimacije skladno s celotnim problemom.
 
 Eden večjih trendov katerih je okrepitveno učenje deležno je večji stik med umetno inteligenco in ostalimi inženirskimi disciplinami. Nedolgo nazaj se je umetno inteligenco smatralo kot popolnoma ločeno od teorije nadzora in statistiko~\cite{ReinforcementLearningAnIntroduction}. Imelo je opravka z logiko in simboli, ne pa s števili. Umetna inteligenca so bili obširni LISP programi, ne linearna algebra, diferencialne enačbe ali statistika. V zadnjih desetletjih se je ta pogled spremenil. Moderni raziskovalci umetne inteligence sprejemajo statistične in nadzorne algoritme kot pomembne konkurenčne metode ali pa enostavno kot orodja. Prej prezrta področja med umetno inteligenco in konvencionalnega inženirstva so sedaj med najbolj aktivnimi, vključno z nevronskimi mrežami, pametnim nadzorom in okrepitvenim učenjem. V okrepitvenem učenju se ideje optimalne teorije nadora in stohastične aproksimacije razširijo za nasloviti širše in bolj ambiciozne cilje umetne inteligence.
+
+% gpu > c > java
 
 % while table td converges, function approximation td is tricky and not yet fully understood:
 % 3.3 Scaling up in Tutorial survey and Recent Advances says something about ANN failures
@@ -1008,6 +1031,11 @@ S. B. Thrun,
 \newblock{\em The Role of Exploration in Learning Control},
 \newblock{Department of Computer Science, Carnegie-Mellon University, 1992.}
 
+\bibitem{ACombinatorialProblemWhichIsCompleteInPolynomialSpace}
+S. Even, R. E. Tarjan,
+\newblock{\em A combinatorial problem which is complete in polynomial space},
+\newblock{Journal of the ACM (JACM) 23.4, 1976.}
+
 \bibitem{CognitionEvolutionAndBehavior}
 S. J. Shettleworth,
 \newblock{\em Cognition, Evolution and Behavior},
@@ -1037,6 +1065,11 @@ S. Watanabe, J. Sakamoto, M. Wakita,
 T. L. Brink,
 \newblock{\em Psychology: A Student Friendly Approach},
 \newblock{San Bernardino Community College, 2008.}
+
+\bibitem{Hex}
+T. Maarup,
+\newblock{\em Everything you always wanted to know about Hex but were afraid to ask},
+\newblock{Diss. Master’s thesis, University of Southern Denmark, 2005.}
 
 \bibitem{PlayingAtariWithDeepReinforcementLearning}
 V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, M. Riedmiller,

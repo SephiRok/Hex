@@ -22,10 +22,10 @@
 \contentsline {section}{\numberline {4.2}Zdru\IeC {\v z}itev TD($\lambda $) z nevronskimi mre\IeC {\v z}ami}{23}
 \contentsline {chapter}{\numberline {5}U\IeC {\v c}enje na namizni igri Hex}{25}
 \contentsline {section}{\numberline {5.1}Ozadje}{25}
-\contentsline {section}{\numberline {5.2}Implementacija}{25}
-\contentsline {subsection}{\numberline {5.2.1}U\IeC {\v c}enec tabularne TD($\lambda )$}{25}
-\contentsline {subsection}{\numberline {5.2.2}U\IeC {\v c}enec TD($\lambda $) z nevronsko mre\IeC {\v z}o}{25}
-\contentsline {subsection}{\numberline {5.2.3}Naklju\IeC {\v c}ni igralec}{25}
-\contentsline {section}{\numberline {5.3}Rezultati}{25}
-\contentsline {chapter}{\numberline {6}Zaklju\IeC {\v c}ek}{26}
-\contentsline {chapter}{Literatura}{28}
+\contentsline {section}{\numberline {5.2}Implementacija}{26}
+\contentsline {subsection}{\numberline {5.2.1}U\IeC {\v c}enec tabularne TD($\lambda )$}{26}
+\contentsline {subsection}{\numberline {5.2.2}U\IeC {\v c}enec TD($\lambda $) z nevronsko mre\IeC {\v z}o}{26}
+\contentsline {subsection}{\numberline {5.2.3}Naklju\IeC {\v c}ni igralec}{26}
+\contentsline {section}{\numberline {5.3}Rezultati}{26}
+\contentsline {chapter}{\numberline {6}Zaklju\IeC {\v c}ek}{27}
+\contentsline {chapter}{Literatura}{29}

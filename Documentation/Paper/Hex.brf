@@ -43,5 +43,7 @@
 \backcite {AnAnalysisOfTemporalDifferenceLearningWithFunctionApproximation}{{24}{4.2}{}}
 \backcite {GeneralizationInReinforcementLearningSafelyApproximatingTheValueFunction}{{24}{4.2}{}}
 \backcite {PracticalIssuesInTemporalDifferenceLearning}{{24}{4.2}{}}
-\backcite {ReinforcementLearningAnIntroduction}{{26}{6}{}}
-\backcite {TheSingularityIsNear}{{26}{6}{}}
+\backcite {Hex}{{25}{5.1}{}}
+\backcite {ACombinatorialProblemWhichIsCompleteInPolynomialSpace}{{25}{5.1}{}}
+\backcite {ReinforcementLearningAnIntroduction}{{27}{6}{}}
+\backcite {TheSingularityIsNear}{{27}{6}{}}
