@@ -20,8 +20,6 @@
 \backcite {IntroductionToPsychology}{{5}{1.1.2}{}}
 \backcite {IntroductionToPsychology}{{6}{1.1.2}{}}
 \backcite {IntroductionToPsychology}{{6}{1.1.2}{}}
-\backcite {IntroductionToPsychology}{{6}{1.1.2}{}}
-\backcite {IntroductionToPsychology}{{7}{1.1.2}{}}
 \backcite {IntroductionToPsychology}{{7}{1.1.2}{}}
 \backcite {IntroductionToPsychology}{{7}{1.1.2}{}}
 \backcite {MusicDiscriminationByPigeons}{{7}{1.1.2}{}}
@@ -34,6 +32,16 @@
 \backcite {ReinforcementLearningWithReplacingEligibilityTraces}{{16}{3.2}{}}
 \backcite {IntroductionToMonteCarloMethods}{{18}{3.2}{}}
 \backcite {ReinforcementLearningAnIntroduction}{{18}{3.2}{}}
+\backcite {LearningWithoutStateEstimationInPartiallyObservableMarkovianDecisionProcesses}{{18}{3.3}{}}
+\backcite {ReinforcementLearningWithReplacingEligibilityTraces}{{20}{3.4}{}}
 \backcite {ReinforcementLearningAnIntroduction}{{20}{3.4}{}}
-\backcite {ReinforcementLearningAnIntroduction}{{24}{6}{}}
-\backcite {TheSingularityIsNear}{{24}{6}{}}
+\backcite {LearningWithoutStateEstimationInPartiallyObservableMarkovianDecisionProcesses}{{21}{3.4}{}}
+\backcite {UnderstandingTheDifficultyOfTrainingDeepFeedforwardNeuralNetworks}{{23}{4.1}{}}
+\backcite {Perceptrons}{{23}{4.1}{}}
+\backcite {MultilayerFeedforwardNetworksAreUniversalApproximators}{{23}{4.1}{}}
+\backcite {TDANNForStrategicControlProblems}{{23}{4.2}{}}
+\backcite {AnAnalysisOfTemporalDifferenceLearningWithFunctionApproximation}{{24}{4.2}{}}
+\backcite {GeneralizationInReinforcementLearningSafelyApproximatingTheValueFunction}{{24}{4.2}{}}
+\backcite {PracticalIssuesInTemporalDifferenceLearning}{{24}{4.2}{}}
+\backcite {ReinforcementLearningAnIntroduction}{{26}{6}{}}
+\backcite {TheSingularityIsNear}{{26}{6}{}}

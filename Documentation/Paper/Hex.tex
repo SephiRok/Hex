@@ -226,7 +226,7 @@ Praktično vse aktivnosti živali, podjetij in računalniških programov vključ
 Področje okrepitvenega učenja sega v zelo različne discipline in je močno povezano s teorijo krmiljenja (angl. control theory), psihologijo in nevroznanostjo. Teorija krmiljenja pripomore k reševanju problema z analitičnega oziroma matematičnega vidika, medtem ko se psihologija in nevroznanost za odgovore zgledujeta po bioloških procesih. Veliko temeljnih smernic je izpeljanih iz psihologije vedenja in učenja; teorijah, ki se tičejo nagrajevanja in pogojevanja dejanj. Algoritmični pristopi so izpeljani pod podobnimi načeli kot ljudje in živali oblikujemo vedenja glede na odzive iz okolice.
 
 % past work
-Zamisel o gradnji inteligentni strojev sega v daljno preteklost; o tem so razmišljali že Egipčani. Čez leta se je razvilo veliko teorij, ampak šele z začetkom sodobnega računalnika pred 60-imi leti sta se umetna inteligenca in strojno učenje razvila v samostojno znanstveno področje~\cite{TDANNForStrategicControlProblems}. Leta 1948 je Claude Elwood Shannon~\cite{AMathematicalTheoryOfCommunication} napisal predlog za šahovski program, Arthur Samuel~\cite{SomeStudiesInMachineLearningUsingTheGameOfCheckers} pa je leta 1959 razvil računalniški program, ki se je naučil igrati namizno igro dama z igranjem proti samem sebi. V zadnjih letih so se raziskave osredotočale bolj na posnemanje bioloških modelov, da be izdelale programe, ki rešujejo probleme in razmišljajo kot ljudje. Nevrološke mreže (angl. neural networks), pri katerih gre za zelo poenostavljen model možganov, so bile uspešno uporabljene v vrsti aplikacijah. Po formalizaciji Samuelevega pristopa in oblikovanja učenja na podlagi časovne razlike lambda Richarda Suttona~\cite{LearningToPredictByTheMethodsOfTemporalDifference} je Richard Tesauro~\cite{PracticalIssuesInTemporalDifferenceLearning} leta 1992 razvil računalniškega igralca za igro Backgammon, ki je tekmoval proti najboljšim človeškim igralcem na svetu. Čeprav je Tesaurova združitev pristopa okrepitvenega učenja in nevroloških mrež pretresla področje umetne inteligence in Backgammonske skupnosti, ni bilo veliko drugih uspehov v namiznih igrah~\cite{PlayingRiskAversiveGoOnALargeBoardUsingLocalNeuralNetworkPositionEvaluationFunctions, StrategyAcquisitionForTheGameOthelloBasedOnReinforcementLearning, LearningToEvaluateGoPositionsViaTemporalDifferenceMethods}. Prenos Tesaurove rešitve v največje namizne igre na področju umetne inteligence -- šah in Go -- niso uspele; rezultati so bili slabši, kot pa so jih dosegale konvencionalne metode. Poleg namiznih iger se je okrepitveno učenje uporabljalo tudi v problemih robotike, razporejanja, dinamičnih dodelitev in optimizacije~\cite{ReinforcementLearningAnIntroduction}.
+Zamisel o gradnji inteligentni strojev sega v daljno preteklost; o tem so razmišljali že Egipčani. Čez leta se je razvilo veliko teorij, ampak šele z začetkom sodobnega računalnika pred 60-imi leti sta se umetna inteligenca in strojno učenje razvila v samostojno znanstveno področje~\cite{TDANNForStrategicControlProblems}. Leta 1948 je Claude Elwood Shannon~\cite{AMathematicalTheoryOfCommunication} napisal predlog za šahovski program, Arthur Samuel~\cite{SomeStudiesInMachineLearningUsingTheGameOfCheckers} pa je leta 1959 razvil računalniški program, ki se je naučil igrati namizno igro dama z igranjem proti samem sebi. V zadnjih letih so se raziskave osredotočale bolj na posnemanje bioloških modelov, da be izdelale programe, ki rešujejo probleme in razmišljajo kot ljudje. Nevronske mreže (angl. neural networks), pri katerih gre za zelo poenostavljen model možganov, so bile uspešno uporabljene v vrsti aplikacijah. Po formalizaciji Samuelevega pristopa in oblikovanja učenja na podlagi časovne razlike lambda Richarda Suttona~\cite{LearningToPredictByTheMethodsOfTemporalDifference} je Richard Tesauro~\cite{PracticalIssuesInTemporalDifferenceLearning} leta 1992 razvil računalniškega igralca za igro Backgammon, ki je tekmoval proti najboljšim človeškim igralcem na svetu. Čeprav je Tesaurova združitev pristopa okrepitvenega učenja in nevronskih mrež pretresla področje umetne inteligence in Backgammonske skupnosti, ni bilo veliko drugih uspehov v namiznih igrah~\cite{PlayingRiskAversiveGoOnALargeBoardUsingLocalNeuralNetworkPositionEvaluationFunctions, StrategyAcquisitionForTheGameOthelloBasedOnReinforcementLearning, LearningToEvaluateGoPositionsViaTemporalDifferenceMethods}. Prenos Tesaurove rešitve v največje namizne igre na področju umetne inteligence -- šah in Go -- niso uspele; rezultati so bili slabši, kot pa so jih dosegale konvencionalne metode. Poleg namiznih iger se je okrepitveno učenje uporabljalo tudi v problemih robotike, razporejanja, dinamičnih dodelitev in optimizacije~\cite{ReinforcementLearningAnIntroduction}.
 
 % 10000 hours to master skill, 20 hours to acquire new skill
 % brain energy consumption and comparison to other primate and rodent brains -- we have the largest number of neurons in the cerebral cortex, and are the only ones that cook, allowing us to intake the energy needed to sustain the amount of neurons and the size of our body: https://www.youtube.com/watch?v=_7_XH1CBzGw
@@ -333,15 +333,15 @@ Negativno kaznovanje & Zmanjšana ali odvzeta prijetna spodbuda & Vedenje je osl
 \label{table:OperantConditioningTerms}
 \end{table}
 
-Čeprav je razlika med okrepitvijo (povišanje verjetnosti vedenja) in kaznovanjem (znižanje verjetnosti vedenja) navadno jasna, je v nekaterih primerih težko določiti, ali gre za pozitivno ali negativno. V vročem poletnem dnevu je lahko svež veter zaznan kot pozitivna okrepitev (ker prinese hladnejši zrak) ali pa negativna okrepitev (ker odvzame vroč zrak). V nekaterih primerih je lahko okrepitev hkrati pozitivna in negativna. Za odvisnika, jemanje drog hkrati prinese užitek (pozitivna okrepitev) in odstrani neprijetne simptome umika (negativna okrepitev).~\cite{IntroductionToPsychology}
+Čeprav je razlika med okrepitvijo (povišanje verjetnosti vedenja) in kaznovanjem (znižanje verjetnosti vedenja) navadno jasna, je v nekaterih primerih težko določiti, ali gre za pozitivno ali negativno. V vročem poletnem dnevu je lahko svež veter zaznan kot pozitivna okrepitev (ker prinese hladnejši zrak) ali pa negativna okrepitev (ker odvzame vroč zrak). V nekaterih primerih je lahko okrepitev hkrati pozitivna in negativna. Za odvisnika, jemanje drog hkrati prinese užitek (pozitivna okrepitev) in odstrani neprijetne simptome umika (negativna okrepitev).
 
-Pomembno se je tudi zavedati, da okrepitev in kaznovanje nista zgolj nasprotna pojma. Spreminjanje vedenja s pomočjo pozitivne okrepitve je skoraj vedno učinkovite od kaznovanja, ker pozitivna okrepitev pri osebi ali živali izboljša razpoloženje in pripomore k vzpostavitvi pozitivnega razmerja z osebo, ki predstavlja okrepitev. Med vrste pozitivne okrepitve, ki so učinkovite v vsakdanjem življenju, sodijo izrečene pohvale in odobritve, podelitev statusa in prestiža ter neposredno denarno izplačilo. Pri kaznovanju pa je po drugi strani bolj verjetno, da bodo spremembe vedenja samo začasne, ker temelji na prisili in vzpostavi negativno ter nasprotujoče razmerje z osebo, ki predstavlja kazen. Ko se oseba, ki kazen predstavi, iz okolja umakne, se neželeno vedenje najverjetneje vrne.~\cite{IntroductionToPsychology}
+Pomembno se je tudi zavedati, da okrepitev in kaznovanje nista zgolj nasprotna pojma. Spreminjanje vedenja s pomočjo pozitivne okrepitve je skoraj vedno učinkovitejše od kaznovanja, ker pozitivna okrepitev pri osebi ali živali izboljša razpoloženje in pripomore k vzpostavitvi pozitivnega razmerja z osebo, ki predstavlja okrepitev. Med vrste pozitivne okrepitve, ki so učinkovite v vsakdanjem življenju, sodijo izrečene pohvale in odobritve, podelitev statusa in prestiža ter neposredno denarno izplačilo. Pri kaznovanju pa je po drugi strani bolj verjetno, da bodo spremembe vedenja samo začasne, ker temelji na prisili in vzpostavi negativno ter nasprotujoče razmerje z osebo, ki predstavlja kazen. Ko se oseba, ki kazen predstavi, iz okolja umakne, se neželeno vedenje najverjetneje vrne.~\cite{IntroductionToPsychology}
 
 Operantno pogojevanje je metoda učenja, ki se uporablja pri treniranju živali za izvajanje različnih trikov. V filmih in na predstavah so živali, od psov do konjev in delfinov, naučene dejanj z uporabo pozitivnih okrepitev -- skačejo čez ovire, se vrtijo, pomagajo osebi pri vsakdanjih opravilih in izvajajo podobna zanje neobičajna dejanja.~\cite{IntroductionToPsychology}
 
 Velikokrat se pri učenju hkrati izvajata klasično in operantno pogojevanje. Učitelji imajo s seboj napravo, ki proizvede določen zvok. Učenje se začne z nagrajevanjem želenega enostavnega dejanja s hrano (operantno pogojevanje) in hkrati z vzpostavljanjem povezave med hrano in zvokom (klasično pogojevanje). Hrana se tako lahko po intervalih izpusti in pred dejanjem se doda še zvočni ukaz, na katerega želimo vezati učeno dejanje (klasično pogojevanje). Tako z nagrado hrane povežemo samo zvočni ukaz, ki je predstavljen pred dejanjem. Kompleksnejša dejanja se naučijo postopoma iz enostavnejših z nadaljno povezavo spodbud, kar se imenovuje proces oblikovanja.~\cite{IntroductionToPsychology}
 
-Spodbude, ki so organizmu naravno zadovoljive, kot na primer hrana, voda in preprečevanje bolečine, se imenujejo primarne spodbude, medtem ko gre pri sekundarni spodbudi za nevtralni dogodek, ki je s primarno spodbudo povezan s pomočjo klasičnega pogojevanja. Primer sekundarne spodbude je povezava zvoka s primarno spodbudo, kakršna je hrana. Dodaten primer vsakdanje sekundarne spodbude je denar. Denar ni zaželen sam po sebi, temveč zaradi primarnih spodbud oziroma stvari, katere se z njim lahko kupijo.~\cite{IntroductionToPsychology}
+%Spodbude, ki so organizmu naravno zadovoljive, kot na primer hrana, voda in preprečevanje bolečine, se imenujejo primarne spodbude, medtem ko gre pri sekundarni spodbudi za nevtralni dogodek, ki je s primarno spodbudo povezan s pomočjo klasičnega pogojevanja. Primer sekundarne spodbude je povezava zvoka s primarno spodbudo, kakršna je hrana. Dodaten primer vsakdanje sekundarne spodbude je denar. Denar ni zaželen sam po sebi, temveč zaradi primarnih spodbud oziroma stvari, katere se z njim lahko kupijo.~\cite{IntroductionToPsychology}
 
 Tudi domači ljubljenčki se obnašanja naučijo na podlagi teh konceptov; ne samo na ukaz, ampak tudi samega vedenja na povodcu, do tujcev itd. S to metodo se živali lahko nauči celo razlikovati med podobnimi vzorci, s čimer lahko znanstveniki na živalih preverjajo sposobnost učenja. Porter in Neuringer~\cite{MusicDiscriminationByPigeons} sta golobe na primer naučila, da so razlikovali med različnimi vrstami glasbe, Watanabe, Sakamoto in Wakita~\cite{PigeonsDiscriminationOfPaintings} pa so jih naučili razlikovati med različnimi stili umetnosti.
 
@@ -621,7 +621,7 @@ z imenom {\em SARSA(0) $(State_t, Action_t, Reward_{t+1}, State_{t+1}, Action_{t
 %Q(s_t, a_t) \gets Q(s_t, a_t) + \alpha[r_{t+1} + \gamma \max_a Q(s_{t+1}, a) - Q(s_t, a_t)].
 %\end{equation}
 
-Obe metodi konvergirata k optimalni politiki, če je $\alpha$ dovolj majhen oziroma se zmanjšuje čez čas in so vsa stanja oziroma vsi pari (stanje, dejanje) obiskani neskončno krat [REF TD, REF SARSA].
+Obe metodi konvergirata k optimalni politiki, če je $\alpha$ dovolj majhen oziroma se zmanjšuje čez čas in so vsa stanja oziroma vsi pari (stanje, dejanje) obiskani neskončno krat~\cite{LearningWithoutStateEstimationInPartiallyObservableMarkovianDecisionProcesses}.
 
 \section{Združitev metod - TD($\lambda$)}
 TD(0) glede na obiskano stanje posodobi samo vrednost prejšnjega stanja. Novost pri {\em TD($\lambda$)} algoritmu je sposobnost razširiti znanje nazaj v poljubno število vrednosti prejšnjih stanj.
@@ -677,7 +677,7 @@ e_t(s) = \left\{
 \end{array}
 \right.
 \end{equation}
-kjer je $\gamma$ faktor popuščanja kot je vpisano v predhodnem razdelku. Na vsakem koraku se sledi primernosti znižajo za $\gamma \lambda$, sled obiskanega stanja pa se zviša za 1 ali pa ponastavi na 1. Parameter $\lambda$ je zaradi tega imenovan tudi {\em parameter popuščanja sledi (angl. trace-decay parameter)}. Z akumulacijskimi sledmi se sled poveča za $1$ ob vsakem obisku, kar jo lahko dvigne nad vrednostjo $1$, medtem ko se pri zamenjavnih sled vedno ponastavi na 1. V poljubnem času sledi določajo katera stanja so bila nedavno obiskana. $TD(1)$ z akumulacijskimi sledmi je logično povezan z every-visit MC, $TD(1)$ z zamenjavnimi sledmi, pa z first-visit MC. Čeprav je razlika majhna, lahko zamenjavne sledi pripeljejo do znatno hitrejšega učenja~\cite{ReinforcementLearningAnIntroduction}.
+kjer je $\gamma$ faktor popuščanja kot je vpisano v predhodnem razdelku. Na vsakem koraku se sledi primernosti znižajo za $\gamma \lambda$, sled obiskanega stanja pa se zviša za 1 ali pa ponastavi na 1. Parameter $\lambda$ je zaradi tega imenovan tudi {\em parameter popuščanja sledi (angl. trace-decay parameter)}. Z akumulacijskimi sledmi se sled poveča za $1$ ob vsakem obisku, kar jo lahko dvigne nad vrednostjo $1$, medtem ko se pri zamenjavnih sled vedno ponastavi na 1. V poljubnem času sledi določajo katera stanja so bila nedavno obiskana. $TD(1)$ z akumulacijskimi sledmi je logično povezan z every-visit MC, $TD(1)$ z zamenjavnimi sledmi, pa z first-visit MC \cite{ReinforcementLearningWithReplacingEligibilityTraces}. Čeprav je razlika majhna, lahko zamenjavne sledi pripeljejo do znatno hitrejšega učenja~\cite{ReinforcementLearningAnIntroduction}.
 
 Celoten algoritem $TD(\lambda)$ za napoved vrednosti z zamenjavnimi sledmi je predstavljen v tabeli \ref{table:TDLambda}. Napaka v oceni vrednosti pri TD metodah je
 \begin{equation}
@@ -716,37 +716,114 @@ Za vsako epizodo: \\
 TD algoritem za krmiljenje {\em SARSA($\lambda$)} je iz TD($\lambda$) razvit preprosto z zamenjavo $V_t(s)$ za $Q_t(s, a)$ in $e_t(s)$ za $e_t(s,a)$, podobno kot pri SARSA(0).
 
 % TD(λ) was proved to converge in the mean by Dayan (1992), and with probability 1 by many researchers, including Peng (1993), Dayan and Sejnowski (1994), and Tsitsiklis (1994). Jaakkola, Jordan, and Singh (1994), in addition, first proved convergence of TD(λ) under on-line updating. Gurvits, Lin, and Hanson (1994) proved convergence of a more general class of eligibility trace methods.
-Dayan, Singh in ostali so dokazali, da TD($\lambda$) konvergira k optimalni rešitvi [REF, REF].
-
-%\section{Napovedovanje - vrednost stanja}
-%\subsection{Monte Carlo metode}
-%\subsection{Učenje na podlagi časovne razlike - TD(0)} \label{subsection:TD0Prediction}
-%\subsection{Združitev metod - TD($\lambda$)}
-%\section{Krmiljenje - vrednost dejanja}
-%\subsection{Monte Carlo metode}
-%\subsection{Učenje na podlagi časovne razlike - TD(0)} \label{subsection:TD0Control}
-%\subsection{Združitev metod - TD($\lambda$)}
+Singh in ostali so dokazali, da TD($\lambda$) konvergira k optimalni rešitvi~\cite{LearningWithoutStateEstimationInPartiallyObservableMarkovianDecisionProcesses}.
 
 \chapter{Posploševanje in funkcijska aproksimacija}
-%%%%% PONG GUY HAD MUCH BETTER SUCCESS WITH LINEAR OUPUT NEURON INSTEAD OF OTHER THINGIE.
 \thispagestyle{fancy}
-\section{Umetne nevronske mreže} %rename nevrološke mreže to nevronske mreže
+Vsi algoritmi do sedaj so predpostavljali, da ocenjene vrednosti hranimo v tabeli, z enim vpisom za vsako vrednost. Težava je v tem, da je to mogoče le pri majhnemu številu stanj in dejanj. Ni problem samo v količini potrebnega spomina, ampak tudi v času in količini podatkov potrebnih za pravilno oceniti celotno tabelo. Potrebujemo način za posploševanje znanja iz izkušenj omejenega števila stanj.
+
+Posploševanje je izčrpno preučeno v obliki funkcijskih aproksimacij na področju nadzorovanega učenja -- umetnih nevronskih mrežah, prepoznavi vzorcev in statističnem prilagajanju krivulj. V principu lahko uporabimo katerokoli od teh metod v okrepitvenem učenju -- posebej popularne so nevronske mreže in gradient descent metode.
+
+\section{Nevronske mreže}
+% inspired by the brain
+% in comparison to other methods, they work on non-linearly separable problems
 % overfitting -- early stopping and weight decay
-\section{Metode gradient descent}
-% instead just say what was implemented to generalize Hex?
-%\section{Napovedovanje - vrednost stanja}
+Eden izmed najbolj zanimivih in raziskanih funkcijskih aproksimatorjev se zgleduje po najbolj spretnem posploševalcu v naravi -- možganih. {\em Umetne nevronske mreže (angl. artificial neural network)} so v splošnem predstavljene kot sistem povezanih modelov nevronov, ki znajo iz več vhodnih vrednosti izračunati eno izhodno.
 
-%\section{Krmiljenje - vrednost dejanja}
+{\em Nevroni} so logično povzeti kot linearna funkcija $y(\mathbf{x})$, kjer je vsaka vrednost iz vhodnega vektorja $\mathbf{x}$ utežena z vrednostjo iz {\em utežnega vektorja} $\mathbf{w}$:
+\begin{equation}
+y(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + \omega_0.
+\end{equation}
+Če je vhodni vektor dvodimenzijonalen, potem utežni vektor določa orientacijo ravnine in $\omega$ {\em (angl. bias)} določa pravokotno razdaljo ravnine od središča prostora. Na funkcijo lahko gledamo tudi iz zornega kota funkcijske aproksimacije, kjer pri vhodu $\mathbf{x}$ spreminjamo $\mathbf{w}$, da dosežemo želen izhod $y(\mathbf{x})$. Pogostjo je rezultat spuščen še skozi monotonično nelinearno {\em aktivacijsko oziroma preklopno funkcijo g}:
+\begin{equation}
+y(\mathbf{x}) = g(\mathbf{w}^T \mathbf{x} + \omega_0).
+\end{equation}
+Čeprav je $g$ nelinearna funkcija, je odločitvena meja še vedno linearna, ker je $g$ monotonična.
 
-% compare size of ann to our brain
+Najpogostejši aktivacijski funkciji so sigmoidni zaradi enostavnosti izračuna njunih odvodov: logistična funkcija (zaloga vrednosti $[0, 1]$)
+\begin{equation}
+g(a) = \frac{1}{1 + e^{-a}}
+\end{equation}
+in hiperbolična tangentna funkcija (zaloga vrednosti $[-1, 1]$)
+\begin{equation}
+\tanh(a) = \frac{1 - e^{-2a}} {1 + e^{-2a}}.
+\end{equation}
+Zaradi simetrije in v splošnem boljših rezultatov pri učenju je priporočena uporaba $\tanh$~\cite{UnderstandingTheDifficultyOfTrainingDeepFeedforwardNeuralNetworks}.
 
-\chapter{Namizna igra Hex}
+%Map non-linear problem into an identical linear problem:
+%\begin{equation}
+%y(\mathbf{x}) = \sum_{i=1}^M w_i \phi (\mathbf{x}) + \omega_{k0}
+%\end{equation}
+
+Za učenje nevrona -- da vemo v katero smer utež spremeniti -- moramo definirati neko napako $E$ glede na izhod nevrona:
+\begin{equation}
+\mathbf{w_{t+1}} = \mathbf{w_t} + \alpha E \mathbf{x_t}.
+\end{equation}
+
+%This paper rigorously establishes that standard multilayer feedforward networks with as few as one hidden layer using arbitrary squashing functions are capable of approximating any Borel measurable function from one finite dimensional space to another to any desired degree of accuracy, provided sufficiently many hidden units are available. In this sense, multilayer feedforward networks are a class of universal approximators.
+Posamezni nevroni se niso zmožni naučiti nelinearno ločljivih vzorcev kot je logična funkcija XOR~\cite{Perceptrons}. Če pa nevrone povežemo v {\em večnivojsko feedforward nevronsko mrežo (angl. multilayer feedforward neural network)} z vsaj tremi nivoji in dovolj velikim številom nevronov v srednjem nivoju, postane mreža univerzalni aproksimator -- poljubno natančno lahko aproksimira poljubno zvezno funkcijo, ki slika iz realnih števil v realna števila~\cite{MultilayerFeedforwardNetworksAreUniversalApproximators}. Feedforward pomeni, da mreža nima usmerjenih ciklov oziroma, da informacija iz vhodov na izhode potuje samo v eno smer.
+
+Med probleme nevronskih mrež spadajo veliko število spremenljivk, ki jih moramo določiti empirično (število nivojev, število nevronov v vsakem nivoju, število različnih stopenj učenja), neenotna predstavitev vhodov, začetna vrednost uteži, počasna hitrost učenja, prekomerno prilagajanje (overfitting ali overtraining) in konvergiranje k lokalnem minimumu.
+
+%\section{Metoda gradient descent}
+%Gradient descent update rule:
+%\begin{equation}
+%\mathbf{w_{t+1}} = \mathbf{w_t} - \alpha \frac{\partial E(\mathbf{w_t})}{\partial \mathbf{w_t}}
+%\end{equation}
+
+%\begin{equation}
+%\Delta \mathbf{w} = \mathbf{w_{t+1}} - \mathbf{w_t} = - \alpha \frac{\partial E(\mathbf{w_t})}{\partial \mathbf{w_t}}
+%\end{equation}
+
+%Delta rule:
+%\begin{equation}
+%E(\mathbf{w}) = \frac{1}{2} (v_k - y_k)^2
+%\end{equation}
+
+%\begin{equation}
+%\frac{\partial E(\mathbf{w})}{\partial w_i} = -(v_k - y_k) \phi (\mathbf{x})
+%\end{equation}
+
+%\section{Multilayer neural networks}
+%Backpropagation:
+
+\section{Združitev TD($\lambda$) z nevronskimi mrežami}
+Učenje na podlagi časovne razlike TD($\lambda$) lahko združimo z {\em gradient descent} metodo za izračun napake ter uporabimo {\em backpropagation} algoritem za razširitev napake po nevronski mreži~\cite{TDANNForStrategicControlProblems}.
+
+Posodobitveno pravilo za utež nevrona v tem primeru postane
+\begin{equation}
+\mathbf{w_{t+1}} = \mathbf{w_t} - \alpha (R_t^\lambda - V(s_t)) \frac{\partial V(s_t)}{\partial \mathbf{w_t}}.
+\end{equation}
+Izraženo s sledmi primernosti:
+\begin{equation}
+\mathbf{w_{t+1}} = \mathbf{w_t} - \alpha \delta_t e_t,
+\end{equation}
+kjer je $\delta_t$ {\em TD-napaka (angl. TD-error)}
+\begin{equation}
+\delta_t = r_{t+1} + \gamma V(s_{t+1}) - V(s_t)
+\end{equation}
+in $\mathbf{e_t}$ je vektor sledi primernosti, ena sled za vsako utež v vektorju $\mathbf{w_t}$,
+\begin{equation}
+\mathbf{e_t} = \gamma \mathbf{\lambda e_{t-1}} + \frac{\partial V(s_t)}{\partial \mathbf{w_t}}
+\end{equation}
+z $\mathbf{e_0} = \mathbf{0}$.
+
+% for linear function approximators, convergence is guaranteed if states are sampled according to the steady-state probabilities, while divergence is possible when states are sampled from distributions independent of the dynamics of the Markov chain of interest. Given that the steady-state probabilities are usually unknown, the only viable approach to generating the required samples is to perform on- line sampling. By this we mean that the samples should consist of an actual sequence of visited states obtained either through simulation of a Markov chain or observation of a physical system.
+% We have run simulations in a variety of domains􏲀including a continuous gridworld􏱪 a car􏱜on􏱜the􏱜hill problem with nonlinear dynamics􏱪 and tic􏱜tac􏱜to e versus a sto chas􏱜 tic opp onent􏲀and using a variety of function approximators􏱪 including p olynomial regression􏱪 backpropagation􏱪 and lo cal weighted regression􏱝 In our exp eriments􏱪 none of these function approximators was immune from divergence􏱝
+Če politika vedenja oziroma vzorčenje sledi dinamiki MDPja v interesu, potem linearni funkcijski aproksimatorji z TD($\lambda$) dokazano konvergirajo z verjetnostjo 1~\cite{AnAnalysisOfTemporalDifferenceLearningWithFunctionApproximation}. Za offline vzorčenjene in nelinearne funkcijske aproksimatorje, kot so nevronske mreže z backpropagation, pa ne obstaja zagotovil konvergence; v znatnih primerih je pokazano, da divergirajo~\cite{GeneralizationInReinforcementLearningSafelyApproximatingTheValueFunction}, čeprav obstajajo tudi empirični uspehi kot je TD-Gammon~\cite{PracticalIssuesInTemporalDifferenceLearning}.
+
+\chapter{Učenje na namizni igri Hex}
 \thispagestyle{fancy}
 \section{Ozadje}
-\section{Učenje}
+Število stanj.
+\section{Implementacija}
+\subsection{Učenec tabularne TD($\lambda)$}
+\subsection{Učenec TD($\lambda$) z nevronsko mrežo}
+%%%%% PONG GUY HAD MUCH BETTER SUCCESS WITH LINEAR OUPUT NEURON INSTEAD OF OTHER THINGIE.
+\subsection{Naključni igralec}
 % I guess I use a partial model of the environment when learning. When selecting an action I check what state that action would bring me to. I could have action-values instead, but that would be many more values and the state check is simple. Afterstates are also pretty efficient.
 \section{Rezultati}
-% graphs, errors
+% graphs, errors; wins vs games
 
 \chapter{Zaključek}
 \thispagestyle{fancy}
@@ -759,14 +836,17 @@ Eden večjih trendov katerih je okrepitveno učenje deležno je večji stik med 
 % td with function approximation convergence
 % td with non-linear function approximation does not converge
 % some recent advances from Sutton: http://webdocs.cs.ualberta.ca/~sutton/publications.html
-
 % Convergent Temporal-Difference Learning with Arbitrary Smooth Function Approximation
+
 % We introduce the first temporal-difference learning algorithms that converge with smooth value function approximators, such as neural networks. Conventional temporal-difference (TD) methods, such as TD(λ), Q-learning and Sarsa have been used successfully with function approximation in many applications. How- ever, it is well known that off-policy sampling, as well as nonlinear function ap- proximation, can cause these algorithms to become unstable (i.e., the parameters of the approximator may diverge). Sutton et al. (2009a, 2009b) solved the prob- lem of off-policy learning with linear TD algorithms by introducing a new objec- tive function, related to the Bellman error, and algorithms that perform stochastic gradient-descent on this function. These methods can be viewed as natural gener- alizations to previous TD methods, as they converge to the same limit points when used with linear function approximation methods. We generalize this work to non- linear function approximation. We present a Bellman error objective function and two gradient-descent TD algorithms that optimize it. We prove the asymptotic almost-sure convergence of both algorithms, for any finite Markov decision pro- cess and any smooth value function approximator, to a locally optimal solution. The algorithms are incremental and the computational complexity per time step scales linearly with the number of parameters of the approximator. Empirical re- sults obtained in the game of Go demonstrate the algorithms’ effectiveness.
 % In this paper, we solved a long-standing open problem in reinforcement learning, by establishing a family of temporal-difference learning algorithms that converge with arbitrary differentiable func- tion approximators (including neural networks). The algorithms perform gradient descent on a nat- ural objective function, the projected Bellman error. The local optima of this function coincide with solutions that could be obtained by TD(0). Of course, TD(0) need not converge with non-linear function approximation. Our algorithms are on-line, incremental and their computational cost per update is linear in the number of parameters. Our theoretical results guarantee convergence to a local optimum, under standard technical assumptions. Local optimality is the best one can hope for, since nonlinear function approximation creates non-convex optimization problems. The early empirical results obtained for computer Go are very promising. However, more practical experience with these algorithms is needed. We are currently working on extensions of these algorithms using eligibility traces, and on using them for solving control problems.
 
 %A general gradient algorithm for temporal-difference prediction learning with eligibility traces
 %ABSTRACT: A new family of gradient temporal-difference learning algorithms have recently been introduced by Sutton, Maei and others in which function approximation is much more straightforward. In this paper, we introduce the GQ(λ) algorithm which can be seen as extension of that work to a more general setting including eligibility traces and off-policy learning of temporally abstract predictions. These extensions bring us closer to the ultimate goal of this work—the development of a universal prediction learning algorithm suitable for learning experientially grounded knowledge of the world. Eligibility traces are essential to this goal because they bridge the temporal gaps in cause and effect when experience is processed at a temporally ﬁne resolution. Temporally abstract predictions are also essential as the means for representing abstract, higher-level knowledge about courses of action, or options. GQ(λ) can be thought of as an extension of Q-learning. We extend existing convergence results for policy evaluation to this setting and carry out a forward-view/backward-view analysis to derive and prove the validity of the new algorithm.
 %The GQ(λ) algorithm, which has been introduced in this paper, incorporates varying eligibility traces and option-conditional probabilities for policy evalu- ation. To derive GQ(λ), we carried out a forward- view/backward-view analysis. We extended the exist- ing convergence results to show that GQ(λ) is guaran- teed to converge to the TD(λ) fixed-point. GQ(λ) is a general gradient TD method for off-policy learning and as such can be seen as extension of Q-learning. GQ(λ) is able to learn about temporally abstract predictions, which makes it suitable to use for learning experientially grounded knowledge. In addition, GQ(λ) is online, in- cremental and its computational complexity scales only linearly with the size of features. Thus, it is suitable for large-scale applications. Our work, however, is limited to policy evaluation. Interesting future works is to ex- tend GQ(λ) for control problems and gather extensive empirical data on large-scale real-world applications.
+
+% Interesting single layer of neurons that can learn any binary function and doesn't require much communication between neurons, continuous activation functions or calculation of derivatives
+%\cite{ALearningRuleForVerySimpleUniversalApproximatorsConsistingOfASingleLayerOfPerceptrons}
 
 Ray Kurzweil, inventor in futurist, je, v svoji nefiktivni knjigi ``The Singularity Is Near: When Humans Transcend Biology''~\cite{TheSingularityIsNear}, opisal svoj zakon o pospeševanju donosov, ki napoveduje eksponentno povečanje v tehnologijah kot so računalništvo, genetika, nanotehnologija, robotika in umetna inteligenca. Predvideva, da bo do okrog leta 2020 obstajal računalnik za tisoč ameriških dolarjev, ki bo imel računsko zmožnost posnemati človeško inteligenco. Po tem, pričakuje, da bo tehnologija optičnega zajemanja človeških možganov pripomogla k učinkovitemu modelu človeške inteligence do okrog 2025. Ta dva elementa bosta omogočala računalnikom opraviti Turingov preizkus do leta 2029. In do zgodnjih 2030 bo količina nebiološkega računanja prekoračilo zmožnost vse žive biološke inteligence človeštva. Končno eksponentno povečanje v računski zmožnosti bo privedlo do dogodka Singularnosti -- močno in moteče preoblikovanje v človeški sposobnosti -- leta 2045.
 
@@ -778,6 +858,8 @@ Ray Kurzweil, inventor in futurist, je, v svoji nefiktivni knjigi ``The Singular
 %http://www.theguardian.com/technology/shortcuts/2014/jan/28/demis-hassabis-15-facts-deepmind-technologies-founder-google
 
 %http://www.technologyreview.com/news/524026/is-google-cornering-the-market-on-deep-learning/
+
+% ANN recent advances from wiki.
 
 \begin{thebibliography}{99}
 \thispagestyle{fancy}
@@ -856,6 +938,26 @@ I. Pavlov,
 \newblock{\em Conditioned Reflexes},
 \newblock{Courier Dover Publications, 2003.}
 
+\bibitem{GeneralizationInReinforcementLearningSafelyApproximatingTheValueFunction}
+J. Boyan, A. W. Moore,
+\newblock{\em Generalization in Reinforcement Learning: Safely Approximating the Value Function},
+\newblock{Advances in neural information processing systems, 1995.}
+
+\bibitem{AnAnalysisOfTemporalDifferenceLearningWithFunctionApproximation}
+J. N. Tsitsiklis, B. Van Roy,
+\newblock{\em An analysis of temporal-difference learning with function approximation},
+\newblock{Automatic Control, IEEE Transactions on 42.5, 1997.}
+
+\bibitem{MultilayerFeedforwardNetworksAreUniversalApproximators}
+K. Hornik, M. Stinchcombe, H. White,
+\newblock{\em Multilayer feedforward networks are universal approximators},
+\newblock{Neural networks 2.5, 1989.}
+
+\bibitem{ALearningRuleForVerySimpleUniversalApproximatorsConsistingOfASingleLayerOfPerceptrons}
+P. Auer, H. Burgsteiner, W. Maass,
+\newblock{\em A learning rule for very simple universal approximators consisting of a single layer of perceptrons},
+\newblock{Neural Networks 21.5, 2008.}
+
 \bibitem{PavlovianConditioningItsNotWhatYouThinkItIs}
 R. A. Rescorla,
 \newblock{\em Pavlovian Conditioning: It's Not What You Think It Is},
@@ -891,6 +993,11 @@ M. Ito, T. Yoshioka, S. Ishii,
 \newblock{\em Strategy acquisition for the game “Othello” based on reinforcement learning},
 \newblock{Technical report, Nara Institute of Science and Techology, 1998.}
 
+\bibitem{Perceptrons}
+M. L. Minsky, S. A. Papert,
+\newblock{\em Perceptrons - Expanded Edition: An Introduction to Computational Geometry},
+\newblock{Boston, MA:: MIT press, 1987.}
+
 \bibitem{LearningToEvaluateGoPositionsViaTemporalDifferenceMethods}
 N. N. Schraudolf, P. Dayan, T. Sejnowski,
 \newblock{\em Learning to evaluate go positions via temporal difference methods},
@@ -912,9 +1019,14 @@ S. Legg, M. Hutter,
 \newblock{Frontiers in Aritificial Intelligence and Applications, 2007.}
 
 \bibitem{ReinforcementLearningWithReplacingEligibilityTraces}
-S. Singh, R. S. Sutton,
+S. P. Singh, R. S. Sutton,
 \newblock{\em Reinforcement Learning with Replacing Eligibility Traces},
 \newblock{Machine learning 22.1-3, 1996.}
+
+\bibitem{LearningWithoutStateEstimationInPartiallyObservableMarkovianDecisionProcesses}
+S. P. Singh, T. Jaakkola, M. I. Jordan,
+\newblock{\em Learning Without State-Estimation in Partially Observable Markovian Decision Processes},
+\newblock{ICML, 1994.}
 
 \bibitem{PigeonsDiscriminationOfPaintings}
 S. Watanabe, J. Sakamoto, M. Wakita,
@@ -930,6 +1042,11 @@ T. L. Brink,
 V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, M. Riedmiller,
 \newblock{\em Playing Atari with Deep Reinforcement Learning},
 \newblock{arXiv preprint arXiv:1312.5602, 2013.}
+
+\bibitem{UnderstandingTheDifficultyOfTrainingDeepFeedforwardNeuralNetworks}
+X. Glorot, Y. Bengio,
+\newblock{\em Understanding the difficulty of training deep feedforward neural networks},
+\newblock{International Conference on Artificial Intelligence and Statistics, 2010.}
 
 \end{thebibliography}
 

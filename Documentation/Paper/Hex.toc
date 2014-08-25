@@ -18,11 +18,14 @@
 \contentsline {section}{\numberline {3.3}U\IeC {\v c}enje na podlagi \IeC {\v c}asovne razlike - TD(0)}{18}
 \contentsline {section}{\numberline {3.4}Zdru\IeC {\v z}itev metod - TD($\lambda $)}{19}
 \contentsline {chapter}{\numberline {4}Posplo\IeC {\v s}evanje in funkcijska aproksimacija}{22}
-\contentsline {section}{\numberline {4.1}Umetne nevronske mre\IeC {\v z}e}{22}
-\contentsline {section}{\numberline {4.2}Metode gradient descent}{22}
-\contentsline {chapter}{\numberline {5}Namizna igra Hex}{23}
-\contentsline {section}{\numberline {5.1}Ozadje}{23}
-\contentsline {section}{\numberline {5.2}U\IeC {\v c}enje}{23}
-\contentsline {section}{\numberline {5.3}Rezultati}{23}
-\contentsline {chapter}{\numberline {6}Zaklju\IeC {\v c}ek}{24}
-\contentsline {chapter}{Literatura}{26}
+\contentsline {section}{\numberline {4.1}Nevronske mre\IeC {\v z}e}{22}
+\contentsline {section}{\numberline {4.2}Zdru\IeC {\v z}itev TD($\lambda $) z nevronskimi mre\IeC {\v z}ami}{23}
+\contentsline {chapter}{\numberline {5}U\IeC {\v c}enje na namizni igri Hex}{25}
+\contentsline {section}{\numberline {5.1}Ozadje}{25}
+\contentsline {section}{\numberline {5.2}Implementacija}{25}
+\contentsline {subsection}{\numberline {5.2.1}U\IeC {\v c}enec tabularne TD($\lambda )$}{25}
+\contentsline {subsection}{\numberline {5.2.2}U\IeC {\v c}enec TD($\lambda $) z nevronsko mre\IeC {\v z}o}{25}
+\contentsline {subsection}{\numberline {5.2.3}Naklju\IeC {\v c}ni igralec}{25}
+\contentsline {section}{\numberline {5.3}Rezultati}{25}
+\contentsline {chapter}{\numberline {6}Zaklju\IeC {\v c}ek}{26}
+\contentsline {chapter}{Literatura}{28}
